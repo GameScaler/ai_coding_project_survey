@@ -17,7 +17,9 @@
 - LPME v0.1 固定测试集：[benchmark/lpme_v0.1/tasks.yml](benchmark/lpme_v0.1/tasks.yml)
 - 评分 rubric：[benchmark/lpme_v0.1/scoring_rubric.md](benchmark/lpme_v0.1/scoring_rubric.md)
 - 每日更新方案：[automation/daily_update_design.md](automation/daily_update_design.md)
+- 飞书订阅与机器人方案：[automation/feishu_subscription_plan.md](automation/feishu_subscription_plan.md)
 - 每日抓取脚本：[scripts/daily_update.py](scripts/daily_update.py)
+- 飞书机器人推送脚本：[scripts/feishu_push.py](scripts/feishu_push.py)
 
 ## 当前链路状态
 

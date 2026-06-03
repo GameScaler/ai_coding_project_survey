@@ -56,6 +56,17 @@ MVP 阶段建议用 Codex 自动化生成每日草稿，飞书写入先通过当
 - `FEISHU_BOT_WEBHOOK`
 - `FEISHU_BOT_SECRET`
 
+## Subscription Reality Check
+
+飞书文档内放一个按钮，让任意读者点击后自动订阅同一个自定义机器人，这条链路不可直接实现。飞书自定义机器人只能用于当前群聊，同一个 custom bot 不能添加到其他群。
+
+因此推荐：
+
+- MVP：建立固定订阅群，在文档里放群二维码/入群链接/申请订阅表；自定义机器人只推这个群。
+- 正式版：做飞书开放平台应用 bot，维护订阅表，支持个人或多群推送。
+
+详细方案见：[feishu_subscription_plan.md](feishu_subscription_plan.md)
+
 ## Codex Automation Prompt
 
 每日自动化可以使用以下任务描述：
@@ -70,4 +81,3 @@ MVP 阶段建议用 Codex 自动化生成每日草稿，飞书写入先通过当
 - 每周：趋势复盘，把碎片变化归纳成产品路线判断。
 
 这样可以兼顾“日新月异”和“不硬推”。
-
