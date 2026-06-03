@@ -39,6 +39,21 @@ MVP 阶段建议用 Codex 自动化生成每日草稿，飞书写入先通过当
    - source links
 6. 写入飞书每日更新区，并把摘要推送给订阅群。
 
+## Weekly Workflow
+
+每周一 11:20 生成上周复盘，和每日 11:00 更新错开：
+
+1. 读取上一周 `data/daily_updates/*.md`。
+2. 重新检查官方源，避免漏掉周末或跨时区更新。
+3. 合并成一个 weekly digest：
+   - 本周主要产品变化；
+   - 模型版本/模型能力变化；
+   - 产品能力如何补足当前模型短板；
+   - 对 TRAE SOLO 的路线启示；
+   - 是否调整 LPME。
+4. 写入 `data/weekly_updates/`。
+5. 若配置了飞书 webhook 或 App Bot 凭证，向订阅群推送短卡片。
+
 ## Feishu Requirements
 
 需要用户提供或协助创建：
@@ -55,6 +70,8 @@ MVP 阶段建议用 Codex 自动化生成每日草稿，飞书写入先通过当
 - `FEISHU_DOC_TOKEN`
 - `FEISHU_BOT_WEBHOOK`
 - `FEISHU_BOT_SECRET`
+- `FEISHU_RECEIVE_ID`，正式 App Bot 推送目标，例如 `chat_id`
+- `FEISHU_RECEIVE_ID_TYPE`，默认 `chat_id`
 
 ## Subscription Reality Check
 
@@ -77,7 +94,7 @@ MVP 阶段建议用 Codex 自动化生成每日草稿，飞书写入先通过当
 
 建议每日检查、每周汇总：
 
-- 每日：短评，只关注重大更新。
+- 每日：短评，只关注重大更新；无重大更新时只记录“无重大更新”。
 - 每周：趋势复盘，把碎片变化归纳成产品路线判断。
 
 这样可以兼顾“日新月异”和“不硬推”。

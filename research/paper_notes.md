@@ -181,3 +181,29 @@ TRAE SOLO 启示：
 
 对 TRAE SOLO 来说，模型能力越强，越应该往 product workbench 走；模型能力越不稳定，越要通过产品能力把不稳定性关进流程里。
 
+## 产品能力如何补足模型短板
+
+把论文主线合在一起，可以得到一个更适合产品团队使用的判断框架：当前 AI coding 的失败不是单点失败，而通常是四类缺口叠加。
+
+| 缺口 | 论文线索 | 用户表象 | 产品补足方式 |
+| --- | --- | --- | --- |
+| Context miss | RepoBench、SWE-bench | agent 看起来很聪明，但改错文件、漏业务约束 | Context Vault、retrieval、symbol graph、来源标注、缺失上下文追问 |
+| Action overreach | SWE-agent、CodeAct | agent 执行动作太自由，用户无法判断风险 | 结构化 action space、权限分级、checkpoint、rollback、action log |
+| Verification gap | SWE-bench Verified、VisualWebArena | 代码/页面“看起来能用”，但没有证据 | test/lint/E2E/browser screenshot/visual diff/verifier panel |
+| Handoff opacity | SWE-Gym、R2E-Gym、SWE-rebench | agent 做了很多事，但团队无法接手、复盘或训练 | 任务轨迹、变更摘要、review package、LPME telemetry、动态评测 |
+
+这也是为什么 AI coding 产品不是“模型套壳”。模型负责生成和推理，产品负责把真实工作拆成能被模型成功执行、能被人信任接收的系统。
+
+## 对 TRAE SOLO 的一条主线建议
+
+TRAE SOLO 的技术路线可以围绕一个问题展开：如何把不完美模型变成可靠交付系统？
+
+分层答案：
+
+- **输入层**：让用户不用知道该给什么上下文，系统主动建立 context checklist。
+- **执行层**：让模型不用面对完整人类电脑，使用更适合 agent 的 harness。
+- **控制层**：让用户不用理解每个底层动作，但能理解权限、风险、计划和回滚点。
+- **验证层**：让结果不是“AI 说可以”，而是带测试、截图、引用、数据校验和人工验收。
+- **协作层**：让产物能进入飞书文档、群消息、PR、任务系统和团队评论。
+
+LPME 的价值就在这里：它不替代 SWE-bench，而是把这些产品补足能力变成可测量、可回归、可讨论的产品语言。

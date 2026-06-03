@@ -70,5 +70,6 @@
 - Create document API: https://open.feishu.cn/document/server-docs/docs/docs/docx-v1/document/create
 - Custom bot webhook: https://open.feishu.cn/document/client-docs/bot-v3/add-custom-bot?lang=en-US
 - Send message cards with custom bot: https://open.feishu.cn/document/feishu-cards/quick-start/send-message-cards-with-custom-bot
+- App authentication / tenant access token: https://open.feishu.cn/document/server-docs/authentication-management/access-token/tenant_access_token_internal
+- App bot send message API: https://open.feishu.cn/document/server-docs/im-v1/message/create
 - Lark/Feishu official CLI: https://github.com/larksuite/cli
-

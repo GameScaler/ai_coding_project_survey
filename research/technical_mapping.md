@@ -15,6 +15,7 @@ AI coding 产品能力不是单纯由模型决定，而是由 **模型能力 × 
 - [technical_deep_dive.md](technical_deep_dive.md)
 - [paper_notes.md](paper_notes.md)
 - [ai_coding_capability_map.mmd](diagrams/ai_coding_capability_map.mmd)
+- [ai_coding_capability_map.png](diagrams/ai_coding_capability_map.png)
 
 ## 1. Model Layer
 

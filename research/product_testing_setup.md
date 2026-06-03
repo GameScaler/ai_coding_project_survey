@@ -11,7 +11,9 @@
 | Cursor | Installed | `/Applications/Cursor.app`, CLI `/opt/homebrew/bin/cursor`, version `3.6.31` | Cursor account login and model/provider settings |
 | TRAE SOLO | Installed | `/Applications/TRAE SOLO.app`, version `0.1.10` | TRAE account login; check auto-update to latest SOLO build on launch |
 | Windsurf / Devin Desktop | Installed | `/Applications/Windsurf.app`, CLI `/opt/homebrew/bin/windsurf`, version `2.3.15` | Windsurf/Cognition login; Devin access if available |
-| GitHub Copilot | Not separately installed | GitHub account is available in browser; Copilot availability not verified | Copilot subscription / app access if included in GameScaler account |
+| Devin CLI | Installed | CLI `/opt/homebrew/bin/devin`, cask version `2026.5.26-3` | Cognition/Devin login |
+| GitHub Copilot App | Installed | `/Applications/GitHub Copilot.app`, cask version `0.2.23` | GitHub login; Copilot subscription / technical preview access |
+| OpenClaw | Deferred | 本机当前不可用/被禁用 | 暂不纳入本轮实测，保留观察项 |
 
 ## Environment Notes
 
@@ -20,6 +22,7 @@
   - Node `v26.0.0`
   - npm `11.12.1`
 - Cursor and Windsurf CLI `--version` commands printed macOS code-signing warnings but returned valid versions. This is common for Electron apps invoked from CLI and does not block installation.
+- Claude Code and Codex can be managed by `cc-switch`; do not write API keys into this repository. Configure keys only through local provider config, shell environment, or the product login flow.
 
 ## First Real-Use Test Plan
 
@@ -47,6 +50,22 @@ After smoke tests, run LPME tasks in this order:
 4. `LPME-MKT-001`: campaign landing page.
 5. `LPME-XFUNC-001`: multi-stakeholder handoff.
 
+## Credential Handling
+
+The user may provide API keys during setup, but keys must never be committed to git, pasted into Feishu, or stored in markdown.
+
+Safe paths:
+
+- `cc-switch provider add -a claude` or `cc-switch provider edit -a codex <provider-id>` for local provider config.
+- Product-native login for Cursor, TRAE SOLO, Windsurf/Devin, and GitHub Copilot App.
+- Shell environment variables for one-off test runs.
+
+Current local observation:
+
+- `cc-switch env tools` reports Claude and Codex installed.
+- Codex already has a current provider configured locally.
+- Claude has only `claude-official` provider until a local key/login is configured.
+
 ## Credentials Needed From User
 
 - Anthropic / Claude Code: login or API key.
@@ -54,6 +73,7 @@ After smoke tests, run LPME tasks in this order:
 - TRAE SOLO: account login, and whether to use domestic or global account.
 - Windsurf / Devin: account login and whether Devin access is enabled.
 - GitHub Copilot: whether `GameScaler` has Copilot subscription and Copilot app access.
+- Devin: whether the account has Devin Desktop/cloud agent access.
 
 ## Test Evidence Folder
 
@@ -68,4 +88,3 @@ Suggested files:
 - `output_artifacts/`
 - `scorecard.yml`
 - `raw_logs.txt`
-
