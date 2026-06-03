@@ -1,0 +1,70 @@
+{
+  "updated_at": "2026-06-03",
+  "products": [
+    {
+      "id": "codex",
+      "name": "OpenAI Codex",
+      "priority": "core",
+      "official_sources": [
+        "https://developers.openai.com/codex/changelog",
+        "https://developers.openai.com/codex",
+        "https://github.com/openai/codex/releases"
+      ],
+      "watch_keywords": ["Sites", "plugin", "skill", "cloud", "CLI", "IDE", "security", "model", "automation"]
+    },
+    {
+      "id": "claude_code",
+      "name": "Claude Code",
+      "priority": "core",
+      "official_sources": [
+        "https://code.claude.com/docs/en/changelog",
+        "https://github.com/anthropics/claude-code/releases"
+      ],
+      "watch_keywords": ["agents", "worktree", "MCP", "plugin", "telemetry", "parallel", "IDE", "GitHub"]
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "priority": "core",
+      "official_sources": [
+        "https://cursor.com/changelog",
+        "https://cursor.com/blog"
+      ],
+      "watch_keywords": ["Agents Window", "cloud agent", "automations", "canvases", "Bugbot", "SDK", "Jira", "worktree"]
+    },
+    {
+      "id": "trae_solo",
+      "name": "TRAE SOLO",
+      "priority": "core",
+      "official_sources": [
+        "https://docs.trae.ai/solo/changelog",
+        "https://www.trae.cn/changelog",
+        "https://www.trae.ai/solo-web"
+      ],
+      "watch_keywords": ["SOLO", "Work", "Code", "MTC", "mobile", "voice", "worktree", "browser", "comment", "context"]
+    },
+    {
+      "id": "github_copilot",
+      "name": "GitHub Copilot",
+      "priority": "core",
+      "official_sources": [
+        "https://github.blog/changelog/label/copilot/",
+        "https://github.blog/news-insights/product-news/github-copilot-app-the-agent-native-desktop-experience/",
+        "https://github.com/github/copilot-cli/blob/main/changelog.md"
+      ],
+      "watch_keywords": ["cloud agent", "Copilot app", "CLI", "code review", "memory", "automation", "agent apps", "Azure Repos"]
+    },
+    {
+      "id": "windsurf_devin",
+      "name": "Windsurf / Devin Desktop",
+      "priority": "core",
+      "official_sources": [
+        "https://windsurf.com/changelog",
+        "https://devin.ai/blog/windsurf-is-now-devin-desktop",
+        "https://docs.devin.ai/release-notes/overview"
+      ],
+      "watch_keywords": ["Agent Command Center", "Devin", "Desktop", "ACP", "Spaces", "local agent", "cloud agent"]
+    }
+  ]
+}
+

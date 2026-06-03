@@ -1,0 +1,241 @@
+version: "0.1"
+updated_at: "2026-06-03"
+name: "LPME fixed task set"
+description: "A product-manager-oriented benchmark for AI coding products. Each task evaluates whether the product can turn professional intent into usable artifacts."
+
+tasks:
+  - id: LPME-DS-001
+    persona: "Data Scientist"
+    scenario_family: "Analyze + Build"
+    title: "Messy acquisition cohort analysis"
+    input_assets:
+      - "csv: daily acquisition, spend, signup, activation, revenue"
+      - "md: metric definitions with two ambiguous fields"
+    prompt: "Clean the dataset, identify cohort trends, build a reproducible notebook or dashboard, and produce an executive summary with caveats."
+    expected_artifacts:
+      - "Reproducible analysis notebook or script"
+      - "Charts for CAC, activation, payback, and cohort retention"
+      - "Plain-language summary with assumptions and data-quality issues"
+    acceptance_criteria:
+      - "Handles missing values and inconsistent date formats"
+      - "Explains metric definitions and flags ambiguity"
+      - "Produces charts from executed code, not imagined values"
+      - "Includes next experiment recommendations"
+    primary_metrics:
+      - "context_acquisition"
+      - "execution_depth"
+      - "verification"
+      - "artifact_quality"
+
+  - id: LPME-PM-001
+    persona: "Product Manager"
+    scenario_family: "Build + Ship"
+    title: "PRD to clickable prototype and acceptance tests"
+    input_assets:
+      - "docx/md: feature brief"
+      - "png: rough wireframe"
+      - "csv: user feedback snippets"
+    prompt: "Turn this feature brief into a clickable web prototype, a refined PRD, and acceptance tests engineers can use."
+    expected_artifacts:
+      - "Clickable prototype"
+      - "PRD with scope, non-goals, metrics, edge cases"
+      - "Acceptance test checklist"
+    acceptance_criteria:
+      - "Maintains product intent from the brief"
+      - "Prototype is usable on desktop and mobile"
+      - "Clarifies ambiguous requirements before implementation or documents assumptions"
+      - "Acceptance tests map to user stories"
+    primary_metrics:
+      - "outcome_correctness"
+      - "artifact_quality"
+      - "controllability"
+      - "collaboration_handoff"
+
+  - id: LPME-MKT-001
+    persona: "Marketing Creative"
+    scenario_family: "Build"
+    title: "Campaign landing page with brand constraints"
+    input_assets:
+      - "md: product positioning"
+      - "json: brand colors, typography, banned phrases"
+      - "folder: 3 product screenshots"
+    prompt: "Create a responsive campaign landing page with two headline variants and a reusable component structure."
+    expected_artifacts:
+      - "Working landing page"
+      - "Two copy variants"
+      - "Design rationale and asset usage notes"
+    acceptance_criteria:
+      - "Uses real supplied product screenshots"
+      - "Respects brand constraints and banned phrases"
+      - "Mobile layout has no overlapping text"
+      - "Copy is specific and not generic AI marketing language"
+    primary_metrics:
+      - "artifact_quality"
+      - "execution_depth"
+      - "iteration_efficiency"
+      - "outcome_correctness"
+
+  - id: LPME-OPS-001
+    persona: "Operations"
+    scenario_family: "Automate + Build"
+    title: "SOP to internal workflow tracker"
+    input_assets:
+      - "md: onboarding SOP"
+      - "csv: historical task records"
+    prompt: "Build a lightweight internal tracker that imports the CSV, shows task status, flags SLA risk, and exports a weekly summary."
+    expected_artifacts:
+      - "Local web app or spreadsheet automation"
+      - "CSV import/export"
+      - "Weekly summary template"
+    acceptance_criteria:
+      - "Non-technical operator can use it"
+      - "SLA logic is transparent and configurable"
+      - "Handles malformed CSV rows"
+      - "Provides handoff instructions"
+    primary_metrics:
+      - "outcome_correctness"
+      - "artifact_quality"
+      - "collaboration_handoff"
+      - "safety_governance"
+
+  - id: LPME-SALES-001
+    persona: "Sales"
+    scenario_family: "Analyze + Automate"
+    title: "Lead scoring and follow-up assistant"
+    input_assets:
+      - "csv: leads with firmographic and activity fields"
+      - "md: sales qualification rules"
+    prompt: "Create a lead scoring tool, segment the leads, and generate follow-up email drafts for each segment."
+    expected_artifacts:
+      - "Lead scoring script or app"
+      - "Segmented output CSV"
+      - "Email templates with rationale"
+    acceptance_criteria:
+      - "Rules are explainable and editable"
+      - "No fabricated company facts"
+      - "Output is ready to import into CRM"
+      - "Flags low-confidence leads"
+    primary_metrics:
+      - "context_acquisition"
+      - "verification"
+      - "artifact_quality"
+      - "safety_governance"
+
+  - id: LPME-IB-001
+    persona: "Investment Banking Analyst"
+    scenario_family: "Analyze + Ship"
+    title: "Public comps mini model"
+    input_assets:
+      - "csv: company operating metrics"
+      - "xlsx: template with formatting requirements"
+      - "md: banker instructions"
+    prompt: "Populate a public comps mini model, compute valuation multiples, and generate charts suitable for a client deck."
+    expected_artifacts:
+      - "Updated spreadsheet"
+      - "Charts and short commentary"
+      - "Assumption log"
+    acceptance_criteria:
+      - "Formulas are auditable"
+      - "Formatting follows template"
+      - "Outliers are identified"
+      - "No unsupported investment recommendation"
+    primary_metrics:
+      - "outcome_correctness"
+      - "artifact_quality"
+      - "verification"
+      - "collaboration_handoff"
+
+  - id: LPME-IM-001
+    persona: "Investment Manager"
+    scenario_family: "Analyze"
+    title: "Industry thesis memo with source trail"
+    input_assets:
+      - "md: thesis question and investment lens"
+      - "folder: fixed source packet of filings, articles, and notes"
+    prompt: "Write an industry thesis memo, summarize bull/bear arguments, create a monitoring dashboard spec, and cite the provided sources."
+    expected_artifacts:
+      - "Investment memo"
+      - "Bull/bear table"
+      - "Monitoring dashboard spec"
+    acceptance_criteria:
+      - "Claims trace back to provided sources"
+      - "Separates fact, inference, and opinion"
+      - "Includes disconfirming evidence"
+      - "Does not overstate financial advice"
+    primary_metrics:
+      - "context_acquisition"
+      - "verification"
+      - "artifact_quality"
+      - "safety_governance"
+
+  - id: LPME-FOUNDER-001
+    persona: "Founder"
+    scenario_family: "Build + Ship"
+    title: "Idea to MVP with analytics"
+    input_assets:
+      - "md: startup idea brief"
+      - "png: rough UI sketch"
+      - "md: constraints, budget, must-have integrations"
+    prompt: "Build a demoable MVP, add basic analytics events, and prepare a short investor/customer demo script."
+    expected_artifacts:
+      - "Runnable MVP"
+      - "Analytics event plan"
+      - "Demo script"
+      - "Deployment or local run instructions"
+    acceptance_criteria:
+      - "Core loop works end to end"
+      - "Clear trade-offs for omitted features"
+      - "Can be demoed without developer intervention"
+      - "Avoids insecure handling of credentials"
+    primary_metrics:
+      - "outcome_correctness"
+      - "execution_depth"
+      - "cost_latency"
+      - "collaboration_handoff"
+
+  - id: LPME-SE-001
+    persona: "Software Engineer"
+    scenario_family: "Review + Build"
+    title: "Unfamiliar repo bug fix"
+    input_assets:
+      - "repo: small full-stack app with failing tests"
+      - "md: issue report"
+    prompt: "Diagnose the failing behavior, implement the smallest safe fix, run tests, and prepare a PR description."
+    expected_artifacts:
+      - "Patch"
+      - "Passing test evidence"
+      - "PR description with risk notes"
+    acceptance_criteria:
+      - "Finds root cause rather than masking tests"
+      - "Uses existing code patterns"
+      - "No broad unrelated refactor"
+      - "Explains verification steps"
+    primary_metrics:
+      - "execution_depth"
+      - "verification"
+      - "controllability"
+      - "outcome_correctness"
+
+  - id: LPME-XFUNC-001
+    persona: "Cross-functional Team"
+    scenario_family: "Review + Ship"
+    title: "Agent handoff and collaboration stress test"
+    input_assets:
+      - "repo: existing prototype"
+      - "md: comments from PM, designer, engineer, legal"
+    prompt: "Incorporate the multi-stakeholder feedback, identify conflicts, implement safe changes, and produce a decision log."
+    expected_artifacts:
+      - "Updated prototype or patch"
+      - "Conflict-resolution decision log"
+      - "Reviewer-specific summary"
+    acceptance_criteria:
+      - "Does not silently ignore stakeholder conflicts"
+      - "Keeps legal/safety constraints visible"
+      - "Separates implemented changes from deferred items"
+      - "Supports reviewer handoff"
+    primary_metrics:
+      - "collaboration_handoff"
+      - "controllability"
+      - "safety_governance"
+      - "iteration_efficiency"
+
