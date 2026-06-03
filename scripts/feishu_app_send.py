@@ -22,6 +22,7 @@ import argparse
 import json
 import os
 import pathlib
+import re
 import subprocess
 import urllib.error
 import urllib.parse
@@ -30,6 +31,7 @@ from dataclasses import dataclass
 
 
 FEISHU_BASE = "https://open.feishu.cn/open-apis"
+URL_RE = re.compile(r"https?://[^\s)>\"]+")
 
 
 @dataclass(frozen=True)
@@ -134,8 +136,245 @@ def tenant_access_token(app_id: str, app_secret: str) -> str:
     return data["tenant_access_token"]
 
 
+def section(body: str, heading: str) -> str:
+    pattern = re.compile(
+        rf"^##\s+{re.escape(heading)}\s*$\n(?P<body>.*?)(?=^##\s+|\Z)",
+        re.M | re.S,
+    )
+    match = pattern.search(body)
+    return match.group("body").strip() if match else ""
+
+
+def compact_text(text: str) -> str:
+    text = re.sub(r"^#+\s+.*$", "", text, flags=re.M)
+    text = re.sub(r"自动抓取已完成。.*", "", text)
+    text = re.sub(r"发布前需要补充.*", "", text)
+    text = re.sub(r"本文件是机器抓取草稿.*", "", text)
+    text = re.sub(r"重大更新初筛[：:].*", "", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
+
+
+def product_sections(body: str) -> list[tuple[str, list[str]]]:
+    sections: list[tuple[str, list[str]]] = []
+    current_name = ""
+    current_lines: list[str] = []
+    ignored = {"Summary", "PM Notes", "Product Updates", "Message Card Shape"}
+
+    for raw in body.splitlines():
+        heading = re.match(r"^##\s+(.+?)\s*$", raw.strip())
+        if heading:
+            if current_name and current_name not in ignored:
+                sections.append((current_name, current_lines))
+            current_name = heading.group(1).strip()
+            current_lines = []
+            continue
+        if current_name:
+            current_lines.append(raw)
+
+    if current_name and current_name not in ignored:
+        sections.append((current_name, current_lines))
+    return sections
+
+
+def normalize_hits(text: str, limit: int = 8) -> str:
+    if not text or text.lower() in {"none", "无"}:
+        return "无"
+    parts = re.split(r"[,，、/]\s*", text)
+    seen: set[str] = set()
+    cleaned: list[str] = []
+    for part in parts:
+        value = part.strip()
+        if not value or value in seen:
+            continue
+        seen.add(value)
+        cleaned.append(value)
+        if len(cleaned) >= limit:
+            break
+    return "、".join(cleaned) if cleaned else "无"
+
+
+def draft_product_summary(body: str) -> tuple[list[str], int]:
+    product_names: list[str] = []
+    changed_source_count = 0
+
+    for product, lines in product_sections(body):
+        text = "\n".join(lines)
+        count = 0
+        for pattern in (
+            r"初筛[：:]\s*发现\s*(\d+)\s*个",
+            r"初筛状态[：:]\s*发现\s*(\d+)\s*个",
+        ):
+            match = re.search(pattern, text)
+            if match:
+                count = int(match.group(1))
+                break
+        if not count:
+            count = len(re.findall(r"(?:Changed:\s*True|是否变化：是)", text))
+        if count:
+            product_names.append(product)
+            changed_source_count += count
+
+    return product_names, changed_source_count
+
+
+def summary_text(body: str) -> str:
+    summary = compact_text(section(body, "Summary"))
+    if summary:
+        return summary
+
+    product_names, changed_source_count = draft_product_summary(body)
+    if product_names:
+        shown = "、".join(product_names[:5])
+        suffix = "等" if len(product_names) > 5 else ""
+        return (
+            f"今日官方源初筛发现 {shown}{suffix} 有页面变化，合计 {changed_source_count} 个来源需要复核。"
+            "本卡片只保留产品信号和来源链接；后续会在飞书文档补充产品官判断。"
+        )
+    return "今日官方源初筛未发现重大变化；详细抓取结果保留在 GitHub 归档。"
+
+
+def product_signal_lines(body: str, limit: int = 7) -> list[str]:
+    signals: list[str] = []
+
+    product_updates = section(body, "Product Updates")
+    if product_updates:
+        current = ""
+        for raw in product_updates.splitlines():
+            line = raw.strip()
+            heading = re.match(r"^###\s+(.+)$", line)
+            if heading:
+                current = heading.group(1).strip()
+                continue
+            if current and line.startswith("- "):
+                content = line[2:].strip()
+                signals.append(f"- **{current}**：{content}")
+                current = ""
+            if len(signals) >= limit:
+                return signals
+
+    for product, lines in product_sections(body):
+        explicit_count = 0
+        changed_count = 0
+        hits: list[str] = []
+        for raw in lines:
+            line = raw.strip()
+            count_match = re.search(r"初筛(?:状态)?[：:]\s*发现\s*(\d+)\s*个", line)
+            if count_match:
+                explicit_count = int(count_match.group(1))
+            if re.search(r"(?:Changed:\s*True|是否变化：是)", line):
+                changed_count += 1
+            hits_match = re.search(r"(?:Keyword hits|命中方向)[：:]\s*(.+)$", line)
+            if hits_match:
+                hit_text = hits_match.group(1).strip()
+                if hit_text and hit_text.lower() not in {"none", "无"}:
+                    hits.append(hit_text)
+        count = explicit_count or changed_count
+        if not count:
+            continue
+        hit_summary = normalize_hits("、".join(hits))
+        if hit_summary == "无":
+            signals.append(f"- **{product}**：发现 {count} 个官方来源变化，需复核是否构成产品级更新。")
+        else:
+            signals.append(
+                f"- **{product}**：发现 {count} 个官方来源变化；关注方向：{hit_summary}。"
+            )
+        if len(signals) >= limit:
+            break
+    return signals
+
+
+def pm_note_lines(body: str) -> list[str]:
+    notes = section(body, "PM Notes")
+    lines: list[str] = []
+    for raw in notes.splitlines():
+        line = raw.strip()
+        if not line or "TODO" in line:
+            continue
+        if line.startswith("- "):
+            lines.append(line)
+    return lines[:3]
+
+
+def source_lines(body: str, github_url: str | None) -> list[str]:
+    urls: list[str] = []
+    if github_url:
+        urls.append(github_url)
+    urls.extend(URL_RE.findall(body))
+
+    seen: set[str] = set()
+    deduped: list[str] = []
+    for url in urls:
+        url = url.rstrip(".,，。")
+        if url in seen:
+            continue
+        seen.add(url)
+        deduped.append(url)
+
+    labels = {
+        "github.com/GameScaler": "GitHub 归档",
+        "developers.openai.com/codex": "OpenAI Codex",
+        "github.com/openai/codex": "OpenAI Codex Releases",
+        "code.claude.com": "Claude Code",
+        "github.com/anthropics/claude-code": "Claude Code Releases",
+        "cursor.com/changelog": "Cursor",
+        "cursor.com/blog": "Cursor Blog",
+        "docs.trae.ai": "TRAE SOLO",
+        "trae.cn": "TRAE 中国更新日志",
+        "github.blog": "GitHub Copilot",
+        "windsurf.com": "Windsurf",
+        "devin.ai": "Devin",
+        "docs.openclaw.ai": "OpenClaw",
+        "github.com/openclaw": "OpenClaw Releases",
+    }
+
+    output: list[str] = []
+    for url in deduped[:10]:
+        label = "来源"
+        for key, value in labels.items():
+            if key in url:
+                label = value
+                break
+        output.append(f"- [{label}]({url})")
+    return output
+
+
+def build_digest_markdown(body: str, github_url: str | None) -> str:
+    summary = summary_text(body)
+
+    signals = product_signal_lines(body)
+    if not signals:
+        signals = ["- 暂无可推送的重大产品更新；详细抓取结果仅保留在 GitHub 归档。"]
+
+    notes = pm_note_lines(body)
+    if not notes:
+        notes = [
+            "- **产品官短评**：官方源变化本身不是结论，优先看它是否改变 context、workflow、verification、recovery 或交付形态。",
+            "- **对 TRAE SOLO 的启示**：继续按“模型能力 + 产品能力”判断更新价值；模型不稳的地方，要靠产品层补足真实可用性。",
+        ]
+
+    sources = source_lines(body, github_url)
+    if not sources and github_url:
+        sources = [f"- [GitHub 归档]({github_url})"]
+
+    parts = [
+        "**今日结论**",
+        summary,
+        "",
+        "**重点信号**",
+        *signals,
+        "",
+        "**产品官短评**",
+        *notes,
+    ]
+    if sources:
+        parts.extend(["", "**来源链接**", *sources])
+    return "\n".join(parts)
+
+
 def build_card(title: str, body: str, doc_url: str | None, github_url: str | None) -> dict:
-    elements: list[dict] = [{"tag": "markdown", "content": body[:6000]}]
+    card_body = build_digest_markdown(body, github_url or None)
+    elements: list[dict] = [{"tag": "markdown", "content": card_body[:6000]}]
     actions = []
     if doc_url:
         actions.append(

@@ -141,11 +141,11 @@ def main(argv: list[str] | None = None) -> int:
         rows.append((product, product_rows))
 
     lines = [
-        f"# AI Coding Daily Update - {today}",
+        f"# AI Coding 每日更新初筛 - {today}",
         "",
         "## Summary",
         "",
-        "自动抓取已完成。下面是机器初筛结果，发布前需要补充 PM 短评和人工判断。",
+        "本文件是机器抓取草稿，只用于归档和人工复核。正式飞书推送必须只保留中文结论、PM 短评和来源链接，不直接推送网页原文摘录。",
         "",
     ]
 
@@ -156,18 +156,16 @@ def main(argv: list[str] | None = None) -> int:
         changed_rows = [r for r in product_rows if r.get("changed")]
         if changed_rows:
             any_change = True
-            lines.append(f"- 初筛：发现 {len(changed_rows)} 个来源内容变化。")
+            lines.append(f"- 初筛状态：发现 {len(changed_rows)} 个官方来源内容变化。")
         else:
-            lines.append("- 初筛：未发现来源内容 hash 变化。")
+            lines.append("- 初筛状态：未发现官方来源内容变化。")
         for row in product_rows:
-            lines.append(f"- Source: {row['url']}")
+            lines.append(f"- 来源：{row['url']}")
             if row.get("error"):
-                lines.append(f"  - Fetch error: {row['error']}")
+                lines.append(f"  - 抓取状态：失败，{row['error']}")
                 continue
-            lines.append(f"  - Changed: {row['changed']}")
-            lines.append(f"  - Keyword hits: {', '.join(row['hits']) if row['hits'] else 'none'}")
-            if row.get("changed"):
-                lines.append(f"  - Excerpt: {row['excerpt'][:500]}")
+            lines.append(f"  - 是否变化：{'是' if row['changed'] else '否'}")
+            lines.append(f"  - 命中方向：{', '.join(row['hits']) if row['hits'] else '无'}")
         lines.append("")
 
     lines.insert(5, f"重大更新初筛：{'有变化，需要人工判断重要性' if any_change else '暂无明显变化'}")

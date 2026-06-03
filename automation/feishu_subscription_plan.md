@@ -83,10 +83,18 @@
 
 ```bash
 python scripts/feishu_app_send.py data/daily_updates/2026-06-03.md \
-  --title "AI Coding Daily Update - 2026-06-03" \
+  --title "AI Coding 产品更新｜2026-06-03" \
   --github-url "https://github.com/GameScaler/ai_coding_project_survey/blob/main/data/daily_updates/2026-06-03.md" \
   --dry-run
 ```
+
+推送卡片规范：
+
+- 标题用中文，例如 `AI Coding 产品更新｜2026-06-03`。
+- 正文只保留四块：今日结论、重点信号、产品官短评、来源链接。
+- 不直接推送网页英文原文、`Source / Changed / Excerpt` 等机器抓取字段。
+- 如果只有机器初筛、尚未人工复核，卡片只说明“哪些产品的官方源发生变化、需要复核哪些方向”，不把内部判断字段原样发给订阅者。
+- 来源链接只放官方 changelog、GitHub digest、飞书文档入口，避免把长网页摘录贴进群。
 
 订阅表 dry-run：
 
@@ -127,15 +135,15 @@ python scripts/feishu_list_chats.py
 
 ### 用户操作步骤
 
-1. 创建一个固定飞书群，例如：`AI Coding Product Update`.
-2. 打开群设置。
-3. 进入 `群机器人` / `添加机器人`。
-4. 选择 `自定义机器人`。
-5. 命名建议：`AI Coding Survey Bot - Group Push`。
-6. 安全设置建议开启 `签名校验`，不要只靠关键词。
-7. 保存后复制 webhook URL；如果开启签名，复制 secret。
-8. 把群邀请链接或二维码放进飞书文档的“订阅入口”。
-9. 把 webhook/secret 配置到本地 shell、Codex automation secret 或部署环境。
+1. 创建一个固定飞书群，例如：`AI Coding Survey 订阅群`。
+2. 群设置里开启“群链接/二维码邀请”，复制群链接或保存二维码。
+3. 在群设置里添加 `AI Coding Survey Bot` 应用机器人。
+4. 运行 `scripts/feishu_list_chats.py` 获取该群 `chat_id`，填入订阅表或 `FEISHU_RECEIVE_ID`。
+5. 把群链接/二维码放进飞书文档“自动化更新与订阅”部分。
+6. 分享文档给别人时，对方加入这个群即视为订阅。
+7. 若暂时用自定义机器人 fallback，再进入 `群机器人` / `添加机器人`，创建 custom bot webhook。
+8. 自定义机器人安全设置建议开启 `签名校验`，不要只靠关键词。
+9. webhook/secret 只配置在本地 shell、Codex automation secret 或部署环境，不写入仓库/文档。
 
 ### 自动化配置
 
@@ -184,27 +192,48 @@ python scripts/feishu_push.py data/daily_updates/2026-06-03.md \
 
 每日卡片建议：
 
-- 标题：`AI Coding Daily Update - YYYY-MM-DD`
+- 标题：`AI Coding 产品更新｜YYYY-MM-DD`
 - 状态色：
   - green：有重大更新
   - grey：无重大更新
   - orange：需要人工确认
 - 内容：
-  - 今日重大更新数量
-  - 产品逐条摘要
+  - 今日结论
+  - 重点信号
   - 产品官短评
-  - 对 TRAE SOLO 的启示
-  - 文档链接
-  - GitHub digest 链接
+  - 来源链接
+
+示例：
+
+```text
+AI Coding 产品更新｜2026-06-03
+
+今日结论
+OpenClaw 纳入主要产品池。今天的核心不是又多一个 IDE，而是 agent gateway / runtime 路线进入观察范围。
+
+重点信号
+- OpenClaw：Workboard、Skill Workshop、channels/mobile、runtime recovery。
+- Codex：Sites preview 继续把代码产物变成可部署业务 artifact。
+- GitHub Copilot：App、SDK、sandboxes、agent apps 共同强化 GitHub-native agent platform。
+
+产品官短评
+AI coding 产品能力 = 模型能力 + 产品能力。模型决定上限，产品层决定真实可用性。
+
+来源链接
+- 飞书文档
+- GitHub digest
+- 官方 changelog
+```
 
 ## Required User Action
 
 当前还需要用户在飞书里完成：
 
-1. 给 `AI Coding Survey Bot` 开启机器人能力。
-2. 添加并审批消息发送权限。
-3. 将应用机器人加入目标订阅群，或让目标用户主动和机器人私聊。
-4. 提供目标群 `chat_id` 或个人 `open_id`，也可以先填入 `automation/feishu_subscribers.local.json`。
-5. 如需自动写飞书文档，再补充文档 API 权限与目标文档 token。
+1. 在飞书客户端创建一个普通群，建议命名为 `AI Coding Survey 订阅群`。
+2. 至少选择一位真人成员后再创建群；web 端创建 0 成员群会失败，应用机器人也不能在建群成员搜索里直接作为普通成员选中。
+3. 群创建后，进入群设置，添加 `AI Coding Survey Bot` 应用机器人；只有机器人在群内，App Bot 才能向该群推送。
+4. 在群设置里开启群邀请链接或群二维码；把这个入口放到飞书文档“自动化更新与订阅”部分。
+5. 运行 `scripts/feishu_list_chats.py` 拿到该群 `chat_id`，写入 `automation/feishu_subscribers.local.json` 或本地环境变量。
+6. 后续读者通过文档里的群链接/二维码进群，即完成 MVP 订阅；正式个人订阅再升级为交互式卡片/订阅页。
 
 拿到 `chat_id/open_id` 后，本仓库的 App Bot 脚本可以直接推送。
