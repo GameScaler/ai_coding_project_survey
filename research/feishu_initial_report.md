@@ -200,7 +200,8 @@ MVP 阶段：
 - GitHub 已打通：https://github.com/GameScaler/ai_coding_project_survey
 - 每日自动化已创建：`ai-coding-daily-product-update`
 - 飞书 API / 群机器人仍需 app_id/app_secret 或 webhook
-- 产品实测仍需安装 Claude Code、Cursor、TRAE、Windsurf/Devin，并配置账号/API key
+- 产品实测工具链已安装或确认存在：Codex、Claude Code、Cursor、TRAE SOLO、Windsurf。下一步需要账号登录/API key。
+- 产品实测准备状态：https://github.com/GameScaler/ai_coding_project_survey/blob/main/research/product_testing_setup.md
 
 ## 官方资料源
 
@@ -212,4 +213,3 @@ MVP 阶段：
 - Windsurf / Devin：windsurf.com/changelog、devin.ai/blog/windsurf-is-now-devin-desktop
 
 资料源配置：https://github.com/GameScaler/ai_coding_project_survey/blob/main/automation/product_sources.json
-

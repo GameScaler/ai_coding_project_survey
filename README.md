@@ -11,6 +11,7 @@
 - 论文综述与产品启示：[research/paper_notes.md](research/paper_notes.md)
 - 技术思维导图：[research/diagrams/ai_coding_capability_map.mmd](research/diagrams/ai_coding_capability_map.mmd)
 - 产品资料源清单：[research/sources.md](research/sources.md)
+- 产品实测安装与准备状态：[research/product_testing_setup.md](research/product_testing_setup.md)
 - 核心论文 PDF：[references/papers/README.md](references/papers/README.md)
 - LPME benchmark 说明：[benchmark/README.md](benchmark/README.md)
 - LPME v0.1 固定测试集：[benchmark/lpme_v0.1/tasks.yml](benchmark/lpme_v0.1/tasks.yml)
@@ -22,7 +23,7 @@
 
 - 飞书：已确认可以在 Chrome 登录态下打开并编辑目标文档。
 - GitHub：当前本地仓库还没有 remote，且本机未安装 `gh`。需要提供 GitHub 仓库地址，或允许我在浏览器里创建仓库并推送。
-- 产品实测：本机已发现 Codex CLI/App；Claude Code、Cursor、Windsurf/Devin Desktop、TRAE SOLO 尚未安装到 PATH。真正横评需要后续安装与账号/API key。
+- 产品实测：Codex、Claude Code、Cursor、TRAE SOLO、Windsurf 已安装或确认存在。真正横评需要后续账号登录/API key。
 - 自动化：已先落本地脚本与 Codex 自动化方案。稳定写入飞书和群推送建议走飞书开放平台应用或群机器人 webhook。
 
 ## 调研范围
