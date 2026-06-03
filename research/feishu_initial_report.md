@@ -2,47 +2,51 @@
 
 更新日期：2026-06-03
 
-## 0. 当前结论
+> **基本认知**：AI coding 产品能力 = **模型能力 × 产品能力**。模型能力决定上限，产品能力决定转化率。当前模型还没强到自动补齐真实世界所有上下文、验证、协作和责任边界，所以产品能力不是 UI 外壳，而是把模型能力转成真实交付的放大器。
 
-AI coding 产品已经从“编辑器里的代码补全”进入“agent command center / product workbench”阶段。头部产品不再只比模型写代码能力，而是在比：谁能收集正确上下文、把任务拆成可控计划、在本地/云端执行、持续验证、交付可用产物，并让人类以 reviewer / product owner 的方式管理多个 agent。
+## 当前结论
 
-TRAE SOLO 最值得押注的机会不是做另一个 Cursor，而是把 AI coding 变成“多角色工作交付平台”：产品、数据、运营、销售、投研、创业者、工程师都能从需求、资料、数据、草图出发，拿到可以审查、可以运行、可以分享的产物。
+AI coding 市场已经从“编辑器里的代码补全”进入 **agent command center / product workbench** 阶段。头部产品不再只比模型写代码能力，而是在比：谁能收集正确上下文、把任务拆成可控计划、在本地/云端执行、持续验证、交付可用产物，并让人类以 reviewer / product owner 的方式管理多个 agent。
 
-## 1. 每日更新区
+对 TRAE SOLO 来说，机会不是做另一个 Cursor，而是把 AI coding 做成 **多角色工作交付平台**：产品、数据、运营、销售、投研、创业者、工程师都能从需求、资料、数据、草图出发，拿到可以审查、可以运行、可以分享的产物。
+
+**核心仓库**：https://github.com/GameScaler/ai_coding_project_survey
+
+## 每日更新
 
 ### 2026-06-03
 
-今日是明显的“agent command center”信号日。
+今日是明显的 **agent command center** 信号日。
 
-- OpenAI Codex 推出 Sites preview，开始让 Codex 创建、部署、管理网站和内部工具，说明 Codex 的边界已经从代码扩到托管产物。
-- GitHub 推 Copilot app，主打 agent-native desktop experience，把 issue、PR、session、automation 放进一个桌面指挥入口。
-- Windsurf 升级为 Devin Desktop，把 IDE、local agent、cloud Devin 和 Agent Command Center 合在一起。
-- Cursor 3.6 的 Auto-review run mode 解决长任务中的 approval friction：让 agent 跑更久，但仍保持安全执行。
-- TRAE 中国 changelog 显示 SOLO 桌面端在 2026-06-01 支持内置浏览器选中元素并加入对话/评论，这个能力很适合非工程师基于可视化结果反馈。
+- **OpenAI Codex**：推出 Sites preview，开始让 Codex 创建、部署、管理网站和内部工具，说明 Codex 的边界已经从代码扩到托管产物。
+- **GitHub Copilot**：推出 Copilot app，主打 agent-native desktop experience，把 issue、PR、session、automation 放进一个桌面指挥入口。
+- **Windsurf / Devin**：Windsurf 升级为 Devin Desktop，把 IDE、local agent、cloud Devin 和 Agent Command Center 合在一起。
+- **Cursor**：Cursor 3.6 的 Auto-review run mode 解决长任务中的 approval friction：让 agent 跑更久，但仍保持安全执行。
+- **TRAE SOLO**：TRAE 中国 changelog 显示 SOLO 桌面端在 2026-06-01 支持内置浏览器选中元素并加入对话/评论，这个能力很适合非工程师基于可视化结果反馈。
 
-产品官短评：AI coding 的主界面正在从 chat/editor 变成“任务状态 + 产物预览 + 人工审查 + 多 agent 管理”。TRAE SOLO 如果继续强调 Work/Code、移动端、语音、文档/表格/PPT 上下文，应把自己定义成跨角色 product workbench，而不是工程师 IDE 的子模式。
+**产品官短评**：AI coding 的主界面正在从 chat/editor 变成“任务状态 + 产物预览 + 人工审查 + 多 agent 管理”。TRAE SOLO 如果继续强调 Work/Code、移动端、语音、文档/表格/PPT 上下文，应把自己定义成跨角色 product workbench，而不是工程师 IDE 的子模式。
 
-对 LPME 的影响：v0.2 需要新增两个任务，一是“长时间自治任务安全控制”，测 approval、sandbox、auto-review、回滚；二是“多 agent command center 协作任务”，测状态管理、冲突处理、人工插入反馈和最终交付。
+**对 LPME 的影响**：v0.2 需要新增两个任务：一是“长时间自治任务安全控制”，测 approval、sandbox、auto-review、回滚；二是“多 agent command center 协作任务”，测状态管理、冲突处理、人工插入反馈和最终交付。
 
-## 2. 调研范围
+## 每周复盘
 
-核心产品：
+### 本周观察框架
 
-- OpenAI Codex
-- Anthropic Claude Code
-- Cursor
-- TRAE SOLO
-- GitHub Copilot
-- Windsurf / Devin Desktop
+每日更新只记录重要变化；每周复盘负责把碎片变化归纳成路线判断。
 
-观察产品：
+- **模型版本迭代**：新模型是否提升 repo 理解、长上下文、工具调用、前端视觉理解、成本/延迟。
+- **产品工作流迭代**：是否出现新的 agent harness、auto-review、worktree、cloud agent、mobile handoff。
+- **交付物边界扩张**：是否从代码扩到网站、内部工具、PPT、数据分析、报告、自动化。
+- **治理和协作**：是否加强权限、审查、回滚、PR/issue/飞书/Slack/Jira 集成。
+- **对 TRAE SOLO 的启示**：是否改变 Work/Code、Context Vault、Role Cockpit、Validation Panel 的优先级。
 
-- Devin cloud agent
-- Sourcegraph Amp、OpenCode、Gemini CLI 等 agent runtime 或开源替代
+### 2026-W23 初步判断
 
-本报告只围绕头部路线做深，不做长尾工具大全。
+本周的核心路线是：**长任务自治正在产品化，但产品也在补安全阀**。Codex Sites、Copilot app、Devin Desktop、Cursor Auto-review 都在让 agent 做更长、更完整的任务；同时 approval、review、sandbox、状态管理、回滚也变得更重要。
 
-## 3. 产品版图
+对 TRAE SOLO 来说，这意味着 **Work 模式不能只是聊天增强**，而要成为任务控制台；**Code 模式不能只是代码执行**，而要把验证、预览、回滚、部署和协作放进统一工作流。
+
+## 产品版图
 
 | 产品 | 主定位 | 关键形态 | 差异化 | 对 TRAE SOLO 的启示 |
 | --- | --- | --- | --- | --- |
@@ -53,52 +57,83 @@ TRAE SOLO 最值得押注的机会不是做另一个 Cursor，而是把 AI codin
 | GitHub Copilot | GitHub-native agent platform | VS Code、GitHub issue/PR、CLI、Copilot app、cloud agent | 企业分发、GitHub workflow、治理和审查 | 国内场景可借飞书/GitLab/Gitee/云开发形成工作流入口 |
 | Windsurf / Devin Desktop | IDE + 云端自治工程师 | Devin Desktop、Agent Command Center、local/cloud agents | 本地 IDE 与云 agent 融合，Kanban 管理 agent fleet | 多 agent 管理会成为主界面，而不是聊天窗口 |
 
-## 4. 发展路线
+## 发展路线
 
-### Phase 1：Assistant in editor
+**Phase 1：Assistant in editor**  
+代表：Copilot autocomplete、早期 Cursor、Codeium/Windsurf。核心价值是降低写代码成本，但用户仍然要自己拆任务、粘上下文、运行测试、修 bug。
 
-代表：Copilot autocomplete、早期 Cursor、Codeium/Windsurf。
+**Phase 2：Repo-aware agent**  
+代表：Claude Code、Codex CLI、Cursor Agent、TRAE Agent。产品开始能读 repo、编辑多文件、执行命令、运行测试、解释失败。竞争点从“补全速度”转到“上下文获取 + 工具执行 + 可控修改”。
 
-核心价值是降低写代码成本，但用户仍然要自己拆任务、粘上下文、运行测试、修 bug。
+**Phase 3：Agent workspace**  
+代表：Cursor 3 Agents Window、Codex App、GitHub Copilot App、Windsurf/Devin Desktop、TRAE SOLO。主界面从 IDE/聊天变成任务工作台：多个 agent 并行，worktree 隔离，云端长任务，PR/CI 回路，用户从写代码者变成任务导演和 reviewer。
 
-### Phase 2：Repo-aware agent
+**Phase 4：Product workbench**  
+目标形态：不仅写代码，还能做数据分析、行业研究、PPT、dashboard、内部工具、落地页、投研模型、运营自动化。这是 TRAE SOLO 最值得押注的阶段。Coding 不是终点，而是把专业工作变成可运行系统、可分享文档、可验证结论的中间手段。
 
-代表：Claude Code、Codex CLI、Cursor Agent、TRAE Agent。
+## 技术 Mapping 深入版
 
-产品开始能读 repo、编辑多文件、执行命令、运行测试、解释失败。竞争点从“补全速度”转到“上下文获取 + 工具执行 + 可控修改”。
+AI coding 产品的技术栈可以分成 7 个 leverage layer。
 
-### Phase 3：Agent workspace
+**1. Model capability**  
+代码推理、长上下文、工具调用、多模态、成本/延迟、安全可控。模型版本迭代必须单独追踪，因为它会改变产品默认工作流。
 
-代表：Cursor 3 Agents Window、Codex App、GitHub Copilot App、Windsurf/Devin Desktop、TRAE SOLO。
+**2. Context leverage**  
+Repo index、符号图、依赖图、文档/表格/PPT/截图/网页/issue/飞书消息导入、上下文压缩、来源追踪。TRAE SOLO 应把 Context Vault 做成核心模块。
 
-主界面从 IDE/聊天变成任务工作台：多个 agent 并行，worktree 隔离，云端长任务，PR/CI 回路，用户从写代码者变成任务导演和 reviewer。
+**3. Agent harness**  
+Instructions、rules、memory、文件查看器、结构化编辑器、命令执行器、测试执行器、action log、worktree、rollback。SWE-agent 的关键启示是：agent-computer interface 本身就是产品能力。
 
-### Phase 4：Product workbench
+**4. Structured workflow**  
+当前模型还不够稳定时，不能只靠自由探索。Agentless 的启示是：定位、修复、验证这种结构化流程可以显著提升可靠性。TRAE SOLO 应把不同角色任务做成 workflow，而不是只给一个输入框。
 
-目标形态：不仅写代码，还能做数据分析、行业研究、PPT、dashboard、内部工具、落地页、投研模型、运营自动化。
+**5. Verification**  
+测试、lint、typecheck、E2E、浏览器截图、visual diff、数据校验、公式审计、来源引用、verifier model。每个产物都应该带 Validation Panel。
 
-这是 TRAE SOLO 最值得押注的阶段。Coding 不是终点，而是把专业工作变成可运行系统、可分享文档、可验证结论的中间手段。
+**6. Collaboration**  
+PR/issue/Jira/飞书任务、评论、决策日志、变更摘要、订阅推送、多 agent command center。国内场景里飞书文档和群推送应成为 TRAE SOLO 的天然协作入口。
 
-## 5. 技术 Mapping
+**7. Evaluation flywheel**  
+固定回归集 LPME v0.1 + 动态新鲜集 LPME Live + telemetry。SWE-rebench 提醒我们：公开 benchmark 会被污染，产品团队需要固定测试和新鲜任务两套评估。
 
-AI coding 产品的技术栈可以分成 6 层。
+技术深度材料：
 
-1. Model layer：代码理解、长上下文、工具调用、多模态、规划与反思。
-2. Agent harness layer：instructions、tools、model、权限策略、编辑策略、测试循环、memory、多 agent。
-3. Context engineering layer：repo indexing、文档/表格/PPT/设计稿/网页输入、上下文压缩、来源追踪。
-4. Execution environment layer：本地 terminal、云 sandbox、worktree、浏览器、部署目标。
-5. Verification layer：测试、类型检查、lint、安全扫描、浏览器截图、数据校验、来源引用。
-6. Collaboration layer：任务状态、review workflow、PR/issue/CI、通知和订阅。
+- 技术深度分析：https://github.com/GameScaler/ai_coding_project_survey/blob/main/research/technical_deep_dive.md
+- 论文综述与产品启示：https://github.com/GameScaler/ai_coding_project_survey/blob/main/research/paper_notes.md
+- 技术思维导图：https://github.com/GameScaler/ai_coding_project_survey/blob/main/research/diagrams/ai_coding_capability_map.mmd
+- 核心论文 PDF：https://github.com/GameScaler/ai_coding_project_survey/tree/main/references/papers
 
-技术阅读路线：
+### 技术思维导图
 
-- SWE-bench：理解真实 GitHub issue 为什么比算法题更接近软件工程。
-- SWE-bench Verified：理解 benchmark 为什么需要人类验证，避免不可解/测试错误样本污染评估。
-- SWE-agent：理解 agent-computer interface 对结果的影响。
-- Agentless：理解复杂 agent 不是永远必要，定位、修复、验证三段式仍然是强 baseline。
-- Cursor / Codex / Claude Code / GitHub Copilot / TRAE 官方资料：理解产品如何把 agent 技术包装成可用工作流。
+```mermaid
+flowchart TB
+  A["AI Coding Product Capability"] --> B["Model Capability"]
+  A --> C["Product Leverage"]
+  B --> B1["Code reasoning"]
+  B --> B2["Long context & memory"]
+  B --> B3["Tool-use reliability"]
+  B --> B4["Multimodal understanding"]
+  B --> B5["Cost / latency"]
+  C --> C1["Context leverage"]
+  C --> C2["Agent harness"]
+  C --> C3["Structured workflow"]
+  C --> C4["Verification"]
+  C --> C5["Collaboration"]
+  C --> C6["Safety governance"]
+  C --> C7["Evaluation flywheel"]
+  C1 --> E["TRAE SOLO Product Workbench"]
+  C2 --> E
+  C3 --> E
+  C4 --> E
+  C5 --> E
+  C6 --> E
+  C7 --> E
+  E --> F1["Work View: goal, context, plan, preview, comments"]
+  E --> F2["Code View: repo, diff, terminal, tests, deploy"]
+  E --> F3["Command Center: multi-agent status, risks, handoff"]
+```
 
-## 6. LPME：Last Product Manager Examination
+## LPME：Last Product Manager Examination
 
 现有 coding benchmark 主要问：模型能否修好一个 issue，或者写出正确代码。产品经理更关心的是：一个 AI coding 产品能否让目标用户在真实上下文中完成可验收的工作。
 
@@ -110,59 +145,22 @@ LPME 的第一性原理：
 4. 模型能力是必要条件，但产品外壳决定真实可用性。
 5. 非工程师用户不应该被迫理解 repo、terminal、diff 才能获得价值。
 
-### 角色
+**LPME v0.1 固定测试集**：https://github.com/GameScaler/ai_coding_project_survey/blob/main/benchmark/lpme_v0.1/tasks.yml  
+**评分 Rubric**：https://github.com/GameScaler/ai_coding_project_survey/blob/main/benchmark/lpme_v0.1/scoring_rubric.md  
+**Benchmark README**：https://github.com/GameScaler/ai_coding_project_survey/blob/main/benchmark/README.md
 
-- 数据科学家：数据探索、建模、可视化、实验复现。
-- 产品经理：PRD、原型、需求拆解、验收标准、数据口径。
-- 营销创意：落地页、活动页、素材变体、品牌一致性。
-- 运营：流程自动化、内部工具、表格清洗、状态看板。
-- 销售：CRM 轻工具、客户分层、邮件/话术、跟进提醒。
-- 投行分析师：公司可比、财务模型、图表、PPT 页面。
-- 投资经理：行业研究、投资 thesis、风险清单、跟踪 dashboard。
-- 创业者：MVP、增长实验、支付/登录/部署、演示材料。
-- 工程师：未知仓库修复、测试、重构、PR review。
+LPME v0.2 建议新增：
 
-### 指标
+- **Model upgrade sensitivity**：同一产品换模型后，任务成功率、纠错轮次、成本如何变化。
+- **Context failure recovery**：故意缺少关键上下文，测试产品是否追问或记录假设。
+- **Long-running autonomy control**：测试 auto-review、approval、rollback、checkpoint。
+- **Multimodal artifact validation**：测试 screenshot、UI、PPT、图表、网页视觉质量。
 
-LPME 每个任务 100 分，包含 10 个维度：
+## TRAE SOLO 产品建议
 
-- Outcome correctness：结果是否满足目标。
-- Context acquisition：是否主动发现、组织、追问上下文。
-- Execution depth：是否真的运行、测试、验证，而不是只写方案。
-- Artifact quality：产物是否可读、可用、专业。
-- Controllability：用户能否理解和干预过程。
-- Iteration efficiency：用户反馈后能否局部修正，不重做全部。
-- Verification：是否提供测试、校验、来源、验收标准。
-- Collaboration handoff：是否能交给同事 review、复用、继续维护。
-- Safety and governance：权限、隐私、密钥、破坏性操作是否受控。
-- Cost and latency：时间、token/credit、人工纠错成本是否合理。
+TRAE SOLO 应该把自己定义为 **AI-native 工作交付平台**，而不是“AI IDE 的 SOLO 模式”。北极星不是生成了多少行代码，而是不同角色能否用更少上下文成本、更少纠错轮次，拿到一个可审查、可运行、可分享的结果。
 
-### 固定测试集 v0.1
-
-已在本地仓库建立 10 个固定任务：
-
-- LPME-DS-001：Messy acquisition cohort analysis
-- LPME-PM-001：PRD to clickable prototype and acceptance tests
-- LPME-MKT-001：Campaign landing page with brand constraints
-- LPME-OPS-001：SOP to internal workflow tracker
-- LPME-SALES-001：Lead scoring and follow-up assistant
-- LPME-IB-001：Public comps mini model
-- LPME-IM-001：Industry thesis memo with source trail
-- LPME-FOUNDER-001：Idea to MVP with analytics
-- LPME-SE-001：Unfamiliar repo bug fix
-- LPME-XFUNC-001：Agent handoff and collaboration stress test
-
-GitHub 链接待打通后替换：
-
-- benchmark README：待填
-- tasks.yml：待填
-- scoring rubric：待填
-
-## 7. TRAE SOLO 产品建议
-
-TRAE SOLO 应该把自己定义为“AI-native 工作交付平台”，而不是“AI IDE 的 SOLO 模式”。北极星不是生成了多少行代码，而是不同角色能否用更少上下文成本、更少纠错轮次，拿到一个可审查、可运行、可分享的结果。
-
-建议北极星指标：
+**建议北极星指标**
 
 - Time to first usable artifact：从任务输入到第一个可用产物。
 - Human correction loops：用户为了达到可用需要纠正几轮。
@@ -170,20 +168,21 @@ TRAE SOLO 应该把自己定义为“AI-native 工作交付平台”，而不是
 - Delivery confidence：用户是否理解 agent 做了什么、风险在哪里、如何回滚。
 - Role expansion：非工程师是否可以完成原本需要工程师协助的任务。
 
-建议产品模块：
+**建议产品模块**
 
-- Role cockpit：产品、数据、运营、销售、投研、创业者、工程师不同首页和任务模板。
-- Context vault：项目资料、历史决策、数据源、品牌规范、代码规则统一管理。
-- Work/Code bridge：Work 模式产出 PRD/分析/方案，Code 模式自动转化为可运行系统。
-- Review by artifact：非工程师审查预览、表格、PPT、报告、指标，而不是只审查 diff。
-- Feishu-native loop：文档沉淀、群推送、评论反馈、审批和任务跟踪。
+- Role Cockpit：产品、数据、运营、销售、投研、创业者、工程师不同首页和任务模板。
+- Context Vault：项目资料、历史决策、数据源、品牌规范、代码规则统一管理。
+- Work/Code Bridge：Work 模式产出 PRD/分析/方案，Code 模式自动转化为可运行系统。
+- Validation Panel：每个产物都有测试、来源、风险、视觉检查、数据校验。
+- Review by Artifact：非工程师审查预览、表格、PPT、报告、指标，而不是只审查 diff。
+- Feishu-native Loop：文档沉淀、群推送、评论反馈、审批和任务跟踪。
 
-## 8. 自动化更新方案
+## 自动化更新与订阅
 
 建议每日检查、每周汇总：
 
-- 每日：只关注重大更新，如新 feature、模型迭代、agent workflow、企业治理、定价变化。无重大更新时只记录“无重大更新”。
-- 每周：把每日碎片变化归纳成路线判断，更新竞争格局和 TRAE SOLO 建议。
+- **每日**：只关注重大更新，如新 feature、模型迭代、agent workflow、企业治理、定价变化。无重大更新时只记录“无重大更新”。
+- **每周**：把每日碎片变化归纳成路线判断，更新竞争格局和 TRAE SOLO 建议。
 
 MVP 阶段：
 
@@ -196,15 +195,14 @@ MVP 阶段：
 - 飞书群机器人 webhook 推送摘要给订阅群。
 - GitHub 仓库保存 benchmark、每日抓取和历史报告。
 
-需要用户提供：
+当前状态：
 
-- GitHub 仓库地址或允许我创建仓库。
-- 飞书开放平台 app_id/app_secret，或群机器人 webhook。
-- 如果要真实实测产品：Claude、Cursor、TRAE、Windsurf/Devin、GitHub Copilot 的账号/API key/订阅权限。
+- GitHub 已打通：https://github.com/GameScaler/ai_coding_project_survey
+- 每日自动化已创建：`ai-coding-daily-product-update`
+- 飞书 API / 群机器人仍需 app_id/app_secret 或 webhook
+- 产品实测仍需安装 Claude Code、Cursor、TRAE、Windsurf/Devin，并配置账号/API key
 
-## 9. 官方资料源
-
-基础资料源：
+## 官方资料源
 
 - OpenAI Codex：developers.openai.com/codex/changelog
 - Claude Code：code.claude.com/docs/en/changelog
@@ -213,5 +211,5 @@ MVP 阶段：
 - GitHub Copilot：github.blog/changelog/label/copilot
 - Windsurf / Devin：windsurf.com/changelog、devin.ai/blog/windsurf-is-now-devin-desktop
 
-本地仓库已建立 `automation/product_sources.json`，后续自动化会以这些官方源为第一优先级。
+资料源配置：https://github.com/GameScaler/ai_coding_project_survey/blob/main/automation/product_sources.json
 

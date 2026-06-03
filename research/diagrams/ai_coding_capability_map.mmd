@@ -1,0 +1,39 @@
+flowchart TB
+  A["AI Coding Product Capability"] --> B["Model Capability"]
+  A --> C["Product Leverage"]
+
+  B --> B1["Code reasoning"]
+  B --> B2["Long context & memory"]
+  B --> B3["Tool-use reliability"]
+  B --> B4["Multimodal understanding"]
+  B --> B5["Cost / latency"]
+  B --> B6["Safety & controllability"]
+
+  C --> C1["Context leverage"]
+  C --> C2["Agent harness"]
+  C --> C3["Structured workflow"]
+  C --> C4["Verification"]
+  C --> C5["Collaboration"]
+  C --> C6["Safety governance"]
+  C --> C7["Evaluation flywheel"]
+
+  C1 --> D1["Repo index, docs, CSV, PPT, screenshots, Feishu context"]
+  C2 --> D2["Actions, tools, permissions, logs, worktree, rollback"]
+  C3 --> D3["Role templates, plan contract, checkpoints"]
+  C4 --> D4["Tests, browser checks, visual diff, citations, verifier"]
+  C5 --> D5["PR, Feishu doc, comments, bot push, weekly digest"]
+  C6 --> D6["Sandbox, secret checks, destructive action approval"]
+  C7 --> D7["LPME fixed set + LPME Live + telemetry"]
+
+  D1 --> E["TRAE SOLO Product Workbench"]
+  D2 --> E
+  D3 --> E
+  D4 --> E
+  D5 --> E
+  D6 --> E
+  D7 --> E
+
+  E --> F1["Work View: goal, context, plan, preview, comments"]
+  E --> F2["Code View: repo, diff, terminal, tests, deploy"]
+  E --> F3["Command Center: multi-agent status, risks, handoff"]
+

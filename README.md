@@ -7,7 +7,11 @@
 - 飞书在线文档：`https://my.feishu.cn/docx/GVk4d22dSo3jEXxst72cRjMfntg`
 - 基础调研报告：[research/market_research_base.md](research/market_research_base.md)
 - 技术 mapping 与论文路线：[research/technical_mapping.md](research/technical_mapping.md)
+- 技术深度分析：[research/technical_deep_dive.md](research/technical_deep_dive.md)
+- 论文综述与产品启示：[research/paper_notes.md](research/paper_notes.md)
+- 技术思维导图：[research/diagrams/ai_coding_capability_map.mmd](research/diagrams/ai_coding_capability_map.mmd)
 - 产品资料源清单：[research/sources.md](research/sources.md)
+- 核心论文 PDF：[references/papers/README.md](references/papers/README.md)
 - LPME benchmark 说明：[benchmark/README.md](benchmark/README.md)
 - LPME v0.1 固定测试集：[benchmark/lpme_v0.1/tasks.yml](benchmark/lpme_v0.1/tasks.yml)
 - 评分 rubric：[benchmark/lpme_v0.1/scoring_rubric.md](benchmark/lpme_v0.1/scoring_rubric.md)
@@ -38,4 +42,3 @@
 - Sourcegraph Amp / OpenCode / Gemini CLI 等开源或替代 agent runtime
 
 本轮原则是只围绕头部路线做深，不做长尾工具大全。
-
