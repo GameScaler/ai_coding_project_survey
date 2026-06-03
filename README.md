@@ -24,13 +24,17 @@
 - 每日抓取脚本：[scripts/daily_update.py](scripts/daily_update.py)
 - 飞书机器人推送脚本：[scripts/feishu_push.py](scripts/feishu_push.py)
 - 飞书开放平台 App Bot 推送脚本：[scripts/feishu_app_send.py](scripts/feishu_app_send.py)
+- 飞书 App Bot 群 ID 辅助脚本：[scripts/feishu_list_chats.py](scripts/feishu_list_chats.py)
+- Feishu App Bot 订阅表示例：[automation/feishu_subscribers.example.json](automation/feishu_subscribers.example.json)
+- 本地环境变量示例：[.env.example](.env.example)
 
 ## 当前链路状态
 
-- 飞书：已确认可以在 Chrome 登录态下打开并编辑目标文档。当前采用“文档承载基线 + GitHub 承载细节 + 飞书群承载订阅推送”的 MVP 路线。
+- 飞书：已确认可以在 Chrome 登录态下打开并编辑目标文档。当前路线切换为正式 Feishu App Bot 优先，文档承载基线、GitHub 承载细节、`AI Coding Survey Bot` 负责订阅推送。
 - GitHub：remote 已连接到 `git@github.com:GameScaler/ai_coding_project_survey.git`，调研材料可通过 GitHub 链接回填飞书。
 - 产品实测：Codex、Claude Code、Cursor、TRAE SOLO、Windsurf、GitHub Copilot App、Devin CLI 已安装或确认存在。真正横评需要后续账号登录/API key。OpenClaw 本机不可用，暂不纳入本轮实测。
-- 自动化：已落本地脚本与 Codex daily automation。MVP 群推送等待飞书群 custom bot webhook；正式 App Bot 方案等待飞书应用权限、目标群/订阅表配置。
+- 自动化：已落本地脚本与 Codex daily/weekly automation。Feishu App Bot 已打通固定会话测试推送，脚本支持单目标推送和订阅表群发；分享文档后的订阅入口采用固定群/表单，个人订阅需要下一阶段事件回调拿到 `open_id`。
+- 每周复盘：已回填 2026-W01 到 2026-W23。只生成已结束完整周，W24（2026-06-01～2026-06-07）应在 2026-06-08 后生成。
 
 ## 调研范围
 

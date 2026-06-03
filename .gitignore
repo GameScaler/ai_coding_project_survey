@@ -1,4 +1,8 @@
 __pycache__/
 *.pyc
 .DS_Store
-
+.env
+.env.*
+!.env.example
+automation/feishu_subscribers.local.json
+data/feishu/

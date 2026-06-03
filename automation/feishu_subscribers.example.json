@@ -1,0 +1,18 @@
+{
+  "subscribers": [
+    {
+      "name": "AI Coding Product Update group",
+      "receive_id_type": "chat_id",
+      "receive_id": "oc_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "subscription": "daily",
+      "status": "active"
+    },
+    {
+      "name": "Weekly strategy subscribers",
+      "receive_id_type": "chat_id",
+      "receive_id": "oc_yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+      "subscription": "weekly",
+      "status": "active"
+    }
+  ]
+}
