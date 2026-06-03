@@ -102,7 +102,7 @@
 
 每周自动化补充要求：
 
-> 只复盘上一个已经结束的周一到周日周期，不生成进行中周，不创建 `Wxx-in-progress`。周标题使用 `2026-W23（2026-05-25～2026-05-31）` 格式。复盘必须覆盖产品 feature、模型版本/模型能力变化、产品能力如何补足模型短板、TRAE SOLO 路线启示和 LPME 是否需要调整。
+> 只复盘上一个已经结束的周一到周日周期，不生成进行中周，不创建 `Wxx-in-progress`。周标题使用 `2026-W23（2026-05-25～2026-05-31）` 格式。复盘必须横向扫描 OpenAI Codex、Claude Code、Cursor、TRAE SOLO、GitHub Copilot、Windsurf / Devin Desktop、OpenClaw，并覆盖产品 feature、模型版本/模型能力变化、产品能力如何补足模型短板、TRAE SOLO 路线启示和 LPME 是否需要调整。TRAE SOLO 是战略启示对象，不是唯一信号源。
 
 ## Update Cadence
 

@@ -64,7 +64,31 @@
         "https://docs.devin.ai/release-notes/overview"
       ],
       "watch_keywords": ["Agent Command Center", "Devin", "Desktop", "ACP", "Spaces", "local agent", "cloud agent"]
+    },
+    {
+      "id": "openclaw",
+      "name": "OpenClaw",
+      "priority": "core",
+      "official_sources": [
+        "https://docs.openclaw.ai",
+        "https://github.com/openclaw/openclaw/releases",
+        "https://raw.githubusercontent.com/openclaw/openclaw/main/CHANGELOG.md"
+      ],
+      "watch_keywords": [
+        "Skill Workshop",
+        "Workboard",
+        "Gateway",
+        "Control UI",
+        "channels",
+        "Codex",
+        "Copilot",
+        "plugins",
+        "multi-agent",
+        "Feishu",
+        "mobile",
+        "providers",
+        "runtime"
+      ]
     }
   ]
 }
-

@@ -300,5 +300,6 @@ LPME 的核心不是给模型排名，而是给产品路线提供证据：到底
 | TRAE SOLO | 国内/全球模型组合、多模态上下文 | Work/Code、三栏工作区、浏览器选择、文档/表格/PPT、移动端 | 需要把 More Than Coding 落到可验证的角色化交付 |
 | GitHub Copilot | 多模型接入、GitHub-native cloud agent | Copilot App、CLI、PR/issue/code review、sandboxes、agent apps | 组织治理强，但非 GitHub 工作资产覆盖有限 |
 | Windsurf / Devin Desktop | Devin cloud/local agent | Agent Command Center、IDE + cloud agent、ACP/Spaces | 从工程任务管理扩展到业务交付物仍需证明 |
+| OpenClaw | 多 provider / 多模型网关、Codex/Copilot/Claude 等 runtime 接入 | Gateway、Control UI、Workboard、Skill Workshop、channels、plugins、SecretRef、observability | 不是纯 IDE，最大问题是复杂度治理；但它提示 TRAE SOLO 要把外部渠道、团队技能、权限与恢复机制做成产品能力 |
 
 关键判断：模型版本迭代越快，产品越不能只做“模型入口”。真正的壁垒会沉淀在 context、harness、verification、collaboration、governance 这些产品层里。

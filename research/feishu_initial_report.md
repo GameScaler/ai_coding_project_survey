@@ -56,6 +56,7 @@ AI coding 市场已经从“编辑器里的代码补全”进入 **agent command
 | TRAE SOLO | More Than Coding workspace | Web/Desktop/Mobile、Work/Code、三栏工作区、语音、worktree | 多角色任务、文档/表格/PPT/Python 上下文、反馈和产物在一处 | 应明确“产品交付”而非“代码生成”的北极星 |
 | GitHub Copilot | GitHub-native agent platform | VS Code、GitHub issue/PR、CLI、Copilot app、cloud agent | 企业分发、GitHub workflow、治理和审查 | 国内场景可借飞书/GitLab/Gitee/云开发形成工作流入口 |
 | Windsurf / Devin Desktop | IDE + 云端自治工程师 | Devin Desktop、Agent Command Center、local/cloud agents | 本地 IDE 与云 agent 融合，Kanban 管理 agent fleet | 多 agent 管理会成为主界面，而不是聊天窗口 |
+| OpenClaw | Multi-channel agent gateway | Gateway、Control UI、Workboard、Skill Workshop、channels、plugins/providers | 更像 agent operating system，不是纯 IDE；强调多渠道、多模型、多插件、多设备编排 | TRAE SOLO 要把飞书/移动端/定时任务/外部工具也纳入交付闭环，而不只是在桌面内完成任务 |
 
 ## 发展路线
 
@@ -66,7 +67,7 @@ AI coding 市场已经从“编辑器里的代码补全”进入 **agent command
 代表：Claude Code、Codex CLI、Cursor Agent、TRAE Agent。产品开始能读 repo、编辑多文件、执行命令、运行测试、解释失败。竞争点从“补全速度”转到“上下文获取 + 工具执行 + 可控修改”。
 
 **Phase 3：Agent workspace**  
-代表：Cursor 3 Agents Window、Codex App、GitHub Copilot App、Windsurf/Devin Desktop、TRAE SOLO。主界面从 IDE/聊天变成任务工作台：多个 agent 并行，worktree 隔离，云端长任务，PR/CI 回路，用户从写代码者变成任务导演和 reviewer。
+代表：Cursor 3 Agents Window、Codex App、GitHub Copilot App、Windsurf/Devin Desktop、OpenClaw Workboard / Control UI、TRAE SOLO。主界面从 IDE/聊天变成任务工作台：多个 agent 并行，worktree 隔离，云端长任务，PR/CI 回路，用户从写代码者变成任务导演和 reviewer。
 
 **Phase 4：Product workbench**  
 目标形态：不仅写代码，还能做数据分析、行业研究、PPT、dashboard、内部工具、落地页、投研模型、运营自动化。这是 TRAE SOLO 最值得押注的阶段。Coding 不是终点，而是把专业工作变成可运行系统、可分享文档、可验证结论的中间手段。

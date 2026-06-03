@@ -13,7 +13,7 @@
 | Windsurf / Devin Desktop | Installed | `/Applications/Windsurf.app`, CLI `/opt/homebrew/bin/windsurf`, version `2.3.15` | Windsurf/Cognition login; Devin access if available |
 | Devin CLI | Installed | CLI `/opt/homebrew/bin/devin`, cask version `2026.5.26-3` | Cognition/Devin login |
 | GitHub Copilot App | Installed | `/Applications/GitHub Copilot.app`, cask version `0.2.23` | GitHub login; Copilot subscription / technical preview access |
-| OpenClaw | Deferred | 本机当前不可用/被禁用 | 暂不纳入本轮实测，保留观察项 |
+| OpenClaw | Deferred | 本机当前不可用/被禁用 | 进入主要产品池与公开信号监控；本轮不做真机实测 |
 
 ## Environment Notes
 

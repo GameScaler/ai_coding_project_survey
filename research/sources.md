@@ -53,6 +53,13 @@
 - Devin release notes: https://docs.devin.ai/release-notes/overview
 - Cognition blog: https://cognition.ai/blog
 
+### OpenClaw
+
+- Docs: https://docs.openclaw.ai
+- GitHub releases: https://github.com/openclaw/openclaw/releases
+- Changelog: https://raw.githubusercontent.com/openclaw/openclaw/main/CHANGELOG.md
+- 关注重点：Gateway、Control UI、Workboard、Skill Workshop、multi-channel delivery、providers/plugins、Codex/Copilot integration、Feishu/channel support。
+
 ## Technical Sources
 
 - SWE-bench paper: https://arxiv.org/abs/2310.06770

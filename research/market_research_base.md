@@ -18,6 +18,7 @@ AI coding 市场已经从“编辑器里的代码补全”进入“agent command
 | TRAE SOLO | More Than Coding 的 AI-native workspace | Web/Desktop/Mobile、Work/Code、三栏工作区、语音、worktree | 面向 PM、数据、设计、开发等多角色，强调上下文工程 | 应明确“产品交付”而非“代码生成”的北极星 |
 | GitHub Copilot | GitHub-native agent platform | VS Code、GitHub issue/PR、CLI、Copilot app、cloud agent | 企业分发、GitHub workflow、治理和审查 | GitHub 的优势是组织工作流入口，TRAE 在国内可借飞书/企微/Jira/代码仓形成类似入口 |
 | Windsurf / Devin Desktop | IDE + 云端自治工程师 | Windsurf/Devin Desktop、Agent Command Center、Devin cloud/local | 本地 IDE 与云 agent 融合，Kanban 管理 agent fleet | 证明“管理多个 agent”会成为主界面，而不是聊天窗口 |
+| OpenClaw | Multi-channel agent gateway / agent OS | Gateway、Control UI、Workboard、Skill Workshop、channels、plugins/providers | 不像纯 IDE，更像把 agent 接到多渠道、多模型、多插件和移动端的运行时 | TRAE SOLO 要关注“工作台之外的交付入口”：飞书、Slack、移动端、Cron、外部插件和团队技能治理 |
 
 ## Development Route
 
@@ -35,7 +36,7 @@ AI coding 市场已经从“编辑器里的代码补全”进入“agent command
 
 ### Phase 3: Agent workspace
 
-代表：Cursor 3 Agents Window、Codex App、GitHub Copilot App、Windsurf/Devin Desktop、TRAE SOLO。
+代表：Cursor 3 Agents Window、Codex App、GitHub Copilot App、Windsurf/Devin Desktop、OpenClaw Workboard / Control UI、TRAE SOLO。
 
 主界面从 IDE/聊天变成任务工作台：多个 agent 并行，worktree 隔离，云端长任务，PR/CI 回路，用户从写代码者变成任务导演和 reviewer。
 
@@ -53,6 +54,7 @@ AI coding 市场已经从“编辑器里的代码补全”进入“agent command
 - TRAE 中国 changelog 显示 SOLO 在 2026-03-31 发布 0.1.0 后，持续补 Web/Desktop、移动端、语音、worktree、浏览器元素选中加入对话/评论等能力。
 - GitHub 在 2026-06-02 继续强化 Copilot app、cloud agent、CLI、memory、code review、agent apps，核心优势是 GitHub 生态和企业治理。
 - Windsurf/Devin 在 2026-04-15 推出 Windsurf 2.0，把 Devin cloud agent 放入 IDE；2026-06-02 又发布 Devin Desktop，进一步把 Agent Command Center 作为默认入口。
+- OpenClaw 官方文档把它定义为 multi-channel gateway for AI agents；2026-06-02 changelog 中 Skill Workshop、Workboard、channels/mobile、providers/plugins、Codex/Copilot integration 同时出现，说明它的路线更接近 agent operating system，而不是单一 coding IDE。
 
 ## Competitive Interpretation
 
@@ -92,6 +94,12 @@ Windsurf 2.0 和 Devin Desktop 的方向很清晰：把 local IDE 和 cloud auto
 
 PM 视角最值得关注：这条路线说明 AI coding 产品会越来越像“软件工程操作系统”。TRAE SOLO 的三栏工作区可以继续演进成跨角色 command center：需求、素材、任务、进度、产物、反馈、发布都在一处。
 
+### OpenClaw
+
+OpenClaw 的定位不是传统 IDE，也不是单一终端 agent，而是把 agent 接到多渠道、多设备、多 provider、多 plugin 的 gateway。它的 Workboard、Control UI、Skill Workshop、Feishu/Slack/Discord/Teams 等 channel 支持，说明另一条重要路线正在形成：coding agent 逐步变成“可被组织部署和编排的 agent runtime”。
+
+PM 视角最值得关注：OpenClaw 对 TRAE SOLO 的启发不在于复制开源运行时，而在于把产品能力看成模型能力的外骨骼。当前模型还不够稳定时，产品层必须提供技能治理、权限边界、渠道投递、任务状态、恢复机制、插件生态和观测面板。TRAE SOLO 如果要服务团队工作流，不能只做桌面应用，还要把飞书群、文档、定时任务、移动端、外部工具都纳入交付闭环。
+
 ## Product Trend
 
 1. 从 chat-first 到 task-first。聊天仍是入口，但主界面会变成任务、状态、产物和 review。
@@ -120,4 +128,3 @@ TRAE SOLO 应该把自己定义为“AI-native 工作交付平台”，而不是
 - Work/Code bridge：Work 模式产出 PRD/分析/方案，Code 模式自动转化为可运行系统。
 - Review by artifact：非工程师审查预览、表格、PPT、报告、指标，而不是只审查 diff。
 - Feishu-native loop：文档沉淀、群推送、评论反馈、审批和任务跟踪。
-
