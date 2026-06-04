@@ -32,10 +32,10 @@
 ## 当前链路状态
 
 - 飞书：已确认可以在 Chrome 登录态下打开并编辑目标文档。当前路线切换为正式 Feishu App Bot 优先，文档承载基线、GitHub 承载细节、`AI Coding Survey Bot` 负责订阅推送。
-- GitHub：remote 已连接到 `git@github.com:GameScaler/ai_coding_project_survey.git`，调研材料可通过 GitHub 链接回填飞书。
+- GitHub：remote 已连接到 `git@github.com:GameScaler/ai_coding_project_survey.git`，调研材料可通过 GitHub 链接同步飞书。
 - 产品实测：Codex、Claude Code、Cursor、TRAE SOLO、Windsurf、GitHub Copilot App、Devin CLI 已安装或确认存在。真正横评需要后续账号登录/API key。OpenClaw 本机不可用，暂不纳入本轮实测，但进入主要产品池和公开信号监控。Kimi Code 与 Zhipu GLM Coding Plan / CodeGeeX 已纳入核心产品池，先做公开源监控与后续账号/插件实测准备。
 - 自动化：已落本地脚本与 Codex daily/weekly automation。Feishu App Bot 已打通固定订阅群真实推送，脚本支持单目标推送、订阅表群发和群邀请链接生成；分享文档后的订阅入口采用固定群，个人订阅需要下一阶段事件回调拿到 `open_id`。
-- 每周复盘：已回填 2026-W01 到 2026-W23。只生成已结束完整周，W24（2026-06-01～2026-06-07）应在 2026-06-08 后生成。
+- 每周复盘：已覆盖 2026-W01 到 2026-W23。只生成已结束完整周，W24（2026-06-01～2026-06-07）应在 2026-06-08 后生成。
 
 ## 调研范围
 

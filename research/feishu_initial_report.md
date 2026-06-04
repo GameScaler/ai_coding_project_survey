@@ -14,11 +14,13 @@ AI coding 市场已经从“编辑器里的代码补全”进入 **agent command
 
 ## 每日更新
 
-历史回填说明：过去一周 daily 与 2026-W01～W23 weekly 已补入 Kimi Code 与 Zhipu GLM Coding Plan / CodeGeeX。没有明确当日/当周大版本时，标注为“回溯补录/未发现同级重大公开更新”，避免为了填充而编新闻。
+历史更新口径：过去一周 daily 与 2026-W01～W23 weekly 均按完整核心产品池记录 Kimi Code 与 Zhipu GLM Coding Plan / CodeGeeX；无同级重大更新时只写“无同等级重大公开更新”。
 
 ### 2026-06-03
 
-2026-06-03 Kimi/智谱历史回填：Kimi Code 与 Zhipu GLM Coding Plan / CodeGeeX 纳入同级 daily watch pool；分别代表国内模型厂商 coding agent / agent harness 与模型套餐 + IDE 插件生态。
+Kimi Code：无同等级重大公开更新；进入同级 daily watch pool，重点观察 K2.6 for coding 与 agent harness。
+
+Zhipu GLM Coding Plan / CodeGeeX：无同等级重大公开更新；进入同级 daily watch pool，重点观察 GLM coding 模型套餐与 IDE 插件生态。
 
 今日是明显的 **agent command center** 信号日。
 
@@ -46,7 +48,9 @@ AI coding 市场已经从“编辑器里的代码补全”进入 **agent command
 
 ### 2026-W23 初步判断
 
-2026-W23 Kimi/智谱周更回填：Kimi Code 纳入核心周更口径，重点看 K2.6 for coding、CLI/IDE/ACP、goal/background/subagent、provider 管理；Zhipu GLM Coding Plan / CodeGeeX 纳入核心周更口径，重点看 GLM coding 模型套餐、IDE 插件、MCP、review/test 和国内模型生态。
+Kimi Code：本周无同等级重大公开更新；重点观察 K2.6 for coding、CLI/IDE/ACP、goal/background/subagent、provider 管理。
+
+Zhipu GLM Coding Plan / CodeGeeX：本周无同等级重大公开更新；重点观察 GLM coding 模型套餐、IDE 插件、MCP、review/test 和国内模型生态。
 
 本周的核心路线是：**长任务自治正在产品化，但产品也在补安全阀**。Codex Sites、Copilot app、Devin Desktop、Cursor Auto-review 都在让 agent 做更长、更完整的任务；同时 approval、review、sandbox、状态管理、回滚也变得更重要。
 
