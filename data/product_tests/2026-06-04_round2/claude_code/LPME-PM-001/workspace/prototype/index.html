@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PM Review Board Prototype</title>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --panel: #ffffff;
+      --panel-alt: #f8fafc;
+      --border: #d9e2ec;
+      --text: #102a43;
+      --muted: #627d98;
+      --primary: #3366ff;
+      --primary-soft: #e8efff;
+      --warning: #b7791f;
+      --warning-soft: #fff7e6;
+      --danger: #c53030;
+      --danger-soft: #fff5f5;
+      --success: #2f855a;
+      --success-soft: #edfdf3;
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: none;
+      border-radius: 12px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+
+    .app {
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(217, 226, 236, 0.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1.45rem;
+    }
+
+    .brand p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .ghost-btn,
+    .primary-btn,
+    .status-btn,
+    .tab-btn,
+    .task-card {
+      width: 100%;
+    }
+
+    .ghost-btn {
+      width: auto;
+      background: var(--panel-alt);
+      color: var(--text);
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+    }
+
+    .status-switcher {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: var(--panel-alt);
+      padding: 6px;
+      border-radius: 14px;
+    }
+
+    .status-btn {
+      background: transparent;
+      color: var(--muted);
+      padding: 10px 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .status-btn.active {
+      background: white;
+      color: var(--text);
+      box-shadow: 0 3px 12px rgba(15, 23, 42, 0.08);
+    }
+
+    .section-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 0 0 10px;
+    }
+
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .task-card {
+      text-align: left;
+      padding: 14px;
+      background: var(--panel-alt);
+      border: 1px solid transparent;
+      border-radius: 14px;
+    }
+
+    .task-card.active {
+      border-color: rgba(51, 102, 255, 0.35);
+      background: var(--primary-soft);
+    }
+
+    .task-topline,
+    .meta-row,
+    .comment-row,
+    .detail-header,
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .task-title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .task-subtitle,
+    .meta-row,
+    .comment-row,
+    .helper {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge.draft { background: var(--warning-soft); color: var(--warning); }
+    .badge.ready { background: var(--success-soft); color: var(--success); }
+    .badge.blocked { background: var(--danger-soft); color: var(--danger); }
+    .badge.high { background: #ffe3e3; color: #9b2c2c; }
+    .badge.medium { background: #fff4db; color: #9c6b00; }
+    .badge.low { background: #ebf8ff; color: #1d4ed8; }
+
+    .main {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .toolbar {
+      flex-wrap: wrap;
+    }
+
+    .toolbar-left h2 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .toolbar-left p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn {
+      width: auto;
+      background: var(--primary);
+      color: white;
+      padding: 12px 16px;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(51, 102, 255, 0.22);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.9fr);
+      gap: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      background: var(--panel);
+    }
+
+    .artifact-card {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .artifact-preview {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      padding: 18px;
+      min-height: 320px;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .preview-header h3,
+    .card h3,
+    .card h4 {
+      margin: 0;
+    }
+
+    .preview-section {
+      margin-bottom: 16px;
+    }
+
+    .preview-section p,
+    .preview-section li,
+    .card p,
+    .card li {
+      color: #334e68;
+      line-height: 1.5;
+    }
+
+    ul { padding-left: 18px; }
+
+    .split {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .check-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px;
+      border-radius: 14px;
+      background: var(--panel-alt);
+      border: 1px solid var(--border);
+    }
+
+    .check-item input {
+      margin-top: 3px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+    }
+
+    .check-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .comments {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .comment {
+      padding: 12px;
+      border-radius: 14px;
+      background: var(--panel-alt);
+      border: 1px solid var(--border);
+    }
+
+    .comment strong { font-size: 0.95rem; }
+
+    .detail-rail {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .summary-box {
+      padding: 14px;
+      border-radius: 14px;
+      background: var(--primary-soft);
+      border: 1px solid rgba(51, 102, 255, 0.2);
+    }
+
+    .summary-box p { margin: 6px 0 0; }
+
+    .footer-note {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    @media (max-width: 980px) {
+      .shell,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        order: 2;
+      }
+
+      .main {
+        order: 1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .app { padding: 14px; }
+      .main,
+      .sidebar,
+      .card,
+      .artifact-preview { padding: 16px; }
+      .status-switcher { grid-template-columns: 1fr; }
+      .split { grid-template-columns: 1fr; }
+      .toolbar,
+      .detail-header,
+      .task-topline,
+      .meta-row,
+      .comment-row,
+      .preview-header { align-items: flex-start; flex-direction: column; }
+      .toolbar-actions { width: 100%; }
+      .primary-btn,
+      .ghost-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="shell">
+      <aside class="panel sidebar">
+        <div class="brand">
+          <div>
+            <h1>PM Review Board</h1>
+            <p>See which AI-generated artifacts are still drafts, ready for review, or blocked by risk.</p>
+          </div>
+          <button class="ghost-btn" id="exportBtn">Export Summary</button>
+        </div>
+
+        <div>
+          <p class="section-title">Status</p>
+          <div class="status-switcher" id="statusTabs"></div>
+        </div>
+
+        <div>
+          <div class="detail-header">
+            <p class="section-title">Task List</p>
+            <span class="helper" id="taskCount"></span>
+          </div>
+          <div class="task-list" id="taskList"></div>
+        </div>
+      </aside>
+
+      <main class="panel main">
+        <div class="toolbar">
+          <div class="toolbar-left">
+            <h2 id="detailTitle">Artifact detail</h2>
+            <p id="detailSubtitle">Choose a task to review its preview, risks, and comments.</p>
+          </div>
+          <div class="toolbar-actions">
+            <button class="ghost-btn" id="toggleStateBtn">Move to ready for review</button>
+            <button class="primary-btn" id="markReadyBtn">Mark ready</button>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <section class="artifact-card">
+            <div class="card">
+              <div class="preview-header">
+                <h3>Artifact Preview</h3>
+                <span class="badge" id="statusBadge"></span>
+              </div>
+              <div class="artifact-preview" id="artifactPreview"></div>
+            </div>
+
+            <div class="split">
+              <div class="card">
+                <h3>Risk Checklist</h3>
+                <p class="helper">PMs can see unresolved risks before marking work ready.</p>
+                <div class="checklist" id="riskChecklist"></div>
+              </div>
+              <div class="card">
+                <h3>Reviewer Comments</h3>
+                <p class="helper">Comments stay visible on the page instead of inside a modal.</p>
+                <div class="comments" id="commentsList"></div>
+              </div>
+            </div>
+          </section>
+
+          <aside class="detail-rail">
+            <div class="card">
+              <h3>Review Summary</h3>
+              <div class="summary-box">
+                <strong id="summaryHeadline">Ready to review</strong>
+                <p id="summaryText"></p>
+              </div>
+              <p class="footer-note" id="summaryNote"></p>
+            </div>
+
+            <div class="card">
+              <h3>Acceptance Check Export</h3>
+              <p id="acceptanceText"></p>
+            </div>
+
+            <div class="card">
+              <h3>Assumptions</h3>
+              <ul id="assumptionsList"></ul>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const tasks = [
+      {
+        id: "prd-board",
+        title: "PM review board PRD",
+        type: "PRD",
+        owner: "AI agent",
+        status: "draft",
+        riskLevel: "high",
+        description: "Defines the lightweight board, preview area, risk checklist, comments, and mark-ready action.",
+        summary: "Draft is complete enough to review, but two risk checks still need a PM decision.",
+        acceptance: "Exportable checks: grouped task list, visible preview, risk checklist, comments, mark-ready action, desktop + mobile layout.",
+        assumptions: [
+          "Prototype is local-only with no backend or authentication.",
+          "Reviewers need plain-language summaries instead of code details.",
+          "Export summary is a local interaction, not a live integration."
+        ],
+        risks: [
+          { label: "Unresolved risk is visible before mark-ready", detail: "High-priority PM feedback says risk must be obvious before the final action.", checked: true },
+          { label: "Customer data mention is flagged", detail: "Legal asked for explicit flagging if an artifact references customer data.", checked: false },
+          { label: "Acceptance checks are exportable into a ticket", detail: "Engineer wants a copyable checklist for handoff.", checked: true }
+        ],
+        comments: [
+          { role: "PM", priority: "high", text: "I can understand the status quickly, but I still need a customer-data warning before I mark this ready." },
+          { role: "Engineer", priority: "high", text: "The checklist export looks usable for ticket handoff." }
+        ],
+        preview: {
+          sections: [
+            {
+              heading: "Problem",
+              body: "PMs receive many AI-generated artifacts and need one place to see what is draft, ready for review, or blocked by risk."
+            },
+            {
+              heading: "Scope",
+              bullets: [
+                "Task list grouped by status",
+                "Artifact preview always visible on the page",
+                "Risk checklist and reviewer comments",
+                "Mark ready action"
+              ]
+            },
+            {
+              heading: "Open question",
+              body: "Should any mention of customer data automatically keep the item blocked until reviewed?"
+            }
+          ]
+        }
+      },
+      {
+        id: "landing-page",
+        title: "Launch summary landing page",
+        type: "Landing Page",
+        owner: "AI agent",
+        status: "ready",
+        riskLevel: "medium",
+        description: "A concise launch page summarizing what the board does and who it helps.",
+        summary: "Ready for PM review. The core messaging is aligned and risk checks are complete.",
+        acceptance: "Exportable checks: hero summary, value bullets, review workflow explanation, no external integrations.",
+        assumptions: [
+          "Content is informational only.",
+          "Preview is enough for initial PM feedback.",
+          "Reviewers do not need analytics instrumentation in the prototype."
+        ],
+        risks: [
+          { label: "Preview remains visible", detail: "Designer feedback said preview should not be hidden behind a modal.", checked: true },
+          { label: "No unsupported integration claims", detail: "Brief explicitly avoids backend or deployment promises.", checked: true },
+          { label: "Review intent is clear to non-engineering PMs", detail: "Language is simple and action-oriented.", checked: true }
+        ],
+        comments: [
+          { role: "Designer", priority: "medium", text: "Keeping the preview inline makes it easier to compare content and comments." },
+          { role: "PM", priority: "high", text: "This is easy to scan and feels ready for a first review pass." }
+        ],
+        preview: {
+          sections: [
+            {
+              heading: "Headline",
+              body: "Review AI-generated product work in one place."
+            },
+            {
+              heading: "What PMs can do",
+              bullets: [
+                "See draft, ready, and blocked work",
+                "Open artifact previews without leaving the board",
+                "Spot unresolved risk before handoff"
+              ]
+            },
+            {
+              heading: "Handoff note",
+              body: "Acceptance checks can be copied into a ticket for engineering follow-up."
+            }
+          ]
+        }
+      },
+      {
+        id: "data-memo",
+        title: "Usage analysis memo",
+        type: "Analysis Memo",
+        owner: "AI agent",
+        status: "blocked",
+        riskLevel: "high",
+        description: "A memo that summarizes user feedback themes from recent review sessions.",
+        summary: "Blocked until customer-data language is removed or explicitly reviewed.",
+        acceptance: "Exportable checks: summary, recommendation, risk note, and owner for follow-up.",
+        assumptions: [
+          "Memo can stay local and static.",
+          "Blocked items should explain why they cannot move forward.",
+          "The board should help PMs avoid reading raw technical output."
+        ],
+        risks: [
+          { label: "Customer data mention is flagged", detail: "This memo references customer account details, so it must stay blocked.", checked: false },
+          { label: "Unresolved risk is called out clearly", detail: "PM should not need to inspect the full memo to notice the blocker.", checked: true },
+          { label: "Next reviewer action is obvious", detail: "The board should tell the PM what needs to happen next.", checked: false }
+        ],
+        comments: [
+          { role: "Legal", priority: "high", text: "Any mention of customer data needs an explicit flag and follow-up review." },
+          { role: "PM", priority: "high", text: "I will not mark this ready until the risk note is resolved." }
+        ],
+        preview: {
+          sections: [
+            {
+              heading: "Summary",
+              body: "The memo captures review pain points and recommends surfacing unresolved risks earlier in the workflow."
+            },
+            {
+              heading: "Risk note",
+              body: "Contains a line about customer account behavior. This should be reviewed before sharing."
+            },
+            {
+              heading: "Next step",
+              body: "Remove sensitive references or confirm legal review, then return to the board."
+            }
+          ]
+        }
+      }
+    ];
+
+    const statusLabels = {
+      draft: "Draft",
+      ready: "Ready for Review",
+      blocked: "Blocked"
+    };
+
+    let currentStatus = "draft";
+    let currentTaskId = "prd-board";
+
+    const statusTabs = document.getElementById("statusTabs");
+    const taskList = document.getElementById("taskList");
+    const taskCount = document.getElementById("taskCount");
+    const detailTitle = document.getElementById("detailTitle");
+    const detailSubtitle = document.getElementById("detailSubtitle");
+    const statusBadge = document.getElementById("statusBadge");
+    const artifactPreview = document.getElementById("artifactPreview");
+    const riskChecklist = document.getElementById("riskChecklist");
+    const commentsList = document.getElementById("commentsList");
+    const summaryHeadline = document.getElementById("summaryHeadline");
+    const summaryText = document.getElementById("summaryText");
+    const summaryNote = document.getElementById("summaryNote");
+    const acceptanceText = document.getElementById("acceptanceText");
+    const assumptionsList = document.getElementById("assumptionsList");
+    const markReadyBtn = document.getElementById("markReadyBtn");
+    const toggleStateBtn = document.getElementById("toggleStateBtn");
+    const exportBtn = document.getElementById("exportBtn");
+
+    function getVisibleTasks() {
+      return tasks.filter((task) => task.status === currentStatus);
+    }
+
+    function getCurrentTask() {
+      const visibleTasks = getVisibleTasks();
+      return visibleTasks.find((task) => task.id === currentTaskId) || visibleTasks[0] || tasks[0];
+    }
+
+    function renderStatusTabs() {
+      statusTabs.innerHTML = "";
+      ["draft", "ready", "blocked"].forEach((status) => {
+        const count = tasks.filter((task) => task.status === status).length;
+        const button = document.createElement("button");
+        button.className = `status-btn ${currentStatus === status ? "active" : ""}`;
+        button.textContent = `${statusLabels[status]} (${count})`;
+        button.addEventListener("click", () => {
+          currentStatus = status;
+          const firstTask = getVisibleTasks()[0];
+          currentTaskId = firstTask ? firstTask.id : tasks[0].id;
+          render();
+        });
+        statusTabs.appendChild(button);
+      });
+    }
+
+    function renderTaskList() {
+      const visibleTasks = getVisibleTasks();
+      taskCount.textContent = `${visibleTasks.length} item${visibleTasks.length === 1 ? "" : "s"}`;
+      taskList.innerHTML = "";
+
+      visibleTasks.forEach((task) => {
+        const card = document.createElement("button");
+        card.className = `task-card ${task.id === currentTaskId ? "active" : ""}`;
+        card.addEventListener("click", () => {
+          currentTaskId = task.id;
+          renderDetail();
+          renderTaskList();
+        });
+
+        card.innerHTML = `
+          <div class="task-topline">
+            <div>
+              <p class="task-title">${task.title}</p>
+              <p class="task-subtitle">${task.type}</p>
+            </div>
+            <span class="badge ${task.status}">${statusLabels[task.status]}</span>
+          </div>
+          <div class="meta-row">
+            <span>Owner: ${task.owner}</span>
+            <span class="badge ${task.riskLevel}">${task.riskLevel} risk</span>
+          </div>
+        `;
+        taskList.appendChild(card);
+      });
+
+      if (!visibleTasks.length) {
+        taskList.innerHTML = '<div class="task-card"><p class="task-title">No tasks in this state</p><p class="task-subtitle">Switch to another status tab to continue.</p></div>';
+      }
+    }
+
+    function renderDetail() {
+      const task = getCurrentTask();
+      if (!task) return;
+
+      currentTaskId = task.id;
+      detailTitle.textContent = task.title;
+      detailSubtitle.textContent = task.description;
+      statusBadge.className = `badge ${task.status}`;
+      statusBadge.textContent = statusLabels[task.status];
+
+      artifactPreview.innerHTML = "";
+      task.preview.sections.forEach((section) => {
+        const wrap = document.createElement("div");
+        wrap.className = "preview-section";
+        let sectionHtml = `<h4>${section.heading}</h4>`;
+        if (section.body) {
+          sectionHtml += `<p>${section.body}</p>`;
+        }
+        if (section.bullets) {
+          sectionHtml += `<ul>${section.bullets.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+        }
+        wrap.innerHTML = sectionHtml;
+        artifactPreview.appendChild(wrap);
+      });
+
+      riskChecklist.innerHTML = "";
+      task.risks.forEach((risk, index) => {
+        const item = document.createElement("label");
+        item.className = "check-item";
+        item.innerHTML = `
+          <input type="checkbox" ${risk.checked ? "checked" : ""} data-index="${index}" />
+          <div>
+            <strong>${risk.label}</strong>
+            <span>${risk.detail}</span>
+          </div>
+        `;
+        item.querySelector("input").addEventListener("change", (event) => {
+          task.risks[index].checked = event.target.checked;
+          updateSummary(task);
+        });
+        riskChecklist.appendChild(item);
+      });
+
+      commentsList.innerHTML = "";
+      task.comments.forEach((comment) => {
+        const item = document.createElement("div");
+        item.className = "comment";
+        item.innerHTML = `
+          <div class="comment-row">
+            <strong>${comment.role}</strong>
+            <span class="badge ${comment.priority}">${comment.priority}</span>
+          </div>
+          <p>${comment.text}</p>
+        `;
+        commentsList.appendChild(item);
+      });
+
+      acceptanceText.textContent = task.acceptance;
+      assumptionsList.innerHTML = task.assumptions.map((assumption) => `<li>${assumption}</li>`).join("");
+      updateSummary(task);
+    }
+
+    function updateSummary(task) {
+      const unresolved = task.risks.filter((risk) => !risk.checked).length;
+      const mentionsCustomerData = task.risks.some((risk) => /customer data/i.test(risk.label) && !risk.checked);
+
+      if (task.status === "blocked") {
+        summaryHeadline.textContent = "Blocked by unresolved risk";
+        summaryText.textContent = `${task.summary} ${unresolved} checklist item${unresolved === 1 ? "" : "s"} still need attention.`;
+        summaryNote.textContent = mentionsCustomerData
+          ? "Legal-sensitive content is still flagged. Keep this blocked until reviewed."
+          : "A blocked item needs follow-up before it can move forward.";
+      } else if (unresolved > 0) {
+        summaryHeadline.textContent = "Needs risk review";
+        summaryText.textContent = `${unresolved} checklist item${unresolved === 1 ? "" : "s"} remain unresolved before this is fully ready.`;
+        summaryNote.textContent = mentionsCustomerData
+          ? "Customer data language is still unreviewed."
+          : "Use the checklist and comments to decide the next action.";
+      } else {
+        summaryHeadline.textContent = "Ready for review";
+        summaryText.textContent = task.summary;
+        summaryNote.textContent = "All visible risk checks are complete for the current draft.";
+      }
+
+      const canMarkReady = task.status !== "blocked" && unresolved === 0;
+      markReadyBtn.disabled = !canMarkReady;
+      markReadyBtn.style.opacity = canMarkReady ? "1" : "0.5";
+      markReadyBtn.textContent = task.status === "ready" ? "Already ready" : "Mark ready";
+
+      toggleStateBtn.textContent = task.status === "draft"
+        ? "Move to ready for review"
+        : task.status === "ready"
+          ? "Move back to draft"
+          : "Keep blocked";
+      toggleStateBtn.disabled = task.status === "blocked";
+      toggleStateBtn.style.opacity = task.status === "blocked" ? "0.5" : "1";
+    }
+
+    function moveCurrentTask(nextStatus) {
+      const task = tasks.find((item) => item.id === currentTaskId);
+      if (!task) return;
+      task.status = nextStatus;
+      currentStatus = nextStatus;
+      render();
+    }
+
+    markReadyBtn.addEventListener("click", () => {
+      const task = getCurrentTask();
+      if (!task) return;
+      const unresolved = task.risks.filter((risk) => !risk.checked).length;
+      if (task.status !== "blocked" && unresolved === 0) {
+        moveCurrentTask("ready");
+      }
+    });
+
+    toggleStateBtn.addEventListener("click", () => {
+      const task = getCurrentTask();
+      if (!task || task.status === "blocked") return;
+      moveCurrentTask(task.status === "draft" ? "ready" : "draft");
+    });
+
+    exportBtn.addEventListener("click", () => {
+      const task = getCurrentTask();
+      if (!task) return;
+      const unresolved = task.risks.filter((risk) => !risk.checked).map((risk) => risk.label);
+      const exportLines = [
+        `Artifact: ${task.title}`,
+        `State: ${statusLabels[task.status]}`,
+        `Acceptance checks: ${task.acceptance}`,
+        `Open risks: ${unresolved.length ? unresolved.join('; ') : 'None'}`
+      ];
+      window.alert(exportLines.join("\n"));
+    });
+
+    function render() {
+      renderStatusTabs();
+      renderTaskList();
+      renderDetail();
+    }
+
+    render();
+  </script>
+</body>
+</html>

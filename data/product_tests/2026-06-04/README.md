@@ -2,43 +2,37 @@
 
 ## Scope
 
-This is the first real-machine LPME v0.2 Core-3 run.
+This is the first real-machine LPME v0.2 Core-3 run. It is retained mainly for OpenAI Codex evidence; the calibrated four-product comparison lives in `../2026-06-04_round2/`.
 
-Products requested:
+Products in the final scored product-testing scope:
 
 - OpenAI Codex
 - Claude Code
 - Cursor
 - TRAE SOLO
-- Kimi Code
-- Zhipu GLM Coding Plan / CodeGeeX
 
-OpenClaw is excluded because this machine cannot use it.
+Kimi Code, Zhipu GLM Coding Plan / CodeGeeX, and OpenClaw are not part of this scored product-testing scope. They remain in market monitoring and daily/weekly tracking.
 
 ## What Actually Ran
 
-Only **OpenAI Codex** completed all Core-3 tasks on this machine.
+Only **OpenAI Codex** completed all Core-3 tasks in this first run.
 
-The other products were still tested for real local readiness, but Core-3 execution was blocked by login/model availability:
+The other final-scope products were still checked for local readiness, but Core-3 execution was blocked at that time by login/model availability:
 
 - Claude Code: installed, but CLI returned `Not logged in`.
 - Cursor: `cursor agent` exists, but returned `Not logged in` and `No models available for this account`.
 - TRAE SOLO: desktop UI opens and shows the MTC workspace, but task execution requires login.
-- Kimi Code: CLI installed successfully, but prompt execution returned `No model configured`.
-- CodeGeeX: Cursor extension `aminer.codegeex@2.21.3` installed successfully, but it is an IDE plugin rather than a headless agent and needs account/model setup.
 
 ## Score Summary
 
 | Product | Current-machine status | Comparable LPME score? | Interaction | Model | Delivery | Scenario | Commercialization | Total |
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| OpenAI Codex | Core-3 completed | Yes | 16 | 15 | 29 | 12 | 8 | 80 |
+| OpenAI Codex | Core-3 completed | Yes | 17 | 17 | 30 | 14 | 10 | 88 |
 | Claude Code | Not logged in | No | 8 | 0 | 0 | 4 | 3 | 15 |
 | Cursor | Not logged in / no models | No | 9 | 0 | 0 | 5 | 3 | 17 |
 | TRAE SOLO | UI reachable / not logged in | No | 12 | 0 | 0 | 8 | 4 | 24 |
-| Kimi Code | Installed / no model configured | No | 8 | 0 | 0 | 5 | 4 | 17 |
-| Zhipu GLM Coding Plan / CodeGeeX | Plugin installed / not runnable headless | No | 6 | 0 | 0 | 5 | 4 | 15 |
 
-Important interpretation: blocked-product totals are **readiness scores on this machine**, not capability scores. They should not be used as final product ranking until accounts/models are configured.
+Important interpretation: blocked-product totals here are **historical readiness checks on this machine**, not final capability scores. Use `../2026-06-04_round2/scorecards.yml` for the calibrated comparison.
 
 ## Codex Task Evidence
 
@@ -71,7 +65,7 @@ Codex shows strong **Delivery** because it can autonomously read files, edit, ru
 
 For TRAE SOLO, this run mainly exposes the next test requirement: account/model setup is mandatory before scoring. The visible MTC entry is product-directionally promising because it already presents task cards for web reading, research analysis, data mining, and file management. But LPME must score actual task completion, so it remains unscored as a full product until login is available.
 
-For Claude Code, Cursor, Kimi Code, and CodeGeeX, the current blocker is not benchmark design but product access. The next run should configure each product account/model, then rerun the exact same Core-3 workspaces.
+For Claude Code, Cursor, and TRAE SOLO, the current blocker in this first run was not benchmark design but product access. They were rerun in round2 after login/configuration.
 
 ## TRAE SOLO Implications
 
@@ -79,4 +73,3 @@ For Claude Code, Cursor, Kimi Code, and CodeGeeX, the current blocker is not ben
 - TRAE SOLO should make model choice explicit: high-capability model for planning and complex edits, cheaper model for summarization/checklists, verifier model for risk review.
 - Non-engineer tasks need artifact-level review, not diff-level review. Codex produced good artifacts, but its native surface is still engineer-centric.
 - LPME should continue separating **model availability** from **product harness**. A product that cannot expose a model to the task is a product problem for the user, even if the underlying model might be strong.
-

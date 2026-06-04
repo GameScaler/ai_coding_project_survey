@@ -1,4 +1,0 @@
-$ cursor --list-extensions --show-versions
-exit=0
-aminer.codegeex@2.21.3
-(node:89312) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.

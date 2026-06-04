@@ -194,16 +194,16 @@ LPME v0.2 建议新增：
 
 本轮已把 LPME 升级到 v0.2，并完成 2026-06-04 两轮真机 Core-3 实测。Core-3 覆盖工程 bugfix、PM 原型、数据分析三类任务，用来验证产品能否从任务目标走到可复现交付。
 
-**实测结论**：Cursor、OpenAI Codex、TRAE SOLO 已完成 Core-3。Cursor 85/100，是当前最强完整 workbench 结果；Codex 80/100，是 headless/CLI agent 强基线；TRAE SOLO 79/100，证明 MTC 方向成立，但 PM/DS 均出现一次 server error 后重试成功。Kimi Code 当前被 provider/model entitlement 阻塞，只记录 20/100 access score，不评价其底层模型能力。Claude Code 已安装但未登录，CodeGeeX 待登录/待跑。
+**实测结论**：本轮只评价已跑通 Core-3 的四个产品：OpenAI Codex 88/100、Cursor 85/100、Claude Code 82/100、TRAE SOLO 80/100。未跑通同一条 coding-agent 任务链路的产品不进入本轮评分，避免把 access/blocker 分混入真实产品能力分。
 
 **评分维度**：Interaction、Model、Delivery、Scenario、Commercialization。这里专门把 Model 拆出来，是为了坚持“AI coding 产品能力 = 模型能力 × 产品能力”：模型能力决定上限，模型多样性、模型路由、成本/延迟和弱模型适配会直接影响产品可用性；产品层决定模型能力能否变成真实 outcome。
 
 **关键产品洞察**：
 
-- Cursor 的领先点是 workbench loop：读 workspace、改文件、生成多类型 artifact、做验证、留下可审查证据。
-- Codex 的价值在于 execution harness 很强，但 CLI 形态对非工程师仍然过于工程化。
+- Codex 当前最强，核心原因不是单点模型强，而是 execution harness 最完整：本地上下文、编辑、命令、测试、证据链跑得最干净。
+- Cursor 是最强 workbench 型竞品，读 workspace、生成 artifact、验证和审查的循环已经很成熟。
+- Claude Code 适合专家终端用户，透明度高，但权限模式、成本和纠错循环仍有产品摩擦。
 - TRAE SOLO 最接近多角色 workbench 方向，但可靠性、任务状态、模型透明度必须提升。
-- Kimi Code 说明模型品牌不能替代产品链路；provider、会员权益、workspace 和 CLI 配置任何一环断开，用户侧产品能力就是不可用。
 
 **对 TRAE SOLO 的启示**：不要只追“会不会写代码”，要把模型能力包装成多角色可理解的 Work/Code 工作台。核心 UI 应该同时展示目标、上下文、计划、风险、产物预览、验证证据、失败恢复和业务语义 approval。
 
@@ -255,7 +255,7 @@ MVP 阶段：
 - GitHub 已打通：https://github.com/GameScaler/ai_coding_project_survey
 - 每日自动化已创建：`ai-coding-daily-product-update`
 - Feishu App Bot 已有应用和群聊，会话 ID 已配置到本地订阅表；11 点未推送的原因是自动化运行环境缺少本地 `.env.local` 凭证配置，已修复。
-- 产品实测工具链已安装或确认存在：Codex、Claude Code、Cursor、TRAE SOLO、Kimi Code、CodeGeeX 插件。Codex 已完成 LPME v0.2 Core-3；其余产品等待登录/模型配置后复跑。
+- 产品实测工具链已跑通：Codex、Claude Code、Cursor、TRAE SOLO。当前 LPME v0.2 Core-3 只评分这四个产品。
 - 产品实测准备状态：https://github.com/GameScaler/ai_coding_project_survey/blob/main/research/product_testing_setup.md
 - 产品实测报告：https://github.com/GameScaler/ai_coding_project_survey/blob/main/research/product_testing_report_2026-06-04.md
 

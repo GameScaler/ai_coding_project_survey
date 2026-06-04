@@ -1,6 +1,0 @@
-Sanitized observation log:
-
-- Kimi desktop chat was logged in, but Kimi Code agent execution was unavailable.
-- Kimi Code CLI provider check returned `No providers configured`.
-- Login/member entitlement check did not unlock coding-agent execution on this account.
-- DS task was not run because there was no runnable coding-agent workspace/provider.

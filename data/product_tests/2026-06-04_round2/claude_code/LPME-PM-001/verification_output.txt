@@ -1,0 +1,65 @@
+196:    .badge.draft { background: var(--warning-soft); color: var(--warning); }
+364:    @media (max-width: 980px) {
+379:    @media (max-width: 640px) {
+406:            <p>See which AI-generated artifacts are still drafts, ready for review, or blocked by risk.</p>
+408:          <button class="ghost-btn" id="exportBtn">Export Summary</button>
+429:            <p id="detailSubtitle">Choose a task to review its preview, risks, and comments.</p>
+432:            <button class="ghost-btn" id="toggleStateBtn">Move to ready for review</button>
+433:            <button class="primary-btn" id="markReadyBtn">Mark ready</button>
+450:                <p class="helper">PMs can see unresolved risks before marking work ready.</p>
+451:                <div class="checklist" id="riskChecklist"></div>
+472:              <h3>Acceptance Check Export</h3>
+493:        status: "draft",
+494:        riskLevel: "high",
+495:        description: "Defines the lightweight board, preview area, risk checklist, comments, and mark-ready action.",
+496:        summary: "Draft is complete enough to review, but two risk checks still need a PM decision.",
+497:        acceptance: "Exportable checks: grouped task list, visible preview, risk checklist, comments, mark-ready action, desktop + mobile layout.",
+501:          "Export summary is a local interaction, not a live integration."
+503:        risks: [
+504:          { label: "Unresolved risk is visible before mark-ready", detail: "High-priority PM feedback says risk must be obvious before the final action.", checked: true },
+505:          { label: "Customer data mention is flagged", detail: "Legal asked for explicit flagging if an artifact references customer data.", checked: false },
+516:              body: "PMs receive many AI-generated artifacts and need one place to see what is draft, ready for review, or blocked by risk."
+524:                "Mark ready action"
+529:              body: "Should any mention of customer data automatically keep the item blocked until reviewed?"
+540:        riskLevel: "medium",
+542:        summary: "Ready for PM review. The core messaging is aligned and risk checks are complete.",
+543:        acceptance: "Exportable checks: hero summary, value bullets, review workflow explanation, no external integrations.",
+549:        risks: [
+567:                "See draft, ready, and blocked work",
+569:                "Spot unresolved risk before handoff"
+585:        riskLevel: "high",
+587:        summary: "Blocked until customer-data language is removed or explicitly reviewed.",
+588:        acceptance: "Exportable checks: summary, recommendation, risk note, and owner for follow-up.",
+591:          "Blocked items should explain why they cannot move forward.",
+594:        risks: [
+596:          { label: "Unresolved risk is called out clearly", detail: "PM should not need to inspect the full memo to notice the blocker.", checked: true },
+600:          { role: "Legal", priority: "high", text: "Any mention of customer data needs an explicit flag and follow-up review." },
+601:          { role: "PM", priority: "high", text: "I will not mark this ready until the risk note is resolved." }
+607:              body: "The memo captures review pain points and recommends surfacing unresolved risks earlier in the workflow."
+623:      draft: "Draft",
+624:      ready: "Ready for Review",
+625:      blocked: "Blocked"
+628:    let currentStatus = "draft";
+638:    const riskChecklist = document.getElementById("riskChecklist");
+660:      ["draft", "ready", "blocked"].forEach((status) => {
+699:            <span class="badge ${task.riskLevel}">${task.riskLevel} risk</span>
+735:      riskChecklist.innerHTML = "";
+736:      task.risks.forEach((risk, index) => {
+740:          <input type="checkbox" ${risk.checked ? "checked" : ""} data-index="${index}" />
+742:            <strong>${risk.label}</strong>
+743:            <span>${risk.detail}</span>
+747:          task.risks[index].checked = event.target.checked;
+750:        riskChecklist.appendChild(item);
+773:      const unresolved = task.risks.filter((risk) => !risk.checked).length;
+774:      const mentionsCustomerData = task.risks.some((risk) => /customer data/i.test(risk.label) && !risk.checked);
+777:        summaryHeadline.textContent = "Blocked by unresolved risk";
+783:        summaryHeadline.textContent = "Needs risk review";
+791:        summaryNote.textContent = "All visible risk checks are complete for the current draft.";
+797:      markReadyBtn.textContent = task.status === "ready" ? "Already ready" : "Mark ready";
+799:      toggleStateBtn.textContent = task.status === "draft"
+800:        ? "Move to ready for review"
+802:          ? "Move back to draft"
+819:      const unresolved = task.risks.filter((risk) => !risk.checked).length;
+828:      moveCurrentTask(task.status === "draft" ? "ready" : "draft");
+834:      const unresolved = task.risks.filter((risk) => !risk.checked).map((risk) => risk.label);
+839:        `Open risks: ${unresolved.length ? unresolved.join('; ') : 'None'}`

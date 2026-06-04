@@ -1,6 +1,0 @@
-Sanitized observation log:
-
-- Kimi desktop chat was logged in, but Kimi Code agent execution was unavailable.
-- Kimi Work page stayed blocked before a runnable workspace.
-- Kimi Code CLI provider check returned `No providers configured`.
-- PM task was not run because using ordinary Kimi chat would not be equivalent to the coding-agent product benchmark.

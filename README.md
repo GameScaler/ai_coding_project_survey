@@ -37,7 +37,7 @@
 
 - 飞书：已确认可以在 Chrome 登录态下打开并编辑目标文档。当前路线切换为正式 Feishu App Bot 优先，文档承载基线、GitHub 承载细节、`AI Coding Survey Bot` 负责订阅推送。
 - GitHub：remote 已连接到 `git@github.com:GameScaler/ai_coding_project_survey.git`，调研材料可通过 GitHub 链接同步飞书。
-- 产品实测：LPME v0.2 Core-3 已落地并完成 2026-06-04 两轮真机测试。Cursor、OpenAI Codex、TRAE SOLO 已完成 Core-3；Kimi Code 当前被 provider/model entitlement 阻塞，只记录 access score；Claude Code 已安装但未登录，CodeGeeX 待登录/待跑。OpenClaw 本机不可用，暂不纳入本轮实测。
+- 产品实测：LPME v0.2 Core-3 已落地并完成 2026-06-04 两轮真机测试。当前只评价 OpenAI Codex、Claude Code、Cursor、TRAE SOLO 四个跑通产品。
 - 自动化：已落本地脚本与 Codex daily/weekly automation。Feishu App Bot 已打通固定订阅群真实推送，脚本支持单目标推送、订阅表群发和群邀请链接生成；分享文档后的订阅入口采用固定群，个人订阅需要下一阶段事件回调拿到 `open_id`。
 - 每周复盘：已覆盖 2026-W01 到 2026-W23。只生成已结束完整周，W24（2026-06-01～2026-06-07）应在 2026-06-08 后生成。
 

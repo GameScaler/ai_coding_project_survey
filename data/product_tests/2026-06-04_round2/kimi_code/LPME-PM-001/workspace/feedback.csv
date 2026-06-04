@@ -1,6 +1,0 @@
-role,comment,priority
-PM,"I need to see unresolved risks before I mark anything ready.",high
-Designer,"The preview should not be hidden behind a modal.",medium
-Engineer,"Acceptance checks should be exportable into a ticket.",high
-Legal,"Flag any artifact that mentions customer data.",high
-

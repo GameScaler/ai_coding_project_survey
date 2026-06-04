@@ -2,59 +2,47 @@
 
 ## Scope
 
-This round focuses on products the user had installed and logged in locally:
+This is the calibrated Core-3 product test run for the four products with runnable task evidence:
 
-- Cursor
-- TRAE SOLO
-- Kimi Code
+- OpenAI Codex, evidence from `data/product_tests/2026-06-04/codex`
+- Claude Code, evidence from `data/product_tests/2026-06-04_round2/claude_code`
+- Cursor, evidence from `data/product_tests/2026-06-04_round2/cursor`
+- TRAE SOLO, evidence from `data/product_tests/2026-06-04_round2/trae_solo`
 
-OpenClaw is excluded on this machine. Claude Code is installed but not logged in yet, so it is handled after this round.
-
-## What Actually Ran
-
-Cursor and TRAE SOLO both completed LPME v0.2 Core-3:
-
-1. `LPME-SE-001`: unfamiliar Python repo bug fix.
-2. `LPME-PM-001`: PRD to clickable prototype.
-3. `LPME-DS-001`: messy acquisition cohort analysis.
-
-Kimi Code was checked through both desktop and CLI surfaces, but the coding-agent path was blocked by account/model entitlement:
-
-- Kimi desktop chat was logged in and usable as a general chat surface.
-- Kimi Work page stayed at workspace preparation.
-- Kimi Code CLI `0.9.0` returned `No providers configured`.
-- Login flow failed with a membership entitlement verification message.
-
-This means Kimi is recorded as an access/commercialization blocker, not as a failed model-capability run.
+Products that were not runnable through the same coding-agent task path are excluded from this scored product-testing section. They remain in market and daily/weekly monitoring, but not in the LPME score table.
 
 ## Score Summary
 
-| Product | Current-machine status | Comparable LPME score? | Interaction | Model | Delivery | Scenario | Commercialization | Total |
-| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Cursor | Core-3 completed | Yes | 18 | 16 | 29 | 14 | 8 | 85 |
-| TRAE SOLO | Core-3 completed after retries | Yes | 16 | 13 | 27 | 15 | 8 | 79 |
-| Kimi Code | Blocked by provider/model entitlement | No | 10 | 2 | 0 | 5 | 3 | 20 |
+| Product | Status | Interaction | Model | Delivery | Scenario | Commercialization | Total |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| OpenAI Codex | Core-3 completed | 17 | 17 | 30 | 14 | 10 | 88 |
+| Cursor | Core-3 completed | 18 | 16 | 29 | 14 | 8 | 85 |
+| Claude Code | Core-3 completed after permission/correction friction | 15 | 16 | 27 | 13 | 11 | 82 |
+| TRAE SOLO | Core-3 completed after product retries | 16 | 13 | 27 | 15 | 9 | 80 |
 
-Important interpretation: Cursor and TRAE SOLO are comparable LPME Core-3 scores in this round. Kimi Code is a current-machine access score only.
+The spread is intentionally not huge: all four products can now complete Core-3. The ranking reflects product reliability and the cost of turning model capability into verified outcome.
 
 ## Product-Level Reading
 
-Cursor is the strongest full-run product in this round. The key strength is not only code generation quality; it is the combination of workspace, file editing, command execution, and artifact creation. The main gap is that the desktop run was usable while the CLI path was not logged in and exposed no model list, which hurts reproducibility and automation.
+**Codex is the strongest baseline** because it completed Core-3 with the least product ceremony: read files, edited code, ran commands, generated artifacts, and left verification evidence. It is still engineer-centric, but its execution harness is the cleanest.
 
-TRAE SOLO completed all three tasks and is directionally the closest to a non-engineer workbench. Its MTC surface fits PM/data/ops workflows better than a pure IDE. The important weakness is reliability: PM and DS tasks both hit a server error on the first attempt and needed one retry. That is exactly the kind of product-layer issue that prevents model capability from becoming dependable user value.
+**Cursor is the best workbench-style competitor** in this run. Its desktop agent produced strong PM and DS artifacts, and the product surface feels closer to a durable IDE workbench. Its gap is reproducibility: desktop worked, while CLI/model state was less transparent.
 
-Kimi Code cannot be treated as a completed LPME run. The underlying Kimi model may be capable, but the coding-agent product path did not expose a runnable provider/model under this account. For a product benchmark, this still matters: if the user cannot connect the model to the workflow, the product capability is effectively unavailable.
+**Claude Code is powerful but expensive/frictionful in this environment.** It completed the tasks after we configured the internal gateway. The outputs were strong, but default permission mode caused Bash friction, DS needed one correction loop for mixed-date parsing, and token/cost usage was high.
+
+**TRAE SOLO is directionally closest to the non-engineer workbench.** It completed Core-3 and has the right MTC product instinct, but PM and DS tasks each needed a retry after server errors. Reliability and model transparency are the key gaps.
 
 ## TRAE SOLO Implications
 
-- The benchmark should continue to score product harness and model access separately. Kimi is the clean example: model brand strength does not matter if the agent surface cannot start.
-- TRAE SOLO should treat reliability as a first-order product metric. A retry that eventually succeeds is still a serious PM-side trust cost.
-- Cursor shows why a product workbench needs artifact generation plus verification. It is not enough to answer; the product must leave files, tests, and reviewable handoff material.
-- TRAE SOLO's opportunity is to combine Cursor-like execution with a clearer non-engineer workspace: task status, artifact preview, risk review, verification evidence, and business-language approvals.
+- Learn from Codex's execution harness: local context, file edits, command execution, tests, and evidence.
+- Learn from Cursor's workbench: tasks, artifacts, status, preview, and review loops.
+- Learn from Claude Code's transparency, but avoid pushing non-engineers into terminal-level permission and cost friction.
+- Preserve TRAE SOLO's scenario advantage, but make retry/recovery, task state, model routing, and verification evidence first-class.
 
-## Evidence
+## Evidence Links
 
-- Cursor task outputs: `cursor/LPME-*/workspace`
-- TRAE SOLO task outputs: `trae_solo/LPME-*/workspace`
-- Kimi access notes: `kimi_code/LPME-*/run_notes.md`
-- Machine-readable scorecards: `scorecards.yml`
+- Codex round1 evidence: `../2026-06-04/codex`
+- Claude Code round2 evidence: `claude_code`
+- Cursor round2 evidence: `cursor`
+- TRAE SOLO round2 evidence: `trae_solo`
+- Machine-readable scorecard: `scorecards.yml`

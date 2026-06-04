@@ -1,7 +1,0 @@
-Sanitized observation log:
-
-- Kimi desktop chat was logged in and available as a general chat surface.
-- Kimi Work page did not become a runnable coding workspace during the check.
-- Kimi Code CLI version: 0.9.0.
-- CLI provider check returned `No providers configured`.
-- Coding-agent task execution did not start.

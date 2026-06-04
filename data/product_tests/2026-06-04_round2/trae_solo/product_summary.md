@@ -4,7 +4,7 @@
 - Surface: TRAE SOLO desktop MTC UI.
 - Account state: logged in as a free account.
 - Observed model: Auto Model; exact model and routing were not exposed.
-- Overall score: 79/100.
+- Overall calibrated score: 80/100.
 
 ## Product Read
 
