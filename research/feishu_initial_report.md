@@ -190,6 +190,26 @@ LPME v0.2 建议新增：
 - **Long-running autonomy control**：测试 auto-review、approval、rollback、checkpoint。
 - **Multimodal artifact validation**：测试 screenshot、UI、PPT、图表、网页视觉质量。
 
+## 产品实测
+
+本轮已把 LPME 升级到 v0.2，并完成第一次真机 Core-3 实测。Core-3 覆盖工程 bugfix、PM 原型、数据分析三类任务，用来验证产品能否从任务目标走到可复现交付。
+
+**实测结论**：OpenAI Codex 是当前机器唯一完成 Core-3 的产品，当前实测分 80/100。Claude Code、Cursor、TRAE SOLO、Kimi Code、Zhipu GLM Coding Plan / CodeGeeX 都做了真实本地可用性检查，但因为登录、模型可用性或插件形态限制，尚未进入完整任务跑分。
+
+**评分维度**：Interaction、Model、Delivery、Scenario、Commercialization。这里专门把 Model 拆出来，是为了坚持“AI coding 产品能力 = 模型能力 × 产品能力”：模型能力决定上限，模型多样性、模型路由、成本/延迟和弱模型适配会直接影响产品可用性。
+
+**Codex 结果摘要**：
+
+- LPME-SE-001：61.8s 完成 bugfix，3 个 unittest 通过，PR 描述完整。
+- LPME-PM-001：263.9s 生成本地 prototype、PRD、Acceptance Tests，覆盖风险清单、评论、导出和响应式布局。
+- LPME-DS-001：294.0s 生成清洗脚本、CSV、数据质量报告、4 张 SVG 图和 executive summary，可复跑。
+
+**关键产品洞察**：Codex 的高分不是单纯来自模型强，而是因为 CLI harness 能把模型能力转成真实执行、文件修改、测试和证据。它的弱项也很清楚：非工程师工作区不足、模型/成本透明度不足。TRAE SOLO 要赢，应该把这种 delivery harness 包装成多角色可理解的 Work/Code 工作台。
+
+评测报告：https://github.com/GameScaler/ai_coding_project_survey/blob/main/research/product_testing_report_2026-06-04.md
+LPME v0.2 协议：https://github.com/GameScaler/ai_coding_project_survey/tree/main/benchmark/lpme_v0.2
+过程文件：https://github.com/GameScaler/ai_coding_project_survey/tree/main/data/product_tests/2026-06-04
+
 ## TRAE SOLO 产品建议
 
 TRAE SOLO 应该把自己定义为 **AI-native 工作交付平台**，而不是“AI IDE 的 SOLO 模式”。北极星不是生成了多少行代码，而是不同角色能否用更少上下文成本、更少纠错轮次，拿到一个可审查、可运行、可分享的结果。
@@ -234,8 +254,9 @@ MVP 阶段：
 - GitHub 已打通：https://github.com/GameScaler/ai_coding_project_survey
 - 每日自动化已创建：`ai-coding-daily-product-update`
 - Feishu App Bot 已有应用和群聊，会话 ID 已配置到本地订阅表；11 点未推送的原因是自动化运行环境缺少本地 `.env.local` 凭证配置，已修复。
-- 产品实测工具链已安装或确认存在：Codex、Claude Code、Cursor、TRAE SOLO、Windsurf。Kimi Code 与 Zhipu GLM Coding Plan / CodeGeeX 先进入公开源监控和后续实测准备。
+- 产品实测工具链已安装或确认存在：Codex、Claude Code、Cursor、TRAE SOLO、Kimi Code、CodeGeeX 插件。Codex 已完成 LPME v0.2 Core-3；其余产品等待登录/模型配置后复跑。
 - 产品实测准备状态：https://github.com/GameScaler/ai_coding_project_survey/blob/main/research/product_testing_setup.md
+- 产品实测报告：https://github.com/GameScaler/ai_coding_project_survey/blob/main/research/product_testing_report_2026-06-04.md
 
 ## 官方资料源
 

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="96.0" y="34.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#27313b">CAC by Channel</text>
+<text x="96.0" y="58.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#596572">Total cleaned spend divided by total signups</text>
+<line x1="96" y1="428.0" x2="864" y2="428.0" stroke="#9aa4af" stroke-width="1"/>
+<text x="84.0" y="432.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">$0.00</text>
+<line x1="96" y1="359.6" x2="864" y2="359.6" stroke="#d9dee5" stroke-width="1"/>
+<text x="84.0" y="363.6" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">$1.20</text>
+<line x1="96" y1="291.2" x2="864" y2="291.2" stroke="#d9dee5" stroke-width="1"/>
+<text x="84.0" y="295.2" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">$2.40</text>
+<line x1="96" y1="222.8" x2="864" y2="222.8" stroke="#d9dee5" stroke-width="1"/>
+<text x="84.0" y="226.8" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">$3.60</text>
+<line x1="96" y1="154.4" x2="864" y2="154.4" stroke="#d9dee5" stroke-width="1"/>
+<text x="84.0" y="158.4" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">$4.80</text>
+<line x1="96" y1="86.0" x2="864" y2="86.0" stroke="#d9dee5" stroke-width="1"/>
+<text x="84.0" y="90.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">$6.00</text>
+<rect x="159.0" y="131.6" width="130.0" height="296.4" fill="#276fbf" rx="4"/>
+<text x="224.0" y="121.6" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#27313b">$5.20</text>
+<text x="224.0" y="456.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#27313b">search</text>
+<rect x="415.0" y="195.6" width="130.0" height="232.4" fill="#c95f3f" rx="4"/>
+<text x="480.0" y="185.6" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#27313b">$4.08</text>
+<text x="480.0" y="456.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#27313b">paid_social</text>
+<rect x="671.0" y="235.4" width="130.0" height="192.6" fill="#4a8f5a" rx="4"/>
+<text x="736.0" y="225.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#27313b">$3.38</text>
+<text x="736.0" y="456.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#27313b">affiliate</text>
+<line x1="96" y1="86" x2="96" y2="428" stroke="#9aa4af" stroke-width="1"/>
+<line x1="96" y1="428" x2="864" y2="428" stroke="#9aa4af" stroke-width="1"/>
+</svg>

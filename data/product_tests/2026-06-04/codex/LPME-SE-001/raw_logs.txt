@@ -1,0 +1,19 @@
+COMMAND: codex exec --ephemeral --dangerously-bypass-approvals-and-sandbox -C <workspace> <TASK.md prompt>
+EXIT: 0
+ELAPSED_SECONDS: 61.8
+MODEL: gpt-5.5
+PROVIDER: custom
+TOKENS_USED: 43,255
+
+PUBLIC SUMMARY
+- Read TASK.md and pricing fixture.
+- Changed apply_discount() to clamp discount_rate into [0.0, 1.0].
+- Changed cart_total() to compute shipping on post-discount subtotal.
+- Created PR_DESCRIPTION.md.
+
+VERIFICATION
+$ python3 -m unittest discover -s tests -v
+- test_discount_above_one_is_capped_at_free_cart ... ok
+- test_negative_discount_is_treated_as_zero ... ok
+- test_shipping_uses_post_discount_subtotal ... ok
+- Ran 3 tests: OK

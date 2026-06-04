@@ -1,0 +1,1 @@
+OpenAI Codex CLI smoke passed. Version: codex-cli 0.136.0-alpha.2. Active model/provider observed in run logs: gpt-5.5 / custom.

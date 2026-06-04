@@ -1,0 +1,7 @@
+check,count,handling
+raw_row_count,12,cleaned output preserves one row per raw cohort row
+unparsed_dates,0,mixed-format parser with month-first assumption for slash dates
+normalized_channel_rows,2,mapped social to paid_social
+missing_spend_rows,1,imputed with within-channel linear interpolation when possible
+missing_activated_users_rows,1,imputed with within-channel linear interpolation and rounded
+zero_spend_rows,1,left spend at zero; row-level payback_proxy set to blank/undefined

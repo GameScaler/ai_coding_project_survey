@@ -1,0 +1,4 @@
+TRAE SOLO app opened successfully.
+Observed surface: More Than Coding (MTC) home, task prompt box, scenario cards for web reading / research analysis / data mining / file management, cloud mode selector, login button in lower-left.
+Blocking state: not logged in, so Core-3 task execution was not started in this run.
+Version: 0.1.10 (CFBundleShortVersionString)

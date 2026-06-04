@@ -1,0 +1,7 @@
+$ cursor agent status
+exit=0
+Not logged in
+
+$ cursor agent models
+exit=0
+No models available for this account.

@@ -75,8 +75,13 @@ LPME 每个任务按 10 个维度评分，总分 100。
 
 ## Versioning
 
-- v0.1：本仓库当前版本，覆盖 10 个固定任务。
-- v0.2：补齐真实样例文件、标准答案、自动化评测脚本。
+- v0.1：覆盖 10 个固定任务。
+- v0.2：补齐真实样例文件、Core-3 实测协议、五个产品一级评分维度和过程文件模板。
 - v0.3：加入多人打分和 inter-rater agreement。
 - v1.0：建立公开 leaderboard 或内部长期跟踪表。
 
+## Current Real-Machine Run
+
+- LPME v0.2 protocol: `benchmark/lpme_v0.2/`
+- 2026-06-04 product test artifacts: `data/product_tests/2026-06-04/`
+- Product testing report: `research/product_testing_report_2026-06-04.md`

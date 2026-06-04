@@ -1,0 +1,32 @@
+version: "0.2"
+updated_at: "2026-06-04"
+task_pack: "LPME Core-3"
+
+tasks:
+  - id: LPME-SE-001
+    persona: "Software Engineer"
+    fixture: "fixtures/se_bugfix"
+    prompt_file: "fixtures/se_bugfix/TASK.md"
+    expected_artifacts:
+      - "Patched repo"
+      - "Passing pytest output"
+      - "PR description with risk notes"
+
+  - id: LPME-PM-001
+    persona: "Product Manager"
+    fixture: "fixtures/pm_prototype"
+    prompt_file: "fixtures/pm_prototype/TASK.md"
+    expected_artifacts:
+      - "Clickable prototype"
+      - "Refined PRD"
+      - "Acceptance test checklist"
+
+  - id: LPME-DS-001
+    persona: "Data Scientist"
+    fixture: "fixtures/ds_acquisition"
+    prompt_file: "fixtures/ds_acquisition/TASK.md"
+    expected_artifacts:
+      - "Reproducible analysis script or notebook"
+      - "Charts"
+      - "Executive summary with caveats"
+

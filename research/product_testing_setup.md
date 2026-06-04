@@ -14,8 +14,8 @@
 | Devin CLI | Installed | CLI `/opt/homebrew/bin/devin`, cask version `2026.5.26-3` | Cognition/Devin login |
 | GitHub Copilot App | Installed | `/Applications/GitHub Copilot.app`, cask version `0.2.23` | GitHub login; Copilot subscription / technical preview access |
 | OpenClaw | Deferred | 本机当前不可用/被禁用 | 进入主要产品池与公开信号监控；本轮不做真机实测 |
-| Kimi Code | Pending | 官方提供 CLI install script and Kimi IDE/agent entry；本轮先纳入公开源监控 | Kimi account / Kimi Code subscription; decide whether to install CLI locally |
-| Zhipu GLM Coding Plan / CodeGeeX | Pending | GLM Coding Plan is account/subscription based; CodeGeeX available as VS Code / JetBrains extension | Zhipu account / GLM Coding Plan access; choose IDE plugin test surface |
+| Kimi Code | Installed, blocked by login/model | CLI `/Users/mvbj0638/.kimi-code/bin/kimi`, version `0.9.0` | Kimi login and default model configuration |
+| Zhipu GLM Coding Plan / CodeGeeX | Plugin installed, blocked by IDE/account setup | Cursor extension `aminer.codegeex@2.21.3` | Zhipu/CodeGeeX login or GLM Coding Plan access; then run inside Cursor/VS Code |
 
 ## Environment Notes
 
@@ -51,6 +51,15 @@ After smoke tests, run LPME tasks in this order:
 3. `LPME-DS-001`: acquisition cohort analysis.
 4. `LPME-MKT-001`: campaign landing page.
 5. `LPME-XFUNC-001`: multi-stakeholder handoff.
+
+## First Real-Use Test Result - 2026-06-04
+
+本轮已升级并运行 `benchmark/lpme_v0.2` Core-3。
+
+- Codex completed all Core-3 tasks.
+- Claude Code, Cursor, TRAE SOLO, Kimi Code, and CodeGeeX entered real local readiness checks but were blocked by login/model availability.
+- Process files and scorecards: `data/product_tests/2026-06-04/`
+- Full report: `research/product_testing_report_2026-06-04.md`
 
 ## Credential Handling
 

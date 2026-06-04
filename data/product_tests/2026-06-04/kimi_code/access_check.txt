@@ -1,0 +1,8 @@
+$ /Users/mvbj0638/.kimi-code/bin/kimi --version
+exit=0
+0.9.0
+
+$ /Users/mvbj0638/.kimi-code/bin/kimi -p Return exactly: KIMI_SMOKE_OK
+exit=1
+error: failed to run prompt: No model configured. Run `kimi` and use /login to sign in, then retry; or set default_model in config.toml.
+See log: /Users/mvbj0638/.kimi-code/logs/kimi-code.log

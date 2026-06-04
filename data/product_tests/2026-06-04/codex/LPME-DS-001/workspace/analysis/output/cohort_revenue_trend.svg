@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="96.0" y="34.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#27313b">Cohort Revenue Trend</text>
+<text x="96.0" y="58.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#596572">30-day revenue by signup cohort date after channel normalization</text>
+<line x1="96" y1="476.0" x2="810" y2="476.0" stroke="#9aa4af" stroke-width="1"/>
+<text x="84.0" y="480.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">$0</text>
+<line x1="96" y1="398.4" x2="810" y2="398.4" stroke="#d9dee5" stroke-width="1"/>
+<text x="84.0" y="402.4" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">$800</text>
+<line x1="96" y1="320.8" x2="810" y2="320.8" stroke="#d9dee5" stroke-width="1"/>
+<text x="84.0" y="324.8" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">$1,600</text>
+<line x1="96" y1="243.2" x2="810" y2="243.2" stroke="#d9dee5" stroke-width="1"/>
+<text x="84.0" y="247.2" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">$2,400</text>
+<line x1="96" y1="165.6" x2="810" y2="165.6" stroke="#d9dee5" stroke-width="1"/>
+<text x="84.0" y="169.6" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">$3,200</text>
+<line x1="96" y1="88.0" x2="810" y2="88.0" stroke="#d9dee5" stroke-width="1"/>
+<text x="84.0" y="92.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">$4,000</text>
+<line x1="96.0" y1="88" x2="96.0" y2="476" stroke="#edf0f3" stroke-width="1"/>
+<text x="96.0" y="506.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">Jan 01</text>
+<line x1="334.0" y1="88" x2="334.0" y2="476" stroke="#edf0f3" stroke-width="1"/>
+<text x="334.0" y="506.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">Jan 02</text>
+<line x1="572.0" y1="88" x2="572.0" y2="476" stroke="#edf0f3" stroke-width="1"/>
+<text x="572.0" y="506.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">Jan 03</text>
+<line x1="810.0" y1="88" x2="810.0" y2="476" stroke="#edf0f3" stroke-width="1"/>
+<text x="810.0" y="506.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#596572">Jan 04</text>
+<polyline points="96.0,190.8 334.0,192.8 572.0,208.3 810.0,164.6" fill="none" stroke="#27313b" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="96.0" cy="190.8" r="4" fill="#27313b"/>
+<circle cx="334.0" cy="192.8" r="4" fill="#27313b"/>
+<circle cx="572.0" cy="208.3" r="4" fill="#27313b"/>
+<circle cx="810.0" cy="164.6" r="4" fill="#27313b"/>
+<polyline points="96.0,324.7 334.0,328.6 572.0,341.2 810.0,311.1" fill="none" stroke="#276fbf" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="96.0" cy="324.7" r="4" fill="#276fbf"/>
+<circle cx="334.0" cy="328.6" r="4" fill="#276fbf"/>
+<circle cx="572.0" cy="341.2" r="4" fill="#276fbf"/>
+<circle cx="810.0" cy="311.1" r="4" fill="#276fbf"/>
+<polyline points="96.0,402.3 334.0,397.4 572.0,405.2 810.0,393.6" fill="none" stroke="#c95f3f" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="96.0" cy="402.3" r="4" fill="#c95f3f"/>
+<circle cx="334.0" cy="397.4" r="4" fill="#c95f3f"/>
+<circle cx="572.0" cy="405.2" r="4" fill="#c95f3f"/>
+<circle cx="810.0" cy="393.6" r="4" fill="#c95f3f"/>
+<polyline points="96.0,415.9 334.0,418.8 572.0,413.9 810.0,412.0" fill="none" stroke="#4a8f5a" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="96.0" cy="415.9" r="4" fill="#4a8f5a"/>
+<circle cx="334.0" cy="418.8" r="4" fill="#4a8f5a"/>
+<circle cx="572.0" cy="413.9" r="4" fill="#4a8f5a"/>
+<circle cx="810.0" cy="412.0" r="4" fill="#4a8f5a"/>
+<line x1="838" y1="94" x2="860" y2="94" stroke="#27313b" stroke-width="3"/>
+<text x="868.0" y="98.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#27313b">Total</text>
+<line x1="838" y1="120" x2="860" y2="120" stroke="#276fbf" stroke-width="3"/>
+<text x="868.0" y="124.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#27313b">search</text>
+<line x1="838" y1="146" x2="860" y2="146" stroke="#c95f3f" stroke-width="3"/>
+<text x="868.0" y="150.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#27313b">paid_social</text>
+<line x1="838" y1="172" x2="860" y2="172" stroke="#4a8f5a" stroke-width="3"/>
+<text x="868.0" y="176.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#27313b">affiliate</text>
+<line x1="96" y1="88" x2="96" y2="476" stroke="#9aa4af" stroke-width="1"/>
+<line x1="96" y1="476" x2="810" y2="476" stroke="#9aa4af" stroke-width="1"/>
+</svg>

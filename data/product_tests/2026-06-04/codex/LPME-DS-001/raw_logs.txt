@@ -1,0 +1,20 @@
+COMMAND: codex exec --ephemeral --dangerously-bypass-approvals-and-sandbox -C <workspace> <TASK.md prompt>
+EXIT: 0
+ELAPSED_SECONDS: 294.0
+MODEL: gpt-5.5
+PROVIDER: custom
+TOKENS_USED: 96,322
+
+PUBLIC SUMMARY
+- Created analysis/acquisition_analysis.py.
+- Created analysis/output/cleaned_acquisition.csv.
+- Created channel_summary.csv, daily_revenue_trend.csv, data_quality_report.csv.
+- Created four SVG charts: CAC, activation rate, payback proxy, and cohort revenue trend.
+- Created analysis/EXECUTIVE_SUMMARY.md with assumptions, caveats, and next experiment recommendations.
+
+VERIFICATION
+$ python3 analysis/acquisition_analysis.py
+- Script reran successfully.
+- Cleaned output row count matched raw input: 12 rows.
+- Date parse failure count was 0.
+- All four chart files were regenerated and non-empty.

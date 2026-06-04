@@ -1,0 +1,129 @@
+date: "2026-06-04"
+protocol: "LPME v0.2 Core-3"
+score_note: "Scores are current-machine observed scores. Products blocked by login/model availability are not comparable with fully runnable products."
+
+products:
+  - product: "OpenAI Codex"
+    key: "codex"
+    run_status: "full_core_3_completed"
+    comparable_lpme_score: true
+    surface: "CLI headless agent"
+    version: "codex-cli 0.136.0-alpha.2"
+    observed_model: "gpt-5.5 via custom provider"
+    task_results:
+      - id: "LPME-SE-001"
+        elapsed_seconds: 61.8
+        runnable: true
+        verification: "python3 -m unittest discover -s tests -v passed, 3 tests"
+        score:
+          interaction: 17
+          model: 15
+          delivery: 30
+          scenario: 11
+          commercialization: 8
+          total: 81
+      - id: "LPME-PM-001"
+        elapsed_seconds: 263.9
+        runnable: true
+        verification: "Static file prototype generated; content checked for status tabs, risk checklist, export, responsive CSS"
+        score:
+          interaction: 16
+          model: 15
+          delivery: 27
+          scenario: 13
+          commercialization: 8
+          total: 79
+      - id: "LPME-DS-001"
+        elapsed_seconds: 294.0
+        runnable: true
+        verification: "python3 analysis/acquisition_analysis.py reran successfully and regenerated CSV/SVG outputs"
+        score:
+          interaction: 15
+          model: 15
+          delivery: 29
+          scenario: 12
+          commercialization: 8
+          total: 79
+    overall_score: 80
+    summary: "Best current runnable product in this environment. Strong delivery and verification; weaker on model/cost transparency and non-engineer workspace."
+
+  - product: "Claude Code"
+    key: "claude_code"
+    run_status: "blocked_not_logged_in"
+    comparable_lpme_score: false
+    surface: "CLI headless agent"
+    version: "2.1.161"
+    observed_model: "none; CLI returned not logged in"
+    current_machine_score:
+      interaction: 8
+      model: 0
+      delivery: 0
+      scenario: 4
+      commercialization: 3
+      total: 15
+    summary: "Installed and CLI surface is mature, but this machine has no active Claude login/API configuration, so Core-3 could not run."
+
+  - product: "Cursor"
+    key: "cursor"
+    run_status: "blocked_not_logged_in_no_models"
+    comparable_lpme_score: false
+    surface: "Cursor Agent CLI + desktop app"
+    version: "Cursor 3.6.31"
+    observed_model: "none; cursor agent models returned no models available"
+    current_machine_score:
+      interaction: 9
+      model: 0
+      delivery: 0
+      scenario: 5
+      commercialization: 3
+      total: 17
+    summary: "Cursor Agent CLI is available, but the account is not logged in and exposes no models, so Core-3 could not run."
+
+  - product: "TRAE SOLO"
+    key: "trae_solo"
+    run_status: "blocked_not_logged_in"
+    comparable_lpme_score: false
+    surface: "Desktop MTC UI"
+    version: "0.1.10"
+    observed_model: "none; UI requires login before task execution"
+    current_machine_score:
+      interaction: 12
+      model: 0
+      delivery: 0
+      scenario: 8
+      commercialization: 4
+      total: 24
+    summary: "Home UI already expresses multi-role scenario cards and cloud mode, but login blocked task execution."
+
+  - product: "Kimi Code"
+    key: "kimi_code"
+    run_status: "installed_blocked_no_model"
+    comparable_lpme_score: false
+    surface: "Kimi Code CLI"
+    version: "0.9.0"
+    observed_model: "none; CLI returned no model configured"
+    current_machine_score:
+      interaction: 8
+      model: 0
+      delivery: 0
+      scenario: 5
+      commercialization: 4
+      total: 17
+    summary: "CLI installed successfully. Execution requires Kimi login/default model configuration."
+
+  - product: "Zhipu GLM Coding Plan / CodeGeeX"
+    key: "codegeex"
+    run_status: "plugin_installed_blocked_by_ide_login"
+    comparable_lpme_score: false
+    surface: "Cursor/VS Code extension"
+    version: "aminer.codegeex 2.21.3"
+    observed_model: "none; plugin entry installed but no headless agent/login configured"
+    current_machine_score:
+      interaction: 6
+      model: 0
+      delivery: 0
+      scenario: 5
+      commercialization: 4
+      total: 15
+    summary: "Plugin installation succeeded, but it is not a headless agent and requires IDE/account setup before LPME task execution."
+

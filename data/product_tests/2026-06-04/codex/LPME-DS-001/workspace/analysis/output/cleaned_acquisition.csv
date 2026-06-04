@@ -1,0 +1,13 @@
+row_id,date_raw,date,channel_raw,channel,channel_was_normalized,spend_usd_raw,spend_usd,spend_usd_was_missing,spend_usd_imputation_method,signups,activated_users_raw,activated_users,activated_users_was_missing,activated_users_imputation_method,revenue_30d_usd,cac,activation_rate,payback_proxy,payback_proxy_undefined_reason,data_quality_notes
+1,2026-01-01,2026-01-01,search,search,False,1200,1200.0,False,,240,120,120,False,,1560,5.0,0.5,1.3,,
+4,2026-01-01,2026-01-01,social,paid_social,True,800,800.0,False,,210,80,80,False,,760,3.8095,0.381,0.95,,channel_normalized_from_social
+7,2026-01-01,2026-01-01,affiliate,affiliate,False,400,400.0,False,,90,54,54,False,,620,4.4444,0.6,1.55,,
+2,01/02/2026,2026-01-02,search,search,False,1180,1180.0,False,,236,119,119,False,,1520,5.0,0.5042,1.2881,,
+5,2026-01-02,2026-01-02,paid_social,paid_social,False,860,860.0,False,,216,84,84,False,,810,3.9815,0.3889,0.9419,,
+8,2026-01-02,2026-01-02,affiliate,affiliate,False,0,0.0,False,,88,51,51,False,,590,0.0,0.5795,,zero_spend,zero_spend_payback_undefined
+3,2026/01/03,2026-01-03,search,search,False,,1240.0,True,linear_interpolation_within_channel,225,104,104,False,,1390,5.5111,0.4622,1.121,,spend_imputed:linear_interpolation_within_channel
+6,Jan 03 2026,2026-01-03,social,paid_social,True,900,900.0,False,,205,70,70,False,,730,4.3902,0.3415,0.8111,,channel_normalized_from_social
+9,2026-01-03,2026-01-03,affiliate,affiliate,False,420,420.0,False,,95,,55,True,linear_interpolation_within_channel_rounded,640,4.4211,0.5789,1.5238,,activated_users_imputed:linear_interpolation_within_channel_rounded
+10,2026-01-04,2026-01-04,search,search,False,1300,1300.0,False,,245,128,128,False,,1700,5.3061,0.5224,1.3077,,
+11,2026-01-04,2026-01-04,paid_social,paid_social,False,910,910.0,False,,220,88,88,False,,850,4.1364,0.4,0.9341,,
+12,2026-01-04,2026-01-04,affiliate,affiliate,False,430,430.0,False,,97,58,58,False,,660,4.433,0.5979,1.5349,,

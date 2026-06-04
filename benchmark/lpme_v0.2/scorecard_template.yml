@@ -1,0 +1,47 @@
+product: ""
+surface: ""
+product_version: ""
+date: "2026-06-04"
+auth_status: ""
+model_status:
+  default_model: ""
+  model_options_observed: []
+  model_diversity_notes: ""
+commercial_status:
+  plan_observed: ""
+  pricing_or_quota_visibility: ""
+tasks:
+  - id: "LPME-SE-001"
+    runnable: false
+    score:
+      interaction: 0
+      model: 0
+      delivery: 0
+      scenario: 0
+      commercialization: 0
+      total: 0
+    notes: ""
+  - id: "LPME-PM-001"
+    runnable: false
+    score:
+      interaction: 0
+      model: 0
+      delivery: 0
+      scenario: 0
+      commercialization: 0
+      total: 0
+    notes: ""
+  - id: "LPME-DS-001"
+    runnable: false
+    score:
+      interaction: 0
+      model: 0
+      delivery: 0
+      scenario: 0
+      commercialization: 0
+      total: 0
+    notes: ""
+product_level_adjustment: 0
+overall_score: 0
+summary: ""
+
