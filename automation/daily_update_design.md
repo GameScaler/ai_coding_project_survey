@@ -33,21 +33,57 @@
    - 只修 bug 且无产品含义：记录但不推送。
    - 涉及新 feature、模型、agent workflow、企业治理、定价：写 PM note。
 5. 生成每日 markdown：
-   - 今日是否有重大更新
-   - 产品逐条摘要
-   - PM 短评
-   - 对 TRAE SOLO 的启示
-   - source links
+   - `Summary`
+   - `Product Updates`
+   - `PM Notes`
 6. 写入飞书每日更新区，并把摘要推送给订阅群。
 
-推送到飞书群的消息不是 markdown 原文，而是中文摘要卡片：
+每日 GitHub digest、飞书文档小节、飞书群机器人卡片统一使用同一个固定格式：
 
-- **今日结论**：一句话说明是否有重大更新，以及为什么重要。
-- **重点信号**：按产品列出 3～7 条，不贴网页原文。
-- **产品官短评**：解释这次变化如何影响产品路线和 TRAE SOLO。
-- **来源链接**：飞书文档、GitHub digest、官方 changelog。
+```markdown
+## Summary
 
-机器抓取草稿中的 `Source / Changed / Excerpt` 等字段只用于本地复核，不进入群推送。即使是测试消息，也必须转成中文读者视角：说明哪些产品的官方源发生变化、为什么值得看、来源在哪里。
+无新增产品级重大公开更新。
+
+## Product Updates
+
+### OpenAI Codex
+- 无
+
+### Claude Code
+- 无
+
+### Cursor
+- 无
+
+### TRAE SOLO
+- 无
+
+### GitHub Copilot
+- 无
+
+### Windsurf / Devin Desktop
+- 无
+
+### OpenClaw
+- 无
+
+### Kimi Code
+- 无
+
+### Zhipu GLM Coding Plan / CodeGeeX
+- 无
+
+## PM Notes
+
+- **产品官短评**：无新增产品级重大公开更新。
+- **对 TRAE SOLO 的启示**：只记录真正改变用户 workflow 的新 feature、模型迭代、agent workflow、治理、定价和交付物边界变化。
+- **LPME 是否更新**：不更新。
+```
+
+有重大变化时，只在对应产品项下写 1～2 句中文产品结论；其他产品仍写 `无`。不要把抓取源变化、网页变化、内部监控状态、原文摘录或自动化运行问题写进公开 digest。
+
+机器抓取草稿中的 `Source / Changed / Excerpt` 等字段只用于本地复核，不进入 GitHub 正式 digest、飞书文档或群推送。即使是测试消息，也必须转成产品读者视角：产品本身有没有重要变化；没有就写 `无`。
 
 ## Weekly Workflow
 
@@ -119,7 +155,7 @@
 
 每日自动化可以使用以下任务描述：
 
-> 检查本仓库 `automation/product_sources.json` 中的 AI coding 产品官方更新源，结合网络资料判断今天是否有重大产品变化。运行 `python3 scripts/daily_update.py` 生成基础抓取草稿，然后补充产品经理视角短评：这次更新改变了什么用户工作流、对 TRAE SOLO 有什么启示、是否需要加入 LPME benchmark。把结果写入 `data/daily_updates/YYYY-MM-DD.md`，若无重大更新也保留简短记录。
+> 检查本仓库 `automation/product_sources.json` 中的 AI coding 产品官方更新源，结合网络资料判断今天是否有重大产品变化。运行 `python3 scripts/daily_update.py` 生成基础抓取草稿，然后补充产品经理视角短评。正式写入 `data/daily_updates/YYYY-MM-DD.md` 时必须使用固定结构：`Summary`、`Product Updates`、`PM Notes`。`Product Updates` 必须按固定顺序列出 OpenAI Codex、Claude Code、Cursor、TRAE SOLO、GitHub Copilot、Windsurf / Devin Desktop、OpenClaw、Kimi Code、Zhipu GLM Coding Plan / CodeGeeX；无重大变化的产品写 `无`。不要把抓取源变化、网页变化、内部监控状态、原文摘录或自动化运行问题写进正式 digest。
 
 每周自动化补充要求：
 

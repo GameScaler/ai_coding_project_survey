@@ -32,6 +32,17 @@ from dataclasses import dataclass
 
 FEISHU_BASE = "https://open.feishu.cn/open-apis"
 URL_RE = re.compile(r"https?://[^\s)>\"]+")
+FIXED_PRODUCTS = [
+    "OpenAI Codex",
+    "Claude Code",
+    "Cursor",
+    "TRAE SOLO",
+    "GitHub Copilot",
+    "Windsurf / Devin Desktop",
+    "OpenClaw",
+    "Kimi Code",
+    "Zhipu GLM Coding Plan / CodeGeeX",
+]
 
 
 @dataclass(frozen=True)
@@ -177,6 +188,16 @@ def product_sections(body: str) -> list[tuple[str, list[str]]]:
     return sections
 
 
+def subsections(body: str) -> list[tuple[str, str]]:
+    matches = list(re.finditer(r"^###\s+(.+?)\s*$", body, re.M))
+    sections: list[tuple[str, str]] = []
+    for index, match in enumerate(matches):
+        start = match.end()
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(body)
+        sections.append((match.group(1).strip(), body[start:end].strip()))
+    return sections
+
+
 def normalize_hits(text: str, limit: int = 8) -> str:
     if not text or text.lower() in {"none", "无"}:
         return "无"
@@ -228,10 +249,10 @@ def summary_text(body: str) -> str:
         shown = "、".join(product_names[:5])
         suffix = "等" if len(product_names) > 5 else ""
         return (
-            f"今日官方源初筛发现 {shown}{suffix} 有页面变化，合计 {changed_source_count} 个来源需要复核。"
-            "本卡片只保留产品信号和来源链接；后续会在飞书文档补充产品官判断。"
+            f"今日 {shown}{suffix} 有候选更新，需要人工判断是否构成产品级重大变化。"
+            "正式发布前请完善 Summary / Product Updates / PM Notes。"
         )
-    return "今日官方源初筛未发现重大变化；详细抓取结果保留在 GitHub 归档。"
+    return "无新增产品级重大公开更新。"
 
 
 def product_signal_lines(body: str, limit: int = 10) -> list[str]:
@@ -294,6 +315,33 @@ def pm_note_lines(body: str) -> list[str]:
         if line.startswith("- "):
             lines.append(line)
     return lines[:3]
+
+
+def clean_markdown_text(text: str) -> str:
+    text = re.sub(r"^[-*]\s+", "", text.strip())
+    text = text.replace("**", "")
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
+
+
+def fixed_product_update_lines(body: str) -> list[str]:
+    product_updates = section(body, "Product Updates")
+    product_bodies = dict(subsections(product_updates))
+    lines: list[str] = []
+    for product in FIXED_PRODUCTS:
+        product_body = product_bodies.get(product, "")
+        updates: list[str] = []
+        for raw in product_body.splitlines():
+            line = raw.strip()
+            if not line.startswith("- "):
+                continue
+            content = clean_markdown_text(line)
+            if not content or content.startswith("来源") or URL_RE.match(content):
+                continue
+            updates.append(content)
+        content = "；".join(updates[:2]) if updates else "无"
+        lines.append(f"**{product}**：{content}")
+    return lines
 
 
 def source_lines(body: str, github_url: str | None) -> list[str]:
@@ -361,33 +409,26 @@ def source_lines(body: str, github_url: str | None) -> list[str]:
 def build_digest_markdown(body: str, github_url: str | None) -> str:
     summary = summary_text(body)
 
-    signals = product_signal_lines(body)
-    if not signals:
-        signals = ["- 暂无可推送的重大产品更新；详细抓取结果仅保留在 GitHub 归档。"]
+    product_updates = fixed_product_update_lines(body)
 
     notes = pm_note_lines(body)
     if not notes:
         notes = [
-            "- **产品官短评**：官方源变化本身不是结论，优先看它是否改变 context、workflow、verification、recovery 或交付形态。",
-            "- **对 TRAE SOLO 的启示**：继续按“模型能力 + 产品能力”判断更新价值；模型不稳的地方，要靠产品层补足真实可用性。",
+            "- **产品官短评**：无新增产品级重大公开更新。",
+            "- **对 TRAE SOLO 的启示**：只记录真正改变用户 workflow 的新 feature、模型迭代、agent workflow、治理、定价和交付物边界变化。",
+            "- **LPME 是否更新**：不更新。",
         ]
 
-    sources = source_lines(body, github_url)
-    if not sources and github_url:
-        sources = [f"- [GitHub 归档]({github_url})"]
-
     parts = [
-        "**今日结论**",
+        "**Summary**",
         summary,
         "",
-        "**重点信号**",
-        *signals,
+        "**Product Updates**",
+        *product_updates,
         "",
-        "**产品官短评**",
+        "**PM Notes**",
         *notes,
     ]
-    if sources:
-        parts.extend(["", "**来源链接**", *sources])
     return "\n".join(parts)
 
 
