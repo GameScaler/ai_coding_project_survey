@@ -22,6 +22,32 @@ AI coding 市场已经从“编辑器里的代码补全”进入“agent command
 | Kimi Code | Kimi 模型体系下的 coding agent | CLI、VS Code / JetBrains via ACP、第三方 agent client、Kimi 会员 | K2.6 for coding、长任务 goal、background/subagent、provider 管理 | 国内模型产品会直接争 coding 专业入口；TRAE 要把模型升级和工作流默认值绑定 |
 | Zhipu GLM Coding Plan / CodeGeeX | 智谱 coding 模型套餐 + IDE 助手 | GLM Coding Plan、CodeGeeX VS Code / JetBrains、MCP / Excel / 开发者文档 | 国内模型供给、IDE 插件覆盖、代码生成/补全/解释/review/test | 国内用户可能从“模型套餐 + IDE 插件”进入，TRAE 要用端到端交付体验拉开层次 |
 
+## Major Product Breakthrough Timeline
+
+这部分建议用文字时间线，不单独画图。少于 15 个节点时，真正有价值的是判断哪些节点改变了产品范式，而不是做一张信息密度很低的图。
+
+**入选标准**：只收录改变主入口、自治边界、交付物边界、市场心智，或让模型能力直接改变产品默认 workflow 的节点。普通功能修补、模型小版本、营销更新不进入。
+
+- **2021-06-29｜GitHub Copilot technical preview**：AI coding 从“问答式写代码”变成编辑器内实时共写，autocomplete 成为第一代大众入口。
+- **2024-03｜Devin 发布**：用“自主软件工程师 + SWE-bench”重新定义市场叙事，把竞争问题从 completion 推到 end-to-end task。
+- **2024-04｜GitHub Copilot Workspace preview**：从 issue / natural language 进入 spec、plan、build、test、run，开始把 Copilot 从助手升级为任务环境。
+- **2024-06-20｜Claude 3.5 Sonnet 上线**：模型在 coding、速度和成本上的跃迁，让 Claude 系产品成为 agentic coding 的能力上限参照。
+- **2025-02-24｜Claude Code research preview**：Claude Code 把强模型放进 terminal-native 工作流，建立“透明执行、shell / Git / test 可控”的专业开发者心智。
+- **2025-04/05｜OpenAI Codex CLI + Codex Cloud**：Codex 从本地终端进入 ChatGPT 云端并行任务，形成 local execution 与 cloud delegation 的双入口。
+- **2025-05-19｜GitHub Copilot coding agent public preview**：把 agent 放进 GitHub issue / PR / Actions 闭环，异步开发者开始进入企业工程流。
+- **2025-06-04｜Cursor 1.0**：Background Agent、BugBot、Memories、MCP 一起出现，说明 Cursor 不再只是 AI editor，而是在做 agent runtime + review loop。
+- **2026-03-31｜TRAE SOLO 0.1.0**：TRAE 把 SOLO 独立为 Web / Desktop 双端、Work / Code 双模式和三栏工作区，明确冲向“More Than Coding”的多角色工作台。
+- **2026-04-02｜Cursor 3.0 Agents Window**：主界面从 editor / chat 升级为多 agent 并行窗口，支持 local、worktree、cloud、remote SSH，agent command center 成为正面范式。
+- **2026-H1｜Kimi K2.6 + Kimi Code**：国内模型厂商开始把长任务 coding、agent swarm、CLI / IDE / ACP 打成一体，说明模型升级会直接改变产品默认 workflow。
+- **2026-H1｜智谱 GLM Coding Plan / CodeGeeX 进入 coding plan 化**：不是单点 IDE 插件创新，而是用模型套餐、支持工具、MCP、团队额度和 CodeGeeX 入口抢占国内开发者工作流。
+- **2026-05｜OpenAI Codex /goal**：目标模式把一次 prompt 变成可暂停、恢复、追踪的多小时任务，核心突破是让 agent 有“长期任务对象”而不是只响应回合。
+- **2026-05-05/06｜TRAE SOLO Mobile**：手机变成 dispatch console，可以远程触发桌面 / Web 任务、查看进度和语音输入，AI coding 进入跨设备控制阶段。
+- **2026-05-29～06-02｜长任务控制台集中爆发**：Cursor 3.6 Auto-review 降低 approval friction；Codex Sites 把代码产物变成托管网站 / 内部工具；GitHub Copilot App 做 agent-native desktop；Devin Desktop 把 local / cloud agent 放进 Kanban；OpenClaw 2026.6 beta 强化 multi-channel gateway、Workboard、Skill Workshop。这一周的共同信号是：AI coding 主战场从“写代码”升级为“管理 agent、验证风险、交付可用产物”。
+
+**压缩判断**：AI coding 的主线是 **completion → repo-aware agent → async cloud engineer → multi-agent command center → product workbench**。TRAE SOLO 不能只追 Cursor 的 IDE 能力；真正的机会在于把 coding agent 变成多角色都能使用的工作交付平台。
+
+详版与资料源：https://github.com/GameScaler/ai_coding_project_survey/blob/main/research/product_breakthrough_timeline.md
+
 ## Development Route
 
 ### Phase 1: Assistant in editor
