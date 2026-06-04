@@ -19,6 +19,7 @@
 - 评分 rubric：[benchmark/lpme_v0.1/scoring_rubric.md](benchmark/lpme_v0.1/scoring_rubric.md)
 - 每日更新归档：[data/daily_updates](data/daily_updates)
 - 每周复盘归档：[data/weekly_updates](data/weekly_updates)
+- Daily / weekly 唯一格式规范：[automation/digest_format.md](automation/digest_format.md)
 - 每日更新方案：[automation/daily_update_design.md](automation/daily_update_design.md)
 - 飞书订阅与机器人方案：[automation/feishu_subscription_plan.md](automation/feishu_subscription_plan.md)
 - 每日抓取脚本：[scripts/daily_update.py](scripts/daily_update.py)

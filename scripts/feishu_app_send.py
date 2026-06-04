@@ -170,7 +170,7 @@ def product_sections(body: str) -> list[tuple[str, list[str]]]:
     sections: list[tuple[str, list[str]]] = []
     current_name = ""
     current_lines: list[str] = []
-    ignored = {"Summary", "PM Notes", "Product Updates", "Message Card Shape"}
+    ignored = {"Summary", "PM Notes", "Product Updates"}
 
     for raw in body.splitlines():
         heading = re.match(r"^##\s+(.+?)\s*$", raw.strip())
@@ -324,6 +324,25 @@ def clean_markdown_text(text: str) -> str:
     return text.strip()
 
 
+def compact_section_lines(text: str) -> list[str]:
+    bullet_lines: list[str] = []
+    paragraphs: list[str] = []
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        if line.startswith("- "):
+            bullet_lines.append(clean_markdown_text(line))
+        elif not line.startswith("#"):
+            paragraphs.append(clean_markdown_text(line))
+    return bullet_lines or paragraphs[:2]
+
+
+def first_section_text(body: str, heading: str, default: str = "无") -> str:
+    lines = compact_section_lines(section(body, heading))
+    return lines[0] if lines else default
+
+
 def fixed_product_update_lines(body: str) -> list[str]:
     product_updates = section(body, "Product Updates")
     product_bodies = dict(subsections(product_updates))
@@ -342,6 +361,21 @@ def fixed_product_update_lines(body: str) -> list[str]:
         content = "；".join(updates[:2]) if updates else "无"
         lines.append(f"**{product}**：{content}")
     return lines
+
+
+def fixed_weekly_signal_lines(body: str) -> list[str]:
+    raw_signals = compact_section_lines(section(body, "Head Product Signals"))
+    signals: dict[str, str] = {}
+    for raw in raw_signals:
+        cleaned = clean_markdown_text(raw)
+        match = re.match(r"^(.+?)[：:](.*)$", cleaned)
+        if not match:
+            continue
+        product = match.group(1).strip()
+        value = match.group(2).strip() or "无"
+        if product in FIXED_PRODUCTS:
+            signals[product] = value
+    return [f"**{product}**：{signals.get(product, '无')}" for product in FIXED_PRODUCTS]
 
 
 def source_lines(body: str, github_url: str | None) -> list[str]:
@@ -407,6 +441,9 @@ def source_lines(body: str, github_url: str | None) -> list[str]:
 
 
 def build_digest_markdown(body: str, github_url: str | None) -> str:
+    if section(body, "Weekly Summary"):
+        return build_weekly_digest_markdown(body)
+
     summary = summary_text(body)
 
     product_updates = fixed_product_update_lines(body)
@@ -428,6 +465,31 @@ def build_digest_markdown(body: str, github_url: str | None) -> str:
         "",
         "**PM Notes**",
         *notes,
+    ]
+    return "\n".join(parts)
+
+
+def build_weekly_digest_markdown(body: str) -> str:
+    competitive = compact_section_lines(section(body, "Competitive Reading"))
+    source_notes = compact_section_lines(section(body, "Source Notes"))
+    parts = [
+        "**Weekly Summary**",
+        first_section_text(body, "Weekly Summary"),
+        "",
+        "**Head Product Signals**",
+        *fixed_weekly_signal_lines(body),
+        "",
+        "**Competitive Reading**",
+        *(competitive or ["无"]),
+        "",
+        "**TRAE SOLO Implication**",
+        first_section_text(body, "TRAE SOLO Implication"),
+        "",
+        "**LPME Implication**",
+        first_section_text(body, "LPME Implication"),
+        "",
+        "**Source Notes**",
+        *(source_notes or ["无"]),
     ]
     return "\n".join(parts)
 

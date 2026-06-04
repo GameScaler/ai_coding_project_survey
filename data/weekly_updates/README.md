@@ -2,43 +2,16 @@
 
 本目录保存 AI coding 头部产品的周复盘。周编号沿用当前飞书文档口径：`2026-W23（2026-05-25～2026-05-31）`，即每周一到周日为一个完整复盘周期。
 
+weekly digest 的唯一格式规范是：[../../automation/digest_format.md](../../automation/digest_format.md)。本文件只说明周复盘归档和生成规则，不单独维护另一套格式模板。
+
 ## Update Rule
 
 - 只生成已经结束的完整周，不生成进行中周。
 - W24 对应 `2026-06-01～2026-06-07`，应在 `2026-06-08` 后生成。
 - 周复盘不硬推新闻：没有重大公开更新时，也要记录“无重大公开更新”，并给出路线判断。
-- 每周必须横向扫描核心产品池：OpenAI Codex、Claude Code、Cursor、TRAE SOLO、GitHub Copilot、Windsurf / Devin Desktop、OpenClaw、Kimi Code、Zhipu GLM Coding Plan / CodeGeeX。TRAE SOLO 是战略启示对象，不是唯一信号源。
+- 每周必须横向扫描核心产品池，产品顺序以 `automation/digest_format.md` 为准。TRAE SOLO 是战略启示对象，不是唯一信号源。
 - 判断主线固定为：AI coding 产品能力 = 模型能力 × 产品能力。模型版本迭代决定能力边界，产品层的 context、workflow、verification、collaboration 决定真实可用性。
-
-## Fixed Format
-
-后续新增周复盘必须使用固定结构，已有历史周复盘不需要回改。
-
-```markdown
-## Weekly Summary
-
-## Head Product Signals
-
-- **OpenAI Codex**：无
-- **Claude Code**：无
-- **Cursor**：无
-- **TRAE SOLO**：无
-- **GitHub Copilot**：无
-- **Windsurf / Devin Desktop**：无
-- **OpenClaw**：无
-- **Kimi Code**：无
-- **Zhipu GLM Coding Plan / CodeGeeX**：无
-
-## Competitive Reading
-
-## TRAE SOLO Implication
-
-## LPME Implication
-
-## Source Notes
-```
-
-有重大变化时，只在对应产品项下写 1～2 句产品结论；其他产品仍写 `无`。不要把抓取源变化、网页变化、内部监控状态、原文摘录或自动化运行问题写进周复盘。
+- 后续新增周复盘必须使用 `automation/digest_format.md` 的 Weekly Digest Format；已有历史周复盘不需要回改。
 
 ## 2026 Archive
 

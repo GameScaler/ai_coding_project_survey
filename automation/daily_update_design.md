@@ -2,6 +2,12 @@
 
 目标：每天上午 11 点检查头部 AI coding 产品更新，只有重要变化才写深度 PM 短评；无重要变化时只记录“无重大更新”，避免硬推。
 
+## Canonical Format
+
+daily / weekly 的唯一格式规范是：[digest_format.md](digest_format.md)。
+
+GitHub 归档、飞书文档小节、Feishu App Bot 推送卡片、Codex 自动化 prompt 都必须遵守这个文件。本文只说明运行链路和配置，不再维护另一套消息格式。
+
 ## Recommendation
 
 当前直接采用正式 Feishu App Bot 路线。Codex 自动化负责每日/每周研究和 digest 生成；`AI Coding Survey Bot` 负责订阅推送；飞书文档继续承载提炼后的结论和长期基线。
@@ -32,56 +38,8 @@
 4. 过滤规则：
    - 只修 bug 且无产品含义：记录但不推送。
    - 涉及新 feature、模型、agent workflow、企业治理、定价：写 PM note。
-5. 生成每日 markdown：
-   - `Summary`
-   - `Product Updates`
-   - `PM Notes`
+5. 按 [digest_format.md](digest_format.md) 生成每日 markdown。
 6. 写入飞书每日更新区，并把摘要推送给订阅群。
-
-每日 GitHub digest、飞书文档小节、飞书群机器人卡片统一使用同一个固定格式：
-
-```markdown
-## Summary
-
-无新增产品级重大公开更新。
-
-## Product Updates
-
-### OpenAI Codex
-- 无
-
-### Claude Code
-- 无
-
-### Cursor
-- 无
-
-### TRAE SOLO
-- 无
-
-### GitHub Copilot
-- 无
-
-### Windsurf / Devin Desktop
-- 无
-
-### OpenClaw
-- 无
-
-### Kimi Code
-- 无
-
-### Zhipu GLM Coding Plan / CodeGeeX
-- 无
-
-## PM Notes
-
-- **产品官短评**：无新增产品级重大公开更新。
-- **对 TRAE SOLO 的启示**：只记录真正改变用户 workflow 的新 feature、模型迭代、agent workflow、治理、定价和交付物边界变化。
-- **LPME 是否更新**：不更新。
-```
-
-有重大变化时，只在对应产品项下写 1～2 句中文产品结论；其他产品仍写 `无`。不要把抓取源变化、网页变化、内部监控状态、原文摘录或自动化运行问题写进公开 digest。
 
 机器抓取草稿中的 `Source / Changed / Excerpt` 等字段只用于本地复核，不进入 GitHub 正式 digest、飞书文档或群推送。即使是测试消息，也必须转成产品读者视角：产品本身有没有重要变化；没有就写 `无`。
 
@@ -155,11 +113,11 @@
 
 每日自动化可以使用以下任务描述：
 
-> 检查本仓库 `automation/product_sources.json` 中的 AI coding 产品官方更新源，结合网络资料判断今天是否有重大产品变化。运行 `python3 scripts/daily_update.py` 生成基础抓取草稿，然后补充产品经理视角短评。正式写入 `data/daily_updates/YYYY-MM-DD.md` 时必须使用固定结构：`Summary`、`Product Updates`、`PM Notes`。`Product Updates` 必须按固定顺序列出 OpenAI Codex、Claude Code、Cursor、TRAE SOLO、GitHub Copilot、Windsurf / Devin Desktop、OpenClaw、Kimi Code、Zhipu GLM Coding Plan / CodeGeeX；无重大变化的产品写 `无`。不要把抓取源变化、网页变化、内部监控状态、原文摘录或自动化运行问题写进正式 digest。
+> 先阅读并遵守 `automation/digest_format.md`。检查本仓库 `automation/product_sources.json` 中的 AI coding 产品官方更新源，结合网络资料判断今天是否有重大产品变化。运行 `python3 scripts/daily_update.py` 生成基础抓取草稿，然后补充产品经理视角短评。正式写入 `data/daily_updates/YYYY-MM-DD.md` 时必须使用 `digest_format.md` 中的 Daily Digest Format；无重大变化的产品写 `无`。不要把抓取源变化、网页变化、内部监控状态、原文摘录或自动化运行问题写进正式 digest。
 
 每周自动化补充要求：
 
-> 只复盘上一个已经结束的周一到周日周期，不生成进行中周，不创建 `Wxx-in-progress`。周标题使用 `2026-W23（2026-05-25～2026-05-31）` 格式。复盘必须使用固定结构：`Weekly Summary`、`Head Product Signals`、`Competitive Reading`、`TRAE SOLO Implication`、`LPME Implication`、`Source Notes`。`Head Product Signals` 必须按固定顺序列出 OpenAI Codex、Claude Code、Cursor、TRAE SOLO、GitHub Copilot、Windsurf / Devin Desktop、OpenClaw、Kimi Code、Zhipu GLM Coding Plan / CodeGeeX；无重大变化的产品写 `无`。复盘必须覆盖产品 feature、模型版本/模型能力变化、产品能力如何补足模型短板、TRAE SOLO 路线启示和 LPME 是否需要调整。TRAE SOLO 是战略启示对象，不是唯一信号源。不要把抓取源变化、网页变化、内部监控状态、原文摘录或自动化运行问题写进周复盘。
+> 先阅读并遵守 `automation/digest_format.md`。只复盘上一个已经结束的周一到周日周期，不生成进行中周，不创建 `Wxx-in-progress`。周标题使用 `2026-W23（2026-05-25～2026-05-31）` 格式。复盘必须使用 `digest_format.md` 中的 Weekly Digest Format；无重大变化的产品写 `无`。复盘必须覆盖产品 feature、模型版本/模型能力变化、产品能力如何补足模型短板、TRAE SOLO 路线启示和 LPME 是否需要调整。TRAE SOLO 是战略启示对象，不是唯一信号源。不要把抓取源变化、网页变化、内部监控状态、原文摘录或自动化运行问题写进周复盘。
 
 ## Update Cadence
 

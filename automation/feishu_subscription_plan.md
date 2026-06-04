@@ -84,19 +84,20 @@
 测试命令：
 
 ```bash
-python scripts/feishu_app_send.py data/daily_updates/2026-06-03.md \
-  --title "AI Coding 产品更新｜2026-06-03" \
-  --github-url "https://github.com/GameScaler/ai_coding_project_survey/blob/main/data/daily_updates/2026-06-03.md" \
+python scripts/feishu_app_send.py data/daily_updates/2026-06-04.md \
+  --title "AI Coding Daily Update - 2026-06-04" \
+  --github-url "https://github.com/GameScaler/ai_coding_project_survey/blob/main/data/daily_updates/2026-06-04.md" \
   --dry-run
 ```
 
 推送卡片规范：
 
-- 标题用中文，例如 `AI Coding 产品更新｜2026-06-03`。
-- 正文只保留四块：今日结论、重点信号、产品官短评、来源链接。
+- 唯一格式规范见：[digest_format.md](digest_format.md)。
+- daily 卡片正文只保留 `Summary`、`Product Updates`、`PM Notes`。
+- weekly 卡片正文使用 `Weekly Summary`、`Head Product Signals`、`Competitive Reading`、`TRAE SOLO Implication`、`LPME Implication`、`Source Notes`。
 - 不直接推送网页英文原文、`Source / Changed / Excerpt` 等机器抓取字段。
-- 如果只有机器初筛、尚未人工复核，卡片只说明“哪些产品的官方源发生变化、需要复核哪些方向”，不把内部判断字段原样发给订阅者。
-- 来源链接只放官方 changelog、GitHub digest、飞书文档入口，避免把长网页摘录贴进群。
+- 不把抓取源变化、网页变化、内部监控状态、自动化运行问题写进正式卡片。
+- 飞书文档和 GitHub digest 入口通过卡片按钮承载，正文不再维护旧四段式栏目。
 
 订阅表 dry-run：
 
@@ -193,47 +194,11 @@ python scripts/feishu_push.py data/daily_updates/2026-06-03.md \
 - 每日/每周自动化通过 `AI Coding Survey Bot` 推送消息卡片。
 - 订阅表先用本地 JSON，后续升级为飞书多维表格或数据库。
 - 周复盘只推送已结束完整周；进行中周不推送、不入归档。
+- 推送格式统一遵守 [digest_format.md](digest_format.md)，不在订阅方案里维护第二套卡片模板。
 
 飞书文档中的文案建议：
 
 > 订阅更新：通过 AI Coding Survey Bot 订阅，每天 11:00 接收重大更新；无重大更新时只记录“无重大更新”。每周一 11:20 接收周复盘。当前订阅入口为固定群/表单，后续升级为交互式订阅卡片。
-
-## Message Card Shape
-
-每日卡片建议：
-
-- 标题：`AI Coding 产品更新｜YYYY-MM-DD`
-- 状态色：
-  - green：有重大更新
-  - grey：无重大更新
-  - orange：需要人工确认
-- 内容：
-  - 今日结论
-  - 重点信号
-  - 产品官短评
-  - 来源链接
-
-示例：
-
-```text
-AI Coding 产品更新｜2026-06-03
-
-今日结论
-OpenClaw 纳入主要产品池。今天的核心不是又多一个 IDE，而是 agent gateway / runtime 路线进入观察范围。
-
-重点信号
-- OpenClaw：Workboard、Skill Workshop、channels/mobile、runtime recovery。
-- Codex：Sites preview 继续把代码产物变成可部署业务 artifact。
-- GitHub Copilot：App、SDK、sandboxes、agent apps 共同强化 GitHub-native agent platform。
-
-产品官短评
-AI coding 产品能力 = 模型能力 + 产品能力。模型决定上限，产品层决定真实可用性。
-
-来源链接
-- 飞书文档
-- GitHub digest
-- 官方 changelog
-```
 
 ## Required User Action
 
