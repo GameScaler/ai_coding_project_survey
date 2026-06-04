@@ -1,0 +1,8 @@
+Sanitized observation log:
+
+- Cursor desktop app operated on the local LPME-DS-001 workspace.
+- Task completed in one desktop run.
+- Generated reproducible analysis script, cleaned CSV, daily/channel output tables, charts, data-quality log, and executive summary.
+- Verification command:
+  `python3 analysis/acquisition_analysis.py`
+- Verification result: script reran successfully and regenerated outputs.

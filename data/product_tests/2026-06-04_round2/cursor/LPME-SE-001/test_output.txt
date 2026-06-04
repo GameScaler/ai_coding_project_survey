@@ -1,0 +1,8 @@
+test_discount_above_one_is_capped_at_free_cart (test_pricing.PricingTests.test_discount_above_one_is_capped_at_free_cart) ... ok
+test_negative_discount_is_treated_as_zero (test_pricing.PricingTests.test_negative_discount_is_treated_as_zero) ... ok
+test_shipping_uses_post_discount_subtotal (test_pricing.PricingTests.test_shipping_uses_post_discount_subtotal) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK

@@ -1,0 +1,155 @@
+date: "2026-06-04"
+round: "round2"
+protocol: "LPME v0.2 Core-3"
+score_note: "Cursor and TRAE SOLO completed Core-3 and are comparable. Kimi Code is a current-machine access score because the coding-agent path had no runnable provider/model."
+
+products:
+  - product: "Cursor"
+    key: "cursor"
+    run_status: "full_core_3_completed"
+    comparable_lpme_score: true
+    surface: "Cursor desktop agent; Cursor Agent CLI checked but not logged in"
+    version: "desktop app observed locally; exact version not re-read in this round"
+    observed_model: "Auto/default model in desktop run; CLI model list unavailable on this account"
+    product_level_score:
+      interaction: 18
+      model: 16
+      delivery: 29
+      scenario: 14
+      commercialization: 8
+      total: 85
+    task_results:
+      - id: "LPME-SE-001"
+        runnable: true
+        verification: "python3 -m unittest discover -s tests -v passed, 3 tests"
+        score:
+          interaction: 18
+          model: 16
+          delivery: 30
+          scenario: 12
+          commercialization: 8
+          total: 84
+        notes: "Minimal Python fix, PR description generated, tests passed."
+      - id: "LPME-PM-001"
+        runnable: true
+        verification: "Static prototype contains status handling, risk checklist, PII/customer-data signal, export action, and responsive CSS"
+        score:
+          interaction: 19
+          model: 16
+          delivery: 28
+          scenario: 15
+          commercialization: 8
+          total: 86
+        notes: "Strong PM artifact generation with PRD, acceptance tests, and local prototype."
+      - id: "LPME-DS-001"
+        runnable: true
+        verification: "python3 analysis/acquisition_analysis.py reran successfully and regenerated CSV/PNG outputs"
+        score:
+          interaction: 17
+          model: 16
+          delivery: 30
+          scenario: 14
+          commercialization: 8
+          total: 85
+        notes: "Strong cleaning, caveat handling, reproducible script, charts, and executive summary."
+    summary: "Best full-run result in this round. Strong product harness and artifact quality; weaker on CLI reproducibility and model/cost transparency."
+
+  - product: "TRAE SOLO"
+    key: "trae_solo"
+    run_status: "full_core_3_completed_after_retries"
+    comparable_lpme_score: true
+    surface: "TRAE SOLO desktop MTC UI"
+    version: "0.1.10 observed earlier in this local test cycle"
+    observed_model: "Auto Model; specific model and routing not exposed in the run"
+    product_level_score:
+      interaction: 16
+      model: 13
+      delivery: 27
+      scenario: 15
+      commercialization: 8
+      total: 79
+    task_results:
+      - id: "LPME-SE-001"
+        runnable: true
+        verification: "python3 -m unittest discover -s tests -v passed, 3 tests"
+        score:
+          interaction: 16
+          model: 13
+          delivery: 29
+          scenario: 13
+          commercialization: 8
+          total: 79
+        notes: "Completed bug fix and PR description; manual verification passed."
+      - id: "LPME-PM-001"
+        runnable: true
+        verification: "Static prototype contains draft/ready/blocked, risk checklist, ready action, export, and responsive CSS"
+        score:
+          interaction: 16
+          model: 13
+          delivery: 27
+          scenario: 15
+          commercialization: 8
+          total: 79
+        notes: "First attempt hit server error; one retry succeeded and produced strong PM-facing artifacts."
+      - id: "LPME-DS-001"
+        runnable: true
+        verification: "python3 analysis/acquisition_analysis.py reran successfully and regenerated CSV/PNG outputs"
+        score:
+          interaction: 15
+          model: 13
+          delivery: 26
+          scenario: 15
+          commercialization: 8
+          total: 77
+        notes: "First attempt hit server error; retry succeeded. Output was reproducible, but UI state lag and model opacity reduced confidence."
+    summary: "Completed all tasks and shows strong non-engineer workbench direction. Reliability, UI state sync, and model transparency are the main product gaps."
+
+  - product: "Kimi Code"
+    key: "kimi_code"
+    run_status: "blocked_provider_model_entitlement"
+    comparable_lpme_score: false
+    surface: "Kimi desktop chat plus Kimi Code CLI"
+    version: "Kimi Code CLI 0.9.0"
+    observed_model: "Kimi desktop chat exposed K2.6 Fast; Kimi Code CLI had no configured provider/model"
+    current_machine_score:
+      interaction: 10
+      model: 2
+      delivery: 0
+      scenario: 5
+      commercialization: 3
+      total: 20
+    task_results:
+      - id: "LPME-SE-001"
+        runnable: false
+        verification: "Not run; CLI returned no providers configured and login entitlement verification failed"
+        score:
+          interaction: 10
+          model: 2
+          delivery: 0
+          scenario: 5
+          commercialization: 3
+          total: 20
+        notes: "General chat access is not counted as coding-agent task execution."
+      - id: "LPME-PM-001"
+        runnable: false
+        verification: "Not run; coding-agent workspace unavailable"
+        score:
+          interaction: 10
+          model: 2
+          delivery: 0
+          scenario: 5
+          commercialization: 3
+          total: 20
+        notes: "Blocked before task execution."
+      - id: "LPME-DS-001"
+        runnable: false
+        verification: "Not run; coding-agent workspace unavailable"
+        score:
+          interaction: 10
+          model: 2
+          delivery: 0
+          scenario: 5
+          commercialization: 3
+          total: 20
+        notes: "Blocked before task execution."
+    summary: "Do not interpret this as weak Kimi model capability. It is a product access/model-entitlement failure for Kimi Code on this account."

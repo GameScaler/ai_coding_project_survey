@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PM Review Board Prototype</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --line: #d9e0ea;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #15803d;
+      --success-soft: #dcfce7;
+      --warn: #b45309;
+      --warn-soft: #fef3c7;
+      --danger: #b91c1c;
+      --danger-soft: #fee2e2;
+      --shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .shell {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .topbar h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    .topbar p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.5;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .button {
+      border: none;
+      border-radius: 999px;
+      padding: 11px 16px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      font-weight: 600;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.16);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .button.secondary {
+      background: #eef2ff;
+      color: #1e3a8a;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 16px;
+      min-height: 720px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 0 0 10px;
+    }
+
+    .tabs {
+      display: none;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .tab {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 12px;
+      white-space: nowrap;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .tab.active {
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-color: #bfdbfe;
+    }
+
+    .status-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .task-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+      background: #fff;
+    }
+
+    .task-card:hover,
+    .task-card.active {
+      border-color: #93c5fd;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(37, 99, 235, 0.08);
+    }
+
+    .task-card.active {
+      background: #f8fbff;
+    }
+
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .task-title {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .task-meta {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge.draft {
+      background: var(--warn-soft);
+      color: var(--warn);
+    }
+
+    .badge.ready {
+      background: var(--success-soft);
+      color: var(--success);
+    }
+
+    .badge.blocked {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .preview {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .preview-header h2 {
+      margin: 0 0 6px;
+      font-size: 24px;
+    }
+
+    .preview-subtitle {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+      gap: 16px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      background: #fff;
+    }
+
+    .artifact-surface {
+      min-height: 240px;
+      border: 1px dashed #c7d2fe;
+      border-radius: 14px;
+      padding: 16px;
+      background: linear-gradient(180deg, #fafcff 0%, #f5f7ff 100%);
+    }
+
+    .artifact-surface h3,
+    .artifact-surface h4,
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .artifact-summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .mini-metric {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .mini-metric strong {
+      display: block;
+      font-size: 22px;
+      margin-top: 6px;
+    }
+
+    .checklist,
+    .comments,
+    .facts {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .risk-item,
+    .comment-item,
+    .fact-row {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: #fcfdff;
+    }
+
+    .risk-item label {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      cursor: pointer;
+      line-height: 1.45;
+    }
+
+    .risk-item input {
+      margin-top: 3px;
+      accent-color: var(--accent);
+    }
+
+    .risk-note {
+      display: inline-flex;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--danger);
+      background: var(--danger-soft);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .comment-meta {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .comment-text {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .summary-box {
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-radius: 14px;
+      padding: 14px 16px;
+      line-height: 1.5;
+    }
+
+    .empty-state {
+      color: var(--muted);
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    @media (max-width: 960px) {
+      .app {
+        padding: 14px;
+      }
+
+      .topbar {
+        padding: 18px;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        order: 1;
+      }
+
+      .preview {
+        order: 2;
+      }
+
+      .preview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .artifact-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .desktop-groups {
+        display: none;
+      }
+
+      .tabs {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        flex-direction: column;
+      }
+
+      .topbar h1 {
+        font-size: 24px;
+      }
+
+      .preview-header h2 {
+        font-size: 20px;
+      }
+
+      .button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .actions {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="shell">
+      <header class="topbar panel">
+        <div>
+          <h1>PM Review Board</h1>
+          <p>
+            一个给非工程 PM 使用的轻量评审看板：先看任务状态，再快速查看产物、未解决风险和评审评论，
+            以便在 3 分钟内决定是否可以进入“Ready for Review”。
+          </p>
+        </div>
+        <div class="actions">
+          <button class="button secondary" id="exportButton">导出评审摘要</button>
+          <button class="button primary" id="markReadyButton">标记为 Ready for Review</button>
+        </div>
+      </header>
+
+      <main class="layout">
+        <aside class="panel sidebar">
+          <div>
+            <p class="section-title">Status tabs</p>
+            <div class="tabs" id="mobileTabs"></div>
+          </div>
+
+          <div class="desktop-groups" id="desktopGroups"></div>
+        </aside>
+
+        <section class="panel preview" id="previewPanel">
+          <div class="empty-state">请选择左侧任务查看详情。</div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const tasks = [
+      {
+        id: "prd-board",
+        title: "AI 生成 PRD 评审",
+        status: "draft",
+        artifactType: "PRD",
+        owner: "产品经理",
+        updatedAt: "今天 09:20",
+        summary: "聚焦范围、未解决风险和验收标准是否完整，帮助 PM 快速判断是否可进入正式评审。",
+        preview: {
+          heading: "PRD Snapshot",
+          body: [
+            "目标：让 PM 在一个页面中查看 AI 生成产物的状态、预览、风险和评论。",
+            "范围：任务列表按状态分组；右侧展示产物预览、风险检查清单、评论和“Mark ready”动作。",
+            "成功信号：PM 能在 3 分钟内找到关键风险，并给工程团队清晰的验收清单。"
+          ],
+          metrics: [
+            { label: "待解决风险", value: "2" },
+            { label: "评论条数", value: "3" }
+          ]
+        },
+        facts: [
+          { label: "当前状态", value: "Draft，需要完成风险确认" },
+          { label: "为什么重要", value: "PM 需要不用读代码也能识别是否有风险未解" },
+          { label: "下一步动作", value: "确认风险后再标记为 Ready for Review" }
+        ],
+        risks: [
+          { id: "risk-customer-data", text: "是否明确标记了任何提及 customer data 的内容？", checked: false, critical: true },
+          { id: "risk-review-checklist", text: "工程团队是否能直接拿到清晰的验收检查清单？", checked: false, critical: true },
+          { id: "risk-preview-visible", text: "预览内容是否始终在主界面可见，而不是隐藏在 modal 里？", checked: true, critical: false }
+        ],
+        comments: [
+          { role: "PM", priority: "高优先级", text: "我需要在标记 ready 之前先看到所有未解决风险。" },
+          { role: "Engineer", priority: "高优先级", text: "验收检查应该能直接导出到 ticket 文本里。" },
+          { role: "Designer", priority: "中优先级", text: "预览区不要藏在弹窗后面，保持右侧常驻。" }
+        ]
+      },
+      {
+        id: "landing-page",
+        title: "Landing Page 文案检查",
+        status: "ready",
+        artifactType: "Landing Page",
+        owner: "增长 PM",
+        updatedAt: "今天 08:40",
+        summary: "文案和结构已完成首轮检查，当前已具备进入正式评审的条件。",
+        preview: {
+          heading: "Landing Page Snapshot",
+          body: [
+            "主信息：解释 PM Review Board 如何帮助 PM 更快做审阅决定。",
+            "页面结构：标题、问题描述、关键能力、评审流程和 CTA。",
+            "当前结论：无新增 customer data 描述，已整理为可评审版本。"
+          ],
+          metrics: [
+            { label: "待解决风险", value: "0" },
+            { label: "评论条数", value: "2" }
+          ]
+        },
+        facts: [
+          { label: "当前状态", value: "Ready for Review" },
+          { label: "为什么重要", value: "提供一个已准备好评审的对照样例" },
+          { label: "下一步动作", value: "导出摘要并同步给评审人" }
+        ],
+        risks: [
+          { id: "risk-message-clear", text: "核心价值是否能让非工程 PM 一眼看懂？", checked: true, critical: false },
+          { id: "risk-no-integration", text: "是否没有加入 brief 之外的外部集成说明？", checked: true, critical: true }
+        ],
+        comments: [
+          { role: "PM", priority: "高优先级", text: "这个版本已经足够让我安排 review。" },
+          { role: "Legal", priority: "高优先级", text: "没有发现 customer data 相关描述，当前风险可接受。" }
+        ]
+      },
+      {
+        id: "analysis-memo",
+        title: "分析备忘录整理",
+        status: "blocked",
+        artifactType: "Analysis Memo",
+        owner: "研究 PM",
+        updatedAt: "昨天 17:10",
+        summary: "备忘录中出现 customer data 提法，需先澄清再进入评审流程。",
+        preview: {
+          heading: "Analysis Memo Snapshot",
+          body: [
+            "问题：原始描述提到了 customer data，但没有说明是否应被标记为风险。",
+            "影响：在风险未解决前，不适合进入 ready for review。",
+            "建议：先在风险清单中明确标记，再补充 PM 可理解的说明。"
+          ],
+          metrics: [
+            { label: "待解决风险", value: "1" },
+            { label: "评论条数", value: "1" }
+          ]
+        },
+        facts: [
+          { label: "当前状态", value: "Blocked" },
+          { label: "为什么重要", value: "Legal 明确要求标记任何提及 customer data 的产物" },
+          { label: "下一步动作", value: "先完成风险说明，再恢复评审" }
+        ],
+        risks: [
+          { id: "risk-data-mention", text: "是否已经显式标记 customer data 风险？", checked: false, critical: true }
+        ],
+        comments: [
+          { role: "Legal", priority: "高优先级", text: "请先标记 customer data 风险，再继续流转。" }
+        ]
+      }
+    ];
+
+    const statuses = [
+      { key: "draft", label: "Draft" },
+      { key: "ready", label: "Ready for Review" },
+      { key: "blocked", label: "Blocked" }
+    ];
+
+    let selectedStatus = "draft";
+    let selectedTaskId = tasks[0].id;
+
+    const desktopGroups = document.getElementById("desktopGroups");
+    const mobileTabs = document.getElementById("mobileTabs");
+    const previewPanel = document.getElementById("previewPanel");
+    const markReadyButton = document.getElementById("markReadyButton");
+    const exportButton = document.getElementById("exportButton");
+
+    function getTaskById(taskId) {
+      return tasks.find(task => task.id === taskId);
+    }
+
+    function getTasksByStatus(status) {
+      return tasks.filter(task => task.status === status);
+    }
+
+    function statusLabel(status) {
+      const map = {
+        draft: "Draft",
+        ready: "Ready for Review",
+        blocked: "Blocked"
+      };
+      return map[status] || status;
+    }
+
+    function renderTabs() {
+      mobileTabs.innerHTML = statuses.map(status => {
+        const count = getTasksByStatus(status.key).length;
+        return `
+          <button class="tab ${selectedStatus === status.key ? "active" : ""}" data-status="${status.key}">
+            ${status.label} (${count})
+          </button>
+        `;
+      }).join("");
+
+      mobileTabs.querySelectorAll(".tab").forEach(tab => {
+        tab.addEventListener("click", () => {
+          selectedStatus = tab.dataset.status;
+          const firstTask = getTasksByStatus(selectedStatus)[0];
+          if (firstTask) selectedTaskId = firstTask.id;
+          renderAll();
+        });
+      });
+    }
+
+    function renderDesktopGroups() {
+      desktopGroups.innerHTML = statuses.map(status => {
+        const taskCards = getTasksByStatus(status.key).map(task => `
+          <div class="task-card ${selectedTaskId === task.id ? "active" : ""}" data-task-id="${task.id}">
+            <div class="task-header">
+              <div>
+                <h3 class="task-title">${task.title}</h3>
+                <p class="task-meta">${task.artifactType} · ${task.updatedAt}</p>
+              </div>
+              <span class="badge ${task.status}">${statusLabel(task.status)}</span>
+            </div>
+            <p class="task-meta">${task.summary}</p>
+          </div>
+        `).join("");
+
+        return `
+          <section class="status-group">
+            <div>
+              <p class="section-title">${status.label}</p>
+              ${taskCards || '<div class="task-meta">当前没有任务。</div>'}
+            </div>
+          </section>
+        `;
+      }).join("");
+
+      desktopGroups.querySelectorAll(".task-card").forEach(card => {
+        card.addEventListener("click", () => {
+          selectedTaskId = card.dataset.taskId;
+          selectedStatus = getTaskById(selectedTaskId).status;
+          renderAll();
+        });
+      });
+    }
+
+    function renderPreview() {
+      const task = getTaskById(selectedTaskId);
+      if (!task) {
+        previewPanel.innerHTML = '<div class="empty-state">未找到任务。</div>';
+        return;
+      }
+
+      const unresolvedCritical = task.risks.filter(risk => risk.critical && !risk.checked).length;
+      const canMarkReady = task.status !== "blocked" && unresolvedCritical === 0;
+
+      previewPanel.innerHTML = `
+        <div class="preview-header">
+          <div>
+            <h2>${task.title}</h2>
+            <p class="preview-subtitle">${task.summary}</p>
+          </div>
+          <span class="badge ${task.status}">${statusLabel(task.status)}</span>
+        </div>
+
+        <div class="summary-box">
+          当前结论：${task.status === "ready" ? "这个任务已可进入正式评审。" : canMarkReady ? "关键风险已清空，可以标记为 Ready for Review。" : "还有关键风险未解决，不建议直接进入正式评审。"}
+        </div>
+
+        <div class="preview-grid">
+          <div class="card">
+            <h3>Artifact Preview</h3>
+            <div class="artifact-surface">
+              <h4>${task.preview.heading}</h4>
+              ${task.preview.body.map(line => `<p>${line}</p>`).join("")}
+              <div class="artifact-summary">
+                ${task.preview.metrics.map(metric => `
+                  <div class="mini-metric">
+                    <span>${metric.label}</span>
+                    <strong>${metric.value}</strong>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Quick Facts</h3>
+            <div class="facts">
+              ${task.facts.map(fact => `
+                <div class="fact-row">
+                  <strong>${fact.label}</strong>
+                  <div class="task-meta" style="margin-top: 6px;">${fact.value}</div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-grid">
+          <div class="card">
+            <h3>Risk Checklist</h3>
+            <div class="checklist">
+              ${task.risks.map(risk => `
+                <div class="risk-item">
+                  <label>
+                    <input type="checkbox" data-risk-id="${risk.id}" ${risk.checked ? "checked" : ""} />
+                    <span>
+                      ${risk.text}
+                      ${risk.critical ? '<span class="risk-note">未解决前不能直接标记 ready</span>' : ""}
+                    </span>
+                  </label>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Reviewer Comments</h3>
+            <div class="comments">
+              ${task.comments.map(comment => `
+                <div class="comment-item">
+                  <div class="comment-meta">${comment.role} · ${comment.priority}</div>
+                  <p class="comment-text">${comment.text}</p>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          说明：这个原型只演示本地评审流程，不包含登录、数据库、外部部署或 brief 之外的第三方集成。
+        </div>
+      `;
+
+      previewPanel.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener("change", () => {
+          const currentTask = getTaskById(selectedTaskId);
+          const risk = currentTask.risks.find(item => item.id === checkbox.dataset.riskId);
+          risk.checked = checkbox.checked;
+          renderAll();
+        });
+      });
+
+      markReadyButton.disabled = false;
+      markReadyButton.style.opacity = "1";
+      markReadyButton.textContent = task.status === "ready" ? "已是 Ready for Review" : "标记为 Ready for Review";
+      markReadyButton.onclick = () => {
+        const currentTask = getTaskById(selectedTaskId);
+        const unresolved = currentTask.risks.filter(risk => risk.critical && !risk.checked).length;
+        if (currentTask.status === "blocked") {
+          window.alert("这个任务当前是 Blocked，需要先解除阻塞后再进入 Ready for Review。");
+          return;
+        }
+        if (unresolved > 0) {
+          window.alert("还有关键风险未解决，请先完成风险检查清单。");
+          return;
+        }
+        currentTask.status = "ready";
+        selectedStatus = "ready";
+        renderAll();
+      };
+    }
+
+    function exportSummary() {
+      const task = getTaskById(selectedTaskId);
+      if (!task) return;
+      const unresolvedRisks = task.risks.filter(risk => !risk.checked).map(risk => `- ${risk.text}`);
+      const commentLines = task.comments.map(comment => `- ${comment.role}（${comment.priority}）：${comment.text}`);
+      const content = [
+        `任务：${task.title}`,
+        `状态：${statusLabel(task.status)}`,
+        `产物类型：${task.artifactType}`,
+        `最近更新：${task.updatedAt}`,
+        "",
+        "摘要：",
+        task.summary,
+        "",
+        "未解决风险：",
+        ...(unresolvedRisks.length ? unresolvedRisks : ["- 无"]),
+        "",
+        "评审评论：",
+        ...commentLines,
+        "",
+        "备注：导出为纯文本，可直接复制到 ticket 或评审记录中。"
+      ].join("\n");
+
+      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${task.id}-review-summary.txt`;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function renderAll() {
+      renderTabs();
+      renderDesktopGroups();
+      renderPreview();
+    }
+
+    exportButton.addEventListener("click", exportSummary);
+    renderAll();
+  </script>
+</body>
+</html>

@@ -192,23 +192,24 @@ LPME v0.2 建议新增：
 
 ## 产品实测
 
-本轮已把 LPME 升级到 v0.2，并完成第一次真机 Core-3 实测。Core-3 覆盖工程 bugfix、PM 原型、数据分析三类任务，用来验证产品能否从任务目标走到可复现交付。
+本轮已把 LPME 升级到 v0.2，并完成 2026-06-04 两轮真机 Core-3 实测。Core-3 覆盖工程 bugfix、PM 原型、数据分析三类任务，用来验证产品能否从任务目标走到可复现交付。
 
-**实测结论**：OpenAI Codex 是当前机器唯一完成 Core-3 的产品，当前实测分 80/100。Claude Code、Cursor、TRAE SOLO、Kimi Code、Zhipu GLM Coding Plan / CodeGeeX 都做了真实本地可用性检查，但因为登录、模型可用性或插件形态限制，尚未进入完整任务跑分。
+**实测结论**：Cursor、OpenAI Codex、TRAE SOLO 已完成 Core-3。Cursor 85/100，是当前最强完整 workbench 结果；Codex 80/100，是 headless/CLI agent 强基线；TRAE SOLO 79/100，证明 MTC 方向成立，但 PM/DS 均出现一次 server error 后重试成功。Kimi Code 当前被 provider/model entitlement 阻塞，只记录 20/100 access score，不评价其底层模型能力。Claude Code 已安装但未登录，CodeGeeX 待登录/待跑。
 
-**评分维度**：Interaction、Model、Delivery、Scenario、Commercialization。这里专门把 Model 拆出来，是为了坚持“AI coding 产品能力 = 模型能力 × 产品能力”：模型能力决定上限，模型多样性、模型路由、成本/延迟和弱模型适配会直接影响产品可用性。
+**评分维度**：Interaction、Model、Delivery、Scenario、Commercialization。这里专门把 Model 拆出来，是为了坚持“AI coding 产品能力 = 模型能力 × 产品能力”：模型能力决定上限，模型多样性、模型路由、成本/延迟和弱模型适配会直接影响产品可用性；产品层决定模型能力能否变成真实 outcome。
 
-**Codex 结果摘要**：
+**关键产品洞察**：
 
-- LPME-SE-001：61.8s 完成 bugfix，3 个 unittest 通过，PR 描述完整。
-- LPME-PM-001：263.9s 生成本地 prototype、PRD、Acceptance Tests，覆盖风险清单、评论、导出和响应式布局。
-- LPME-DS-001：294.0s 生成清洗脚本、CSV、数据质量报告、4 张 SVG 图和 executive summary，可复跑。
+- Cursor 的领先点是 workbench loop：读 workspace、改文件、生成多类型 artifact、做验证、留下可审查证据。
+- Codex 的价值在于 execution harness 很强，但 CLI 形态对非工程师仍然过于工程化。
+- TRAE SOLO 最接近多角色 workbench 方向，但可靠性、任务状态、模型透明度必须提升。
+- Kimi Code 说明模型品牌不能替代产品链路；provider、会员权益、workspace 和 CLI 配置任何一环断开，用户侧产品能力就是不可用。
 
-**关键产品洞察**：Codex 的高分不是单纯来自模型强，而是因为 CLI harness 能把模型能力转成真实执行、文件修改、测试和证据。它的弱项也很清楚：非工程师工作区不足、模型/成本透明度不足。TRAE SOLO 要赢，应该把这种 delivery harness 包装成多角色可理解的 Work/Code 工作台。
+**对 TRAE SOLO 的启示**：不要只追“会不会写代码”，要把模型能力包装成多角色可理解的 Work/Code 工作台。核心 UI 应该同时展示目标、上下文、计划、风险、产物预览、验证证据、失败恢复和业务语义 approval。
 
 评测报告：https://github.com/GameScaler/ai_coding_project_survey/blob/main/research/product_testing_report_2026-06-04.md
 LPME v0.2 协议：https://github.com/GameScaler/ai_coding_project_survey/tree/main/benchmark/lpme_v0.2
-过程文件：https://github.com/GameScaler/ai_coding_project_survey/tree/main/data/product_tests/2026-06-04
+过程文件：https://github.com/GameScaler/ai_coding_project_survey/tree/main/data/product_tests/2026-06-04_round2
 
 ## TRAE SOLO 产品建议
 

@@ -1,0 +1,9 @@
+Sanitized observation log:
+
+- Cursor desktop app was logged in and able to operate on the local workspace.
+- Cursor Agent CLI was checked separately and did not expose a logged-in/model-ready state on this machine.
+- Task completed through the desktop product.
+- Generated `PR_DESCRIPTION.md` and modified `pricing.py`.
+- Verification command:
+  `python3 -m unittest discover -s tests -v`
+- Verification result: 3 tests passed.

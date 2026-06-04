@@ -1,0 +1,8 @@
+✅ Generated outputs:
+- /Users/mvbj0638/Documents/ai_coding_project_survey/data/product_tests/2026-06-04_round2/trae_solo/LPME-DS-001/workspace/analysis/output/cleaned_acquisition.csv
+- /Users/mvbj0638/Documents/ai_coding_project_survey/data/product_tests/2026-06-04_round2/trae_solo/LPME-DS-001/workspace/analysis/output/channel_summary.csv
+- [cac] /Users/mvbj0638/Documents/ai_coding_project_survey/data/product_tests/2026-06-04_round2/trae_solo/LPME-DS-001/workspace/analysis/output/cac_by_channel.png
+- [activation_rate] /Users/mvbj0638/Documents/ai_coding_project_survey/data/product_tests/2026-06-04_round2/trae_solo/LPME-DS-001/workspace/analysis/output/activation_rate_by_channel.png
+- [payback_proxy] /Users/mvbj0638/Documents/ai_coding_project_survey/data/product_tests/2026-06-04_round2/trae_solo/LPME-DS-001/workspace/analysis/output/payback_proxy_by_channel.png
+- [cohort_revenue_trend] /Users/mvbj0638/Documents/ai_coding_project_survey/data/product_tests/2026-06-04_round2/trae_solo/LPME-DS-001/workspace/analysis/output/cohort_revenue_trend.png
+- /Users/mvbj0638/Documents/ai_coding_project_survey/data/product_tests/2026-06-04_round2/trae_solo/LPME-DS-001/workspace/analysis/EXECUTIVE_SUMMARY.md

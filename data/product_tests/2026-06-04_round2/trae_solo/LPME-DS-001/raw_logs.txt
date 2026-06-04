@@ -1,0 +1,10 @@
+Sanitized observation log:
+
+- TRAE SOLO desktop MTC UI was logged in on a free account and had local workspace access.
+- First DS task attempt failed with server error `(-1)`.
+- One retry succeeded; UI reported 3m58s on the successful run.
+- Files appeared locally before the UI fully reflected completion, indicating some state-sync lag.
+- Generated reproducible analysis script, cleaned CSV, channel summary, four charts, and executive summary.
+- Verification command:
+  `python3 analysis/acquisition_analysis.py`
+- Verification result: script reran successfully and regenerated outputs.

@@ -1,0 +1,33 @@
+{
+  "source_rows": 12,
+  "cleaned_rows": 12,
+  "issues": [
+    {
+      "row": 3,
+      "field": "channel",
+      "issue": "channel_alias_applied",
+      "from": "social",
+      "to": "paid_social"
+    },
+    {
+      "row": 5,
+      "field": "channel",
+      "issue": "channel_alias_applied",
+      "from": "social",
+      "to": "paid_social"
+    },
+    {
+      "row": 2,
+      "field": "spend_usd",
+      "issue": "missing_value"
+    },
+    {
+      "row": 8,
+      "field": "activated_users",
+      "issue": "missing_value"
+    }
+  ],
+  "rows_excluded_from_cac": 1,
+  "rows_excluded_from_payback": 2,
+  "rows_excluded_from_activation_rate": 1
+}
