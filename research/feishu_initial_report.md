@@ -18,10 +18,6 @@ AI coding 市场已经从“编辑器里的代码补全”进入 **agent command
 
 ### 2026-06-03
 
-Kimi Code：无同等级重大公开更新；进入同级 daily watch pool，重点观察 K2.6 for coding 与 agent harness。
-
-Zhipu GLM Coding Plan / CodeGeeX：无同等级重大公开更新；进入同级 daily watch pool，重点观察 GLM coding 模型套餐与 IDE 插件生态。
-
 今日是明显的 **agent command center** 信号日。
 
 - **OpenAI Codex**：推出 Sites preview，开始让 Codex 创建、部署、管理网站和内部工具，说明 Codex 的边界已经从代码扩到托管产物。
@@ -29,6 +25,7 @@ Zhipu GLM Coding Plan / CodeGeeX：无同等级重大公开更新；进入同级
 - **Windsurf / Devin**：Windsurf 升级为 Devin Desktop，把 IDE、local agent、cloud Devin 和 Agent Command Center 合在一起。
 - **Cursor**：Cursor 3.6 的 Auto-review run mode 解决长任务中的 approval friction：让 agent 跑更久，但仍保持安全执行。
 - **TRAE SOLO**：TRAE 中国 changelog 显示 SOLO 桌面端在 2026-06-01 支持内置浏览器选中元素并加入对话/评论，这个能力很适合非工程师基于可视化结果反馈。
+- **Others**：Kimi Code、Zhipu GLM Coding Plan / CodeGeeX 未观察到同等级重大公开更新；继续分别观察“模型升级 + agent harness”和“模型套餐 + IDE 插件生态”能否升级为端到端 agent workflow。
 
 **产品官短评**：AI coding 的主界面正在从 chat/editor 变成“任务状态 + 产物预览 + 人工审查 + 多 agent 管理”。TRAE SOLO 如果继续强调 Work/Code、移动端、语音、文档/表格/PPT 上下文，应把自己定义成跨角色 product workbench，而不是工程师 IDE 的子模式。
 
@@ -48,13 +45,11 @@ Zhipu GLM Coding Plan / CodeGeeX：无同等级重大公开更新；进入同级
 
 ### 2026-W23 初步判断
 
-Kimi Code：本周无同等级重大公开更新；重点观察 K2.6 for coding、CLI/IDE/ACP、goal/background/subagent、provider 管理。
-
-Zhipu GLM Coding Plan / CodeGeeX：本周无同等级重大公开更新；重点观察 GLM coding 模型套餐、IDE 插件、MCP、review/test 和国内模型生态。
-
 本周的核心路线是：**长任务自治正在产品化，但产品也在补安全阀**。Codex Sites、Copilot app、Devin Desktop、Cursor Auto-review 都在让 agent 做更长、更完整的任务；同时 approval、review、sandbox、状态管理、回滚也变得更重要。
 
 对 TRAE SOLO 来说，这意味着 **Work 模式不能只是聊天增强**，而要成为任务控制台；**Code 模式不能只是代码执行**，而要把验证、预览、回滚、部署和协作放进统一工作流。
+
+**Others**：Kimi Code、Zhipu GLM Coding Plan / CodeGeeX 本周无同等级重大公开更新；继续作为国内模型厂商 coding agent / 模型套餐 + IDE 插件路线观察。
 
 ## 产品版图
 
