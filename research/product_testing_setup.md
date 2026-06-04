@@ -1,6 +1,6 @@
 # Product Testing Setup
 
-更新时间：2026-06-03
+更新时间：2026-06-04
 
 ## Local Installation Status
 
@@ -14,6 +14,8 @@
 | Devin CLI | Installed | CLI `/opt/homebrew/bin/devin`, cask version `2026.5.26-3` | Cognition/Devin login |
 | GitHub Copilot App | Installed | `/Applications/GitHub Copilot.app`, cask version `0.2.23` | GitHub login; Copilot subscription / technical preview access |
 | OpenClaw | Deferred | 本机当前不可用/被禁用 | 进入主要产品池与公开信号监控；本轮不做真机实测 |
+| Kimi Code | Pending | 官方提供 CLI install script and Kimi IDE/agent entry；本轮先纳入公开源监控 | Kimi account / Kimi Code subscription; decide whether to install CLI locally |
+| Zhipu GLM Coding Plan / CodeGeeX | Pending | GLM Coding Plan is account/subscription based; CodeGeeX available as VS Code / JetBrains extension | Zhipu account / GLM Coding Plan access; choose IDE plugin test surface |
 
 ## Environment Notes
 
@@ -74,6 +76,8 @@ Current local observation:
 - Windsurf / Devin: account login and whether Devin access is enabled.
 - GitHub Copilot: whether `GameScaler` has Copilot subscription and Copilot app access.
 - Devin: whether the account has Devin Desktop/cloud agent access.
+- Kimi Code: Kimi account / subscription, and whether to install the CLI from the official script.
+- Zhipu / CodeGeeX: Zhipu account / GLM Coding Plan access, plus VS Code or JetBrains login path if needed.
 
 ## Test Evidence Folder
 

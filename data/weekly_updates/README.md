@@ -7,7 +7,7 @@
 - 只生成已经结束的完整周，不生成进行中周。
 - W24 对应 `2026-06-01～2026-06-07`，应在 `2026-06-08` 后生成。
 - 周复盘不硬推新闻：没有重大公开更新时，也要记录“无重大公开更新”，并给出路线判断。
-- 每周必须横向扫描核心产品池：OpenAI Codex、Claude Code、Cursor、TRAE SOLO、GitHub Copilot、Windsurf / Devin Desktop、OpenClaw。TRAE SOLO 是战略启示对象，不是唯一信号源。
+- 每周必须横向扫描核心产品池：OpenAI Codex、Claude Code、Cursor、TRAE SOLO、GitHub Copilot、Windsurf / Devin Desktop、OpenClaw、Kimi Code、Zhipu GLM Coding Plan / CodeGeeX。TRAE SOLO 是战略启示对象，不是唯一信号源。
 - 判断主线固定为：AI coding 产品能力 = 模型能力 × 产品能力。模型版本迭代决定能力边界，产品层的 context、workflow、verification、collaboration 决定真实可用性。
 
 ## 2026 Archive

@@ -234,7 +234,7 @@ def summary_text(body: str) -> str:
     return "今日官方源初筛未发现重大变化；详细抓取结果保留在 GitHub 归档。"
 
 
-def product_signal_lines(body: str, limit: int = 7) -> list[str]:
+def product_signal_lines(body: str, limit: int = 10) -> list[str]:
     signals: list[str] = []
 
     product_updates = section(body, "Product Updates")
@@ -314,28 +314,47 @@ def source_lines(body: str, github_url: str | None) -> list[str]:
     labels = {
         "github.com/GameScaler": "GitHub 归档",
         "developers.openai.com/codex": "OpenAI Codex",
-        "github.com/openai/codex": "OpenAI Codex Releases",
+        "github.com/openai/codex": "OpenAI Codex",
         "code.claude.com": "Claude Code",
-        "github.com/anthropics/claude-code": "Claude Code Releases",
+        "github.com/anthropics/claude-code": "Claude Code",
         "cursor.com/changelog": "Cursor",
-        "cursor.com/blog": "Cursor Blog",
+        "cursor.com/blog": "Cursor",
         "docs.trae.ai": "TRAE SOLO",
         "trae.cn": "TRAE 中国更新日志",
+        "trae.ai/solo-web": "TRAE SOLO",
         "github.blog": "GitHub Copilot",
+        "github.com/github/copilot-cli": "GitHub Copilot",
         "windsurf.com": "Windsurf",
         "devin.ai": "Devin",
         "docs.openclaw.ai": "OpenClaw",
-        "github.com/openclaw": "OpenClaw Releases",
+        "github.com/openclaw": "OpenClaw",
+        "raw.githubusercontent.com/openclaw": "OpenClaw",
+        "kimi.com/code": "Kimi Code",
+        "kimi.com/ai-models": "Kimi Code",
+        "github.com/MoonshotAI/kimi-code": "Kimi Code",
+        "raw.githubusercontent.com/MoonshotAI/kimi-code": "Kimi Code",
+        "docs.bigmodel.cn/cn/coding-plan": "Zhipu GLM Coding Plan",
+        "docs.bigmodel.cn/cn/update": "Zhipu GLM Coding Plan",
+        "z.ai/subscribe": "Zhipu GLM Coding Plan",
+        "codegeex.cn": "CodeGeeX",
+        "marketplace.visualstudio.com/items?itemName=aminer.codegeex": "CodeGeeX VS Code",
+        "github.com/THUDM/CodeGeeX": "CodeGeeX",
     }
 
     output: list[str] = []
-    for url in deduped[:10]:
+    seen_labels: set[str] = set()
+    for url in deduped:
         label = "来源"
         for key, value in labels.items():
             if key in url:
                 label = value
                 break
+        if label in seen_labels:
+            continue
+        seen_labels.add(label)
         output.append(f"- [{label}]({url})")
+        if len(output) >= 14:
+            break
     return output
 
 

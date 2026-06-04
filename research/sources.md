@@ -60,6 +60,25 @@
 - Changelog: https://raw.githubusercontent.com/openclaw/openclaw/main/CHANGELOG.md
 - 关注重点：Gateway、Control UI、Workboard、Skill Workshop、multi-channel delivery、providers/plugins、Codex/Copilot integration、Feishu/channel support。
 
+### Kimi Code
+
+- Product page: https://www.kimi.com/code
+- English product page: https://www.kimi.com/code/en
+- Kimi K2.6 model page: https://www.kimi.com/ai-models/kimi-k2-6
+- GitHub repo: https://github.com/MoonshotAI/kimi-code
+- Changelog: https://raw.githubusercontent.com/MoonshotAI/kimi-code/main/apps/kimi-code/CHANGELOG.md
+- 关注重点：K2.6 for coding、CLI / IDE / ACP、goal mode、background questions、subagent、provider management、long-horizon task workflow。
+
+### Zhipu GLM Coding Plan / CodeGeeX
+
+- GLM Coding Plan docs: https://docs.bigmodel.cn/cn/coding-plan/overview
+- Zhipu new releases: https://docs.bigmodel.cn/cn/update/new-releases
+- Z.ai subscription / coding plan entry: https://z.ai/subscribe
+- CodeGeeX homepage: https://codegeex.cn/
+- VS Code marketplace: https://marketplace.visualstudio.com/items?itemName=aminer.codegeex
+- GitHub repo: https://github.com/THUDM/CodeGeeX
+- 关注重点：GLM coding model packages、CodeGeeX IDE plugin、MCP、VS Code / JetBrains、代码生成/补全/解释、unit test、code review、国内模型生态和办公场景联动。
+
 ## Technical Sources
 
 - SWE-bench paper: https://arxiv.org/abs/2310.06770

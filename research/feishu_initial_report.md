@@ -1,12 +1,12 @@
 # AI Coding Product Survey
 
-更新日期：2026-06-03
+更新日期：2026-06-04
 
 > **基本认知**：AI coding 产品能力 = **模型能力 × 产品能力**。模型能力决定上限，产品能力决定转化率。当前模型还没强到自动补齐真实世界所有上下文、验证、协作和责任边界，所以产品能力不是 UI 外壳，而是把模型能力转成真实交付的放大器。
 
 ## 当前结论
 
-AI coding 市场已经从“编辑器里的代码补全”进入 **agent command center / product workbench** 阶段。头部产品不再只比模型写代码能力，而是在比：谁能收集正确上下文、把任务拆成可控计划、在本地/云端执行、持续验证、交付可用产物，并让人类以 reviewer / product owner 的方式管理多个 agent。
+AI coding 市场已经从“编辑器里的代码补全”进入 **agent command center / product workbench** 阶段。头部产品不再只比模型写代码能力，而是在比：谁能收集正确上下文、把任务拆成可控计划、在本地/云端执行、持续验证、交付可用产物，并让人类以 reviewer / product owner 的方式管理多个 agent。国内产品池需要同时看 TRAE SOLO、Kimi Code、Zhipu GLM Coding Plan / CodeGeeX：它们分别代表多角色工作台、模型厂商 coding agent、模型套餐 + IDE 插件生态三条路线。
 
 对 TRAE SOLO 来说，机会不是做另一个 Cursor，而是把 AI coding 做成 **多角色工作交付平台**：产品、数据、运营、销售、投研、创业者、工程师都能从需求、资料、数据、草图出发，拿到可以审查、可以运行、可以分享的产物。
 
@@ -57,6 +57,8 @@ AI coding 市场已经从“编辑器里的代码补全”进入 **agent command
 | GitHub Copilot | GitHub-native agent platform | VS Code、GitHub issue/PR、CLI、Copilot app、cloud agent | 企业分发、GitHub workflow、治理和审查 | 国内场景可借飞书/GitLab/Gitee/云开发形成工作流入口 |
 | Windsurf / Devin Desktop | IDE + 云端自治工程师 | Devin Desktop、Agent Command Center、local/cloud agents | 本地 IDE 与云 agent 融合，Kanban 管理 agent fleet | 多 agent 管理会成为主界面，而不是聊天窗口 |
 | OpenClaw | Multi-channel agent gateway | Gateway、Control UI、Workboard、Skill Workshop、channels、plugins/providers | 更像 agent operating system，不是纯 IDE；强调多渠道、多模型、多插件、多设备编排 | TRAE SOLO 要把飞书/移动端/定时任务/外部工具也纳入交付闭环，而不只是在桌面内完成任务 |
+| Kimi Code | Kimi 模型体系下的 coding agent | CLI、VS Code/JetBrains via ACP、第三方 agent client、Kimi 会员 | K2.6 for coding、goal/background/subagent、provider 管理 | 模型升级会直接改变产品默认工作流；TRAE 要把模型版本迭代纳入 roadmap |
+| Zhipu GLM Coding Plan / CodeGeeX | 智谱 coding 模型套餐 + IDE 助手 | GLM Coding Plan、CodeGeeX VS Code/JetBrains、MCP、开放文档 | 国内模型供给、IDE 插件覆盖、代码生成/补全/解释/review/test | 国内用户可能从模型套餐和插件进入，TRAE 要用端到端交付体验拉开差异 |
 
 ## 发展路线
 
@@ -64,10 +66,10 @@ AI coding 市场已经从“编辑器里的代码补全”进入 **agent command
 代表：Copilot autocomplete、早期 Cursor、Codeium/Windsurf。核心价值是降低写代码成本，但用户仍然要自己拆任务、粘上下文、运行测试、修 bug。
 
 **Phase 2：Repo-aware agent**  
-代表：Claude Code、Codex CLI、Cursor Agent、TRAE Agent。产品开始能读 repo、编辑多文件、执行命令、运行测试、解释失败。竞争点从“补全速度”转到“上下文获取 + 工具执行 + 可控修改”。
+代表：Claude Code、Codex CLI、Cursor Agent、TRAE Agent、Kimi Code、CodeGeeX。产品开始能读 repo、编辑多文件、执行命令、运行测试、解释失败。竞争点从“补全速度”转到“上下文获取 + 工具执行 + 可控修改”。
 
 **Phase 3：Agent workspace**  
-代表：Cursor 3 Agents Window、Codex App、GitHub Copilot App、Windsurf/Devin Desktop、OpenClaw Workboard / Control UI、TRAE SOLO。主界面从 IDE/聊天变成任务工作台：多个 agent 并行，worktree 隔离，云端长任务，PR/CI 回路，用户从写代码者变成任务导演和 reviewer。
+代表：Cursor 3 Agents Window、Codex App、GitHub Copilot App、Windsurf/Devin Desktop、OpenClaw Workboard / Control UI、TRAE SOLO、Kimi Code ACP。主界面从 IDE/聊天变成任务工作台：多个 agent 并行，worktree 隔离，云端长任务，PR/CI 回路，用户从写代码者变成任务导演和 reviewer。
 
 **Phase 4：Product workbench**  
 目标形态：不仅写代码，还能做数据分析、行业研究、PPT、dashboard、内部工具、落地页、投研模型、运营自动化。这是 TRAE SOLO 最值得押注的阶段。Coding 不是终点，而是把专业工作变成可运行系统、可分享文档、可验证结论的中间手段。
@@ -193,15 +195,15 @@ MVP 阶段：
 稳定阶段：
 
 - 飞书 Docx API 写入每日更新 block。
-- 飞书群机器人 webhook 推送摘要给订阅群。
+- Feishu App Bot 推送摘要给订阅群。
 - GitHub 仓库保存 benchmark、每日抓取和历史报告。
 
 当前状态：
 
 - GitHub 已打通：https://github.com/GameScaler/ai_coding_project_survey
 - 每日自动化已创建：`ai-coding-daily-product-update`
-- 飞书 API / 群机器人仍需 app_id/app_secret 或 webhook
-- 产品实测工具链已安装或确认存在：Codex、Claude Code、Cursor、TRAE SOLO、Windsurf。下一步需要账号登录/API key。
+- Feishu App Bot 已有应用和群聊，会话 ID 已配置到本地订阅表；11 点未推送的原因是自动化运行环境缺少本地 `.env.local` 凭证配置，已修复。
+- 产品实测工具链已安装或确认存在：Codex、Claude Code、Cursor、TRAE SOLO、Windsurf。Kimi Code 与 Zhipu GLM Coding Plan / CodeGeeX 先进入公开源监控和后续实测准备。
 - 产品实测准备状态：https://github.com/GameScaler/ai_coding_project_survey/blob/main/research/product_testing_setup.md
 
 ## 官方资料源
@@ -212,5 +214,8 @@ MVP 阶段：
 - TRAE SOLO：docs.trae.ai/solo/changelog、trae.cn/changelog
 - GitHub Copilot：github.blog/changelog/label/copilot
 - Windsurf / Devin：windsurf.com/changelog、devin.ai/blog/windsurf-is-now-devin-desktop
+- OpenClaw：docs.openclaw.ai、github.com/openclaw/openclaw
+- Kimi Code：kimi.com/code、github.com/MoonshotAI/kimi-code
+- Zhipu / CodeGeeX：docs.bigmodel.cn/cn/coding-plan/overview、codegeex.cn、marketplace.visualstudio.com/items?itemName=aminer.codegeex
 
 资料源配置：https://github.com/GameScaler/ai_coding_project_survey/blob/main/automation/product_sources.json

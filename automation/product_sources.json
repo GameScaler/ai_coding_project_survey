@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-03",
+  "updated_at": "2026-06-04",
   "products": [
     {
       "id": "codex",
@@ -88,6 +88,64 @@
         "mobile",
         "providers",
         "runtime"
+      ]
+    },
+    {
+      "id": "kimi_code",
+      "name": "Kimi Code",
+      "priority": "core",
+      "official_sources": [
+        "https://www.kimi.com/code",
+        "https://www.kimi.com/code/en",
+        "https://www.kimi.com/ai-models/kimi-k2-6",
+        "https://github.com/MoonshotAI/kimi-code",
+        "https://raw.githubusercontent.com/MoonshotAI/kimi-code/main/apps/kimi-code/CHANGELOG.md"
+      ],
+      "watch_keywords": [
+        "Kimi Code",
+        "K2.6",
+        "kimi-for-coding",
+        "CLI",
+        "IDE",
+        "ACP",
+        "goal",
+        "subagent",
+        "background",
+        "provider",
+        "tool",
+        "agent swarm",
+        "long-horizon"
+      ]
+    },
+    {
+      "id": "zhipu_codegeex",
+      "name": "Zhipu GLM Coding Plan / CodeGeeX",
+      "priority": "core",
+      "official_sources": [
+        "https://docs.bigmodel.cn/cn/coding-plan/overview",
+        "https://docs.bigmodel.cn/cn/update/new-releases",
+        "https://z.ai/subscribe",
+        "https://codegeex.cn/",
+        "https://marketplace.visualstudio.com/items?itemName=aminer.codegeex",
+        "https://github.com/THUDM/CodeGeeX"
+      ],
+      "watch_keywords": [
+        "GLM Coding Plan",
+        "GLM-5.1",
+        "GLM-5-Turbo",
+        "CodeGeeX",
+        "coding agent",
+        "Claude Code",
+        "OpenClaw",
+        "TRAE",
+        "MCP",
+        "视觉理解",
+        "联网搜索",
+        "网页读取",
+        "VS Code",
+        "JetBrains",
+        "code review",
+        "unit test"
       ]
     }
   ]

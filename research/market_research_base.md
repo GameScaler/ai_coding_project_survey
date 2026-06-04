@@ -1,10 +1,10 @@
 # AI Coding Head Product Research
 
-更新时间：2026-06-03
+更新时间：2026-06-04
 
 ## Executive Takeaways
 
-AI coding 市场已经从“编辑器里的代码补全”进入“agent command center”阶段。头部产品的共同方向是：多 agent 并行、worktree 隔离、本地与云端联动、浏览器/电脑使用、PR/issue/CI 集成、以及把最终产物从代码扩展到网站、报告、dashboard、内部工具。
+AI coding 市场已经从“编辑器里的代码补全”进入“agent command center”阶段。头部产品的共同方向是：多 agent 并行、worktree 隔离、本地与云端联动、浏览器/电脑使用、PR/issue/CI 集成、以及把最终产物从代码扩展到网站、报告、dashboard、内部工具。国内路线也在变密：Kimi Code 用 K2.6 和 CLI/IDE/agent protocol 切入专业编码场景，智谱 GLM Coding Plan / CodeGeeX 则把 coding 模型套餐、IDE 插件和国内模型生态连在一起。
 
 对 TRAE SOLO 来说，机会不是复制 Cursor 或 Claude Code，而是把 AI coding 做成“多角色工作交付平台”。TRAE SOLO 已经在 MTC/Code 双模式、Web/Desktop/Mobile、语音、文档/表格/PPT 上下文、三栏工作区等方向表达了这个野心。下一步需要用产品 benchmark 来定义：非工程师能否从需求到交付完成真实工作，而不是只看模型在 SWE-bench 上的分数。
 
@@ -19,6 +19,8 @@ AI coding 市场已经从“编辑器里的代码补全”进入“agent command
 | GitHub Copilot | GitHub-native agent platform | VS Code、GitHub issue/PR、CLI、Copilot app、cloud agent | 企业分发、GitHub workflow、治理和审查 | GitHub 的优势是组织工作流入口，TRAE 在国内可借飞书/企微/Jira/代码仓形成类似入口 |
 | Windsurf / Devin Desktop | IDE + 云端自治工程师 | Windsurf/Devin Desktop、Agent Command Center、Devin cloud/local | 本地 IDE 与云 agent 融合，Kanban 管理 agent fleet | 证明“管理多个 agent”会成为主界面，而不是聊天窗口 |
 | OpenClaw | Multi-channel agent gateway / agent OS | Gateway、Control UI、Workboard、Skill Workshop、channels、plugins/providers | 不像纯 IDE，更像把 agent 接到多渠道、多模型、多插件和移动端的运行时 | TRAE SOLO 要关注“工作台之外的交付入口”：飞书、Slack、移动端、Cron、外部插件和团队技能治理 |
+| Kimi Code | Kimi 模型体系下的 coding agent | CLI、VS Code / JetBrains via ACP、第三方 agent client、Kimi 会员 | K2.6 for coding、长任务 goal、background/subagent、provider 管理 | 国内模型产品会直接争 coding 专业入口；TRAE 要把模型升级和工作流默认值绑定 |
+| Zhipu GLM Coding Plan / CodeGeeX | 智谱 coding 模型套餐 + IDE 助手 | GLM Coding Plan、CodeGeeX VS Code / JetBrains、MCP / Excel / 开发者文档 | 国内模型供给、IDE 插件覆盖、代码生成/补全/解释/review/test | 国内用户可能从“模型套餐 + IDE 插件”进入，TRAE 要用端到端交付体验拉开层次 |
 
 ## Development Route
 
@@ -30,13 +32,13 @@ AI coding 市场已经从“编辑器里的代码补全”进入“agent command
 
 ### Phase 2: Repo-aware agent
 
-代表：Claude Code、Codex CLI、Cursor Agent、TRAE Agent。
+代表：Claude Code、Codex CLI、Cursor Agent、TRAE Agent、Kimi Code、CodeGeeX。
 
 产品开始能读 repo、编辑多文件、执行命令、运行测试、解释失败。竞争点从“补全速度”转到“上下文获取 + 工具执行 + 可控修改”。
 
 ### Phase 3: Agent workspace
 
-代表：Cursor 3 Agents Window、Codex App、GitHub Copilot App、Windsurf/Devin Desktop、OpenClaw Workboard / Control UI、TRAE SOLO。
+代表：Cursor 3 Agents Window、Codex App、GitHub Copilot App、Windsurf/Devin Desktop、OpenClaw Workboard / Control UI、TRAE SOLO、Kimi Code ACP。
 
 主界面从 IDE/聊天变成任务工作台：多个 agent 并行，worktree 隔离，云端长任务，PR/CI 回路，用户从写代码者变成任务导演和 reviewer。
 
@@ -55,6 +57,8 @@ AI coding 市场已经从“编辑器里的代码补全”进入“agent command
 - GitHub 在 2026-06-02 继续强化 Copilot app、cloud agent、CLI、memory、code review、agent apps，核心优势是 GitHub 生态和企业治理。
 - Windsurf/Devin 在 2026-04-15 推出 Windsurf 2.0，把 Devin cloud agent 放入 IDE；2026-06-02 又发布 Devin Desktop，进一步把 Agent Command Center 作为默认入口。
 - OpenClaw 官方文档把它定义为 multi-channel gateway for AI agents；2026-06-02 changelog 中 Skill Workshop、Workboard、channels/mobile、providers/plugins、Codex/Copilot integration 同时出现，说明它的路线更接近 agent operating system，而不是单一 coding IDE。
+- Kimi Code 的公开材料显示 K2.6 已进入 coding 产品线，CLI/IDE/ACP/第三方 agent client 同时存在；近期 changelog 里的 `/goal`、background questions、subagent resume、provider CLI 说明它正在从“模型入口”变成可持续工作的 agent harness。
+- 智谱的 GLM Coding Plan 把 coding 能力包装为订阅套餐，CodeGeeX 则继续覆盖 VS Code、JetBrains 等 IDE。它的观察价值不是单个 IDE 插件，而是国内模型厂商如何把 coding 模型、插件、MCP、办公场景和开发者控制台打包。
 
 ## Competitive Interpretation
 
@@ -100,6 +104,18 @@ OpenClaw 的定位不是传统 IDE，也不是单一终端 agent，而是把 age
 
 PM 视角最值得关注：OpenClaw 对 TRAE SOLO 的启发不在于复制开源运行时，而在于把产品能力看成模型能力的外骨骼。当前模型还不够稳定时，产品层必须提供技能治理、权限边界、渠道投递、任务状态、恢复机制、插件生态和观测面板。TRAE SOLO 如果要服务团队工作流，不能只做桌面应用，还要把飞书群、文档、定时任务、移动端、外部工具都纳入交付闭环。
 
+### Kimi Code
+
+Kimi Code 是国内模型厂商直接进入 coding agent 产品层的代表。它不只是给 IDE 提供模型，而是在 CLI、TUI、ACP、provider 管理、background task、goal 模式上补完整 agent harness。K2.6 for coding 抬高模型上限，但真正会影响用户留存的是：长任务能不能持续、上下文能不能管理、失败时能不能恢复、第三方 IDE 能不能无缝接入。
+
+PM 视角最值得关注：Kimi Code 说明“模型升级”和“产品工作流升级”必须一起看。模型能力强了，产品不只是多一个 model picker，而是可以改变默认 autonomy、上下文窗口、验证强度、确认频率和交互节奏。TRAE SOLO 应把模型版本迭代纳入产品策略：每次模型升级都要重新评估 Work/Code 的默认流程。
+
+### Zhipu GLM Coding Plan / CodeGeeX
+
+智谱这条线更像“模型套餐 + 编程助手 + 开发者生态”的组合。GLM Coding Plan 承接 coding 模型供给，CodeGeeX 承接 IDE 内使用入口，开放文档和 MCP/Excel 等模块承接更广的开发者和办公场景。相比 Cursor / Claude Code，它更像从模型平台出发向产品层延伸。
+
+PM 视角最值得关注：国内产品竞争不会只有一个 TRAE SOLO 对一个 Cursor。模型厂商可以通过订阅套餐、插件、API、MCP、办公插件快速进入用户工作流。TRAE SOLO 的壁垒应放在“从需求到可验收产物”的完整闭环，而不是单点代码补全或模型调用。
+
 ## Product Trend
 
 1. 从 chat-first 到 task-first。聊天仍是入口，但主界面会变成任务、状态、产物和 review。
@@ -108,6 +124,7 @@ PM 视角最值得关注：OpenClaw 对 TRAE SOLO 的启发不在于复制开源
 4. 从 code artifact 到 business artifact。网站、dashboard、报告、PPT、表格、数据结论会成为 AI coding 产品的新边界。
 5. 从 prompt engineering 到 context engineering。谁能帮用户组织上下文，谁就能降低使用门槛。
 6. 从模型 benchmark 到产品 benchmark。SWE-bench 证明模型能不能修 issue，LPME 要证明产品能不能交付真实工作。
+7. 从“模型供应”到“模型 + 产品联动”。Kimi/智谱这类国内模型厂商会把新模型能力直接包装进 CLI、IDE、套餐和插件；TRAE SOLO 必须把模型迭代当成产品 roadmap 的输入，而不是底层依赖更新。
 
 ## TRAE SOLO Product Thesis
 
