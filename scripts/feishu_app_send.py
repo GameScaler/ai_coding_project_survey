@@ -24,6 +24,7 @@ import os
 import pathlib
 import re
 import subprocess
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -85,13 +86,18 @@ def post_json(url: str, payload: dict, token: str | None = None) -> dict:
         headers=headers,
         method="POST",
     )
-    try:
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            return json.loads(resp.read().decode("utf-8"))
-    except urllib.error.URLError as exc:
-        if "CERTIFICATE_VERIFY_FAILED" not in str(exc):
-            raise
-        return post_json_with_curl(url, payload, token)
+    last_error: urllib.error.URLError | None = None
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.URLError as exc:
+            last_error = exc
+            if attempt < 2:
+                time.sleep(2**attempt)
+                continue
+            return post_json_with_curl(url, payload, token)
+    raise RuntimeError(f"post_json failed: {last_error}")
 
 
 def post_json_with_curl(url: str, payload: dict, token: str | None = None) -> dict:
