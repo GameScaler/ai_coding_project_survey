@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.gamescaler.ai-coding-feishu-delivery-guard</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>/Users/mvbj0638/.ai_coding_survey_delivery_runtime/scripts/run_feishu_delivery_guard.sh</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>StartInterval</key>
+  <integer>600</integer>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/Library/Frameworks/Python.framework/Versions/3.14/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/mvbj0638/.ai_coding_survey_delivery_runtime/data/feishu/launchd_delivery_guard.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/mvbj0638/.ai_coding_survey_delivery_runtime/data/feishu/launchd_delivery_guard.err.log</string>
+  <key>WorkingDirectory</key>
+  <string>/Users/mvbj0638/.ai_coding_survey_delivery_runtime</string>
+</dict>
+</plist>

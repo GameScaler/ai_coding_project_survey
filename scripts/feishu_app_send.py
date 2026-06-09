@@ -23,6 +23,7 @@ import json
 import os
 import pathlib
 import re
+import socket
 import subprocess
 import time
 import urllib.error
@@ -32,7 +33,22 @@ from dataclasses import dataclass
 
 
 FEISHU_BASE = "https://open.feishu.cn/open-apis"
+FEISHU_HOST = "open.feishu.cn"
+FEISHU_DNS_RESOLVERS = ("223.5.5.5", "114.114.114.114", "8.8.8.8")
+FEISHU_FALLBACK_IPS = (
+    # Last-resort CDN edge IPs observed from public resolvers. Prefer live DNS
+    # results and FEISHU_OPEN_FEISHU_IPS; these only bypass transient local DNS
+    # failures for Feishu delivery.
+    "119.167.174.77",
+    "119.167.175.27",
+    "116.196.134.220",
+    "61.240.128.129",
+    "124.165.205.167",
+    "27.221.122.16",
+    "116.196.147.73",
+)
 URL_RE = re.compile(r"https?://[^\s)>\"]+")
+IP_RE = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b")
 FIXED_PRODUCTS = [
     "OpenAI Codex",
     "Claude Code",
@@ -100,7 +116,53 @@ def post_json(url: str, payload: dict, token: str | None = None) -> dict:
     raise RuntimeError(f"post_json failed: {last_error}")
 
 
-def post_json_with_curl(url: str, payload: dict, token: str | None = None) -> dict:
+def feishu_resolve_ips() -> list[str]:
+    ips: list[str] = []
+
+    def add(values: list[str] | tuple[str, ...]) -> None:
+        for value in values:
+            ip = value.strip()
+            if ip and ip not in ips:
+                ips.append(ip)
+
+    add(tuple(os.environ.get("FEISHU_OPEN_FEISHU_IPS", "").replace(",", " ").split()))
+
+    try:
+        add([row[-1][0] for row in socket.getaddrinfo(FEISHU_HOST, 443, type=socket.SOCK_STREAM)])
+    except OSError:
+        pass
+
+    for resolver in FEISHU_DNS_RESOLVERS:
+        try:
+            result = subprocess.run(
+                ["nslookup", FEISHU_HOST, resolver],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL,
+                text=True,
+                check=False,
+            )
+        except FileNotFoundError:
+            break
+        if result.returncode == 0:
+            add(
+                [
+                    ip
+                    for line in result.stdout.splitlines()
+                    if "Address:" in line and "#53" not in line
+                    for ip in IP_RE.findall(line)
+                ]
+            )
+
+    add(FEISHU_FALLBACK_IPS)
+    return ips
+
+
+def curl_post(
+    url: str,
+    payload: dict,
+    token: str | None = None,
+    resolve_ip: str | None = None,
+) -> dict:
     cmd = [
         "curl",
         "--silent",
@@ -108,6 +170,12 @@ def post_json_with_curl(url: str, payload: dict, token: str | None = None) -> di
         "--fail-with-body",
         "--max-time",
         "20",
+        "--connect-timeout",
+        "10",
+        "--retry",
+        "2",
+        "--retry-delay",
+        "1",
         "--request",
         "POST",
         "--header",
@@ -116,6 +184,8 @@ def post_json_with_curl(url: str, payload: dict, token: str | None = None) -> di
         "@-",
         url,
     ]
+    if resolve_ip:
+        cmd[-1:-1] = ["--resolve", f"{FEISHU_HOST}:443:{resolve_ip}"]
     if token:
         cmd[-1:-1] = ["--header", f"Authorization: Bearer {token}"]
     result = subprocess.run(
@@ -128,6 +198,24 @@ def post_json_with_curl(url: str, payload: dict, token: str | None = None) -> di
     if result.returncode != 0:
         raise RuntimeError(result.stderr.decode("utf-8") or result.stdout.decode("utf-8"))
     return json.loads(result.stdout.decode("utf-8"))
+
+
+def post_json_with_curl(url: str, payload: dict, token: str | None = None) -> dict:
+    first_error = ""
+    try:
+        return curl_post(url, payload, token)
+    except RuntimeError as exc:
+        first_error = str(exc)
+
+    last_error = first_error
+    if urllib.parse.urlparse(url).hostname == FEISHU_HOST:
+        for ip in feishu_resolve_ips():
+            try:
+                return curl_post(url, payload, token, resolve_ip=ip)
+            except RuntimeError as exc:
+                last_error = f"{ip}: {exc}"
+
+    raise RuntimeError(f"{first_error}\nPinned Feishu DNS fallback failed: {last_error}")
 
 
 def load_local_env() -> None:
