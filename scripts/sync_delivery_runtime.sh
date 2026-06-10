@@ -14,7 +14,9 @@ mkdir -p \
 
 rsync -a "$REPO_DIR/scripts/feishu_app_send.py" "$RUNTIME_DIR/scripts/"
 rsync -a "$REPO_DIR/scripts/feishu_delivery_guard.py" "$RUNTIME_DIR/scripts/"
+rsync -a "$REPO_DIR/scripts/generate_daily_fallback.py" "$RUNTIME_DIR/scripts/"
 rsync -a "$REPO_DIR/scripts/run_feishu_delivery_guard.sh" "$RUNTIME_DIR/scripts/"
+rsync -a "$REPO_DIR/scripts/run_daily_fallback_and_delivery.sh" "$RUNTIME_DIR/scripts/"
 chmod +x "$RUNTIME_DIR/scripts/"*.py "$RUNTIME_DIR/scripts/"*.sh
 
 rsync -a "$REPO_DIR/automation/feishu_subscribers.local.json" "$RUNTIME_DIR/automation/"
