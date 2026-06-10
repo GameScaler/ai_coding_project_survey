@@ -2,6 +2,18 @@
 
 本仓库用于沉淀 AI coding 头部产品调研、TRAE SOLO 产品策略分析、以及从产品经理视角评估 AI coding 产品的 LPME benchmark。
 
+## AI 接手入口
+
+如果把这个仓库交给另一个 Codex 或其他 AI，请先读：
+
+- AI 代理规则：[AGENTS.md](AGENTS.md)
+- 项目上下文与当前状态：[docs/AI_HANDOFF.md](docs/AI_HANDOFF.md)
+- 自动化与飞书推送 runbook：[docs/OPERATIONS_RUNBOOK.md](docs/OPERATIONS_RUNBOOK.md)
+- 交接模板：[docs/HANDOFF_TEMPLATE.md](docs/HANDOFF_TEMPLATE.md)
+- Daily / weekly 唯一格式规范：[automation/digest_format.md](automation/digest_format.md)
+
+最重要的基本认知：**AI coding 产品能力 = 模型能力 x 产品能力**。模型能力决定上限，但当前模型还不够稳定，产品层必须通过 context、workflow、verification、recovery、collaboration、governance 和 cost control 补足模型短板。
+
 ## 交付物
 
 - 飞书在线文档：`https://my.feishu.cn/docx/GVk4d22dSo3jEXxst72cRjMfntg`
@@ -25,9 +37,12 @@
 - Daily / weekly 唯一格式规范：[automation/digest_format.md](automation/digest_format.md)
 - 每日更新方案：[automation/daily_update_design.md](automation/daily_update_design.md)
 - 飞书订阅与机器人方案：[automation/feishu_subscription_plan.md](automation/feishu_subscription_plan.md)
+- 自动化与飞书推送 runbook：[docs/OPERATIONS_RUNBOOK.md](docs/OPERATIONS_RUNBOOK.md)
 - 每日抓取脚本：[scripts/daily_update.py](scripts/daily_update.py)
 - 飞书机器人推送脚本：[scripts/feishu_push.py](scripts/feishu_push.py)
 - 飞书开放平台 App Bot 推送脚本：[scripts/feishu_app_send.py](scripts/feishu_app_send.py)
+- Feishu delivery guard：[scripts/feishu_delivery_guard.py](scripts/feishu_delivery_guard.py)
+- Daily fallback generator：[scripts/generate_daily_fallback.py](scripts/generate_daily_fallback.py)
 - 飞书 App Bot 群 ID 辅助脚本：[scripts/feishu_list_chats.py](scripts/feishu_list_chats.py)
 - 飞书群分享链接辅助脚本：[scripts/feishu_chat_link.py](scripts/feishu_chat_link.py)
 - Feishu App Bot 订阅表示例：[automation/feishu_subscribers.example.json](automation/feishu_subscribers.example.json)
@@ -38,8 +53,8 @@
 - 飞书：已确认可以在 Chrome 登录态下打开并编辑目标文档。当前路线切换为正式 Feishu App Bot 优先，文档承载基线、GitHub 承载细节、`AI Coding Survey Bot` 负责订阅推送。
 - GitHub：remote 已连接到 `git@github.com:GameScaler/ai_coding_project_survey.git`，调研材料可通过 GitHub 链接同步飞书。
 - 产品实测：LPME v0.2 Core-3 已落地并完成 2026-06-04 两轮真机测试。当前只评价 OpenAI Codex、Claude Code、Cursor、TRAE SOLO 四个跑通产品。
-- 自动化：已落本地脚本与 Codex daily/weekly automation。Feishu App Bot 已打通固定订阅群真实推送，脚本支持单目标推送、订阅表群发和群邀请链接生成；分享文档后的订阅入口采用固定群，个人订阅需要下一阶段事件回调拿到 `open_id`。
-- 每周复盘：已覆盖 2026-W01 到 2026-W23。只生成已结束完整周，W24（2026-06-01～2026-06-07）应在 2026-06-08 后生成。
+- 自动化：已落本地脚本、Codex daily/weekly automation、Feishu delivery guard、macOS launchd daily fallback。Codex 深度日更优先；如果 Codex 未产出当天文件，fallback 会生成保守日更并交给 Feishu watchdog 推送。
+- 每周复盘：已覆盖 2026-W01 到 2026-W23。只生成已结束完整周，不生成进行中周。
 
 ## 调研范围
 
