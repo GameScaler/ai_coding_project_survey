@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-04",
+  "updated_at": "2026-06-15",
   "products": [
     {
       "id": "codex",
@@ -7,6 +7,7 @@
       "priority": "core",
       "official_sources": [
         "https://developers.openai.com/codex/changelog",
+        "https://developers.openai.com/codex/changelog/rss.xml",
         "https://developers.openai.com/codex",
         "https://github.com/openai/codex/releases"
       ],
@@ -18,9 +19,36 @@
       "priority": "core",
       "official_sources": [
         "https://code.claude.com/docs/en/changelog",
-        "https://github.com/anthropics/claude-code/releases"
+        "https://github.com/anthropics/claude-code/releases",
+        "https://www.anthropic.com/news",
+        "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+        "https://www.anthropic.com/news/fable-mythos-access",
+        "https://www.anthropic.com/claude/fable",
+        "https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5",
+        "https://support.claude.com/en/articles/15425996-data-retention-practices-for-mythos-class-models",
+        "https://support.claude.com/en/articles/12138966-release-notes"
       ],
-      "watch_keywords": ["agents", "worktree", "MCP", "plugin", "telemetry", "parallel", "IDE", "GitHub"]
+      "watch_keywords": [
+        "agents",
+        "agent harness",
+        "Claude Code",
+        "Managed Agents",
+        "worktree",
+        "MCP",
+        "plugin",
+        "telemetry",
+        "parallel",
+        "IDE",
+        "GitHub",
+        "Fable",
+        "Mythos",
+        "model",
+        "1M",
+        "retention",
+        "classifier",
+        "fallback",
+        "pricing"
+      ]
     },
     {
       "id": "cursor",
@@ -28,9 +56,12 @@
       "priority": "core",
       "official_sources": [
         "https://cursor.com/changelog",
-        "https://cursor.com/blog"
+        "https://cursor.com/blog",
+        "https://cursor.com/docs/models/claude-fable-5",
+        "https://cursor.com/cursorbench",
+        "https://forum.cursor.com/c/announcements/11"
       ],
-      "watch_keywords": ["Agents Window", "cloud agent", "automations", "canvases", "Bugbot", "SDK", "Jira", "worktree"]
+      "watch_keywords": ["Agents Window", "cloud agent", "automations", "canvases", "Bugbot", "SDK", "Jira", "worktree", "Fable", "CursorBench", "model", "retention", "privacy"]
     },
     {
       "id": "trae_solo",
@@ -49,10 +80,13 @@
       "priority": "core",
       "official_sources": [
         "https://github.blog/changelog/label/copilot/",
+        "https://github.blog/changelog/label/copilot/feed/",
+        "https://github.blog/changelog/type/new-releases/",
+        "https://github.blog/changelog/2026-06-09-claude-fable-5-is-generally-available-for-github-copilot/",
         "https://github.blog/news-insights/product-news/github-copilot-app-the-agent-native-desktop-experience/",
         "https://github.com/github/copilot-cli/blob/main/changelog.md"
       ],
-      "watch_keywords": ["cloud agent", "Copilot app", "CLI", "code review", "memory", "automation", "agent apps", "Azure Repos"]
+      "watch_keywords": ["cloud agent", "Copilot app", "CLI", "code review", "memory", "automation", "agent apps", "Azure Repos", "Fable", "Claude", "model", "agent sessions", "agentic workflows", "third-party coding agents", "data retention"]
     },
     {
       "id": "windsurf_devin",

@@ -21,7 +21,7 @@ Every Monday 11:20, Codex weekly automation should create the last completed Mon
 
 Weekly digest must not be generated for an in-progress week. For example, the week starting Monday should only be published after that Sunday has completed.
 
-After the weekly file exists, the same delivery guard sends it to Feishu subscribers.
+If the Codex weekly automation does not create the file, launchd weekly fallback runs Monday 11:50 and 12:30. It creates a conservative weekly digest from existing public daily digests and then sends it. After any weekly file exists, the same delivery guard sends it to Feishu subscribers.
 
 ## Important Files
 
@@ -66,6 +66,12 @@ Run fallback generation and delivery:
 scripts/run_daily_fallback_and_delivery.sh
 ```
 
+Run weekly fallback generation and delivery:
+
+```bash
+scripts/run_weekly_fallback_and_delivery.sh
+```
+
 Direct delivery guard dry run:
 
 ```bash
@@ -90,6 +96,7 @@ python3 scripts/feishu_delivery_guard.py \
 Installed plist templates:
 
 - `automation/launchd/com.gamescaler.ai-coding-daily-fallback.plist`
+- `automation/launchd/com.gamescaler.ai-coding-weekly-fallback.plist`
 - `automation/launchd/com.gamescaler.ai-coding-feishu-delivery-guard.plist`
 
 Install / reload:
@@ -98,9 +105,10 @@ Install / reload:
 scripts/sync_delivery_runtime.sh
 mkdir -p "$HOME/Library/LaunchAgents"
 cp automation/launchd/com.gamescaler.ai-coding-daily-fallback.plist "$HOME/Library/LaunchAgents/"
+cp automation/launchd/com.gamescaler.ai-coding-weekly-fallback.plist "$HOME/Library/LaunchAgents/"
 cp automation/launchd/com.gamescaler.ai-coding-feishu-delivery-guard.plist "$HOME/Library/LaunchAgents/"
 uid=$(id -u)
-for label in com.gamescaler.ai-coding-daily-fallback com.gamescaler.ai-coding-feishu-delivery-guard; do
+for label in com.gamescaler.ai-coding-daily-fallback com.gamescaler.ai-coding-weekly-fallback com.gamescaler.ai-coding-feishu-delivery-guard; do
   launchctl bootout "gui/$uid" "$HOME/Library/LaunchAgents/$label.plist" >/dev/null 2>&1 || true
   launchctl bootstrap "gui/$uid" "$HOME/Library/LaunchAgents/$label.plist"
   launchctl enable "gui/$uid/$label"
@@ -112,6 +120,7 @@ Kickstart manually:
 ```bash
 uid=$(id -u)
 launchctl kickstart -k "gui/$uid/com.gamescaler.ai-coding-daily-fallback"
+launchctl kickstart -k "gui/$uid/com.gamescaler.ai-coding-weekly-fallback"
 launchctl kickstart -k "gui/$uid/com.gamescaler.ai-coding-feishu-delivery-guard"
 ```
 
@@ -120,6 +129,7 @@ Inspect:
 ```bash
 uid=$(id -u)
 launchctl print "gui/$uid/com.gamescaler.ai-coding-daily-fallback"
+launchctl print "gui/$uid/com.gamescaler.ai-coding-weekly-fallback"
 launchctl print "gui/$uid/com.gamescaler.ai-coding-feishu-delivery-guard"
 ```
 
@@ -128,6 +138,8 @@ Logs:
 ```bash
 tail -120 ~/.ai_coding_survey_delivery_runtime/data/feishu/launchd_daily_fallback.out.log
 tail -120 ~/.ai_coding_survey_delivery_runtime/data/feishu/launchd_daily_fallback.err.log
+tail -120 ~/.ai_coding_survey_delivery_runtime/data/feishu/launchd_weekly_fallback.out.log
+tail -120 ~/.ai_coding_survey_delivery_runtime/data/feishu/launchd_weekly_fallback.err.log
 tail -120 ~/.ai_coding_survey_delivery_runtime/data/feishu/launchd_delivery_guard.out.log
 tail -120 ~/.ai_coding_survey_delivery_runtime/data/feishu/launchd_delivery_guard.err.log
 ```
@@ -237,3 +249,14 @@ Do not publish:
 Public message should only say whether product capability changed.
 
 If the fallback digest was sent and later a human / Codex creates a deep digest for the same day, decide whether to resend. For meaningful updates, resend with `--force`; for minor wording improvements, do not.
+
+For a precise correction resend, target a single label:
+
+```bash
+python3 scripts/feishu_delivery_guard.py \
+  --only daily \
+  --label YYYY-MM-DD \
+  --force \
+  --attempts 4 \
+  --backoff-seconds 20
+```

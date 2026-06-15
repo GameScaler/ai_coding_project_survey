@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.gamescaler.ai-coding-weekly-fallback</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>/Users/mvbj0638/.ai_coding_survey_delivery_runtime/scripts/run_weekly_fallback_and_delivery.sh</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict>
+      <key>Weekday</key>
+      <integer>1</integer>
+      <key>Hour</key>
+      <integer>11</integer>
+      <key>Minute</key>
+      <integer>50</integer>
+    </dict>
+    <dict>
+      <key>Weekday</key>
+      <integer>1</integer>
+      <key>Hour</key>
+      <integer>12</integer>
+      <key>Minute</key>
+      <integer>30</integer>
+    </dict>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/Library/Frameworks/Python.framework/Versions/3.14/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/mvbj0638/.ai_coding_survey_delivery_runtime/data/feishu/launchd_weekly_fallback.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/mvbj0638/.ai_coding_survey_delivery_runtime/data/feishu/launchd_weekly_fallback.err.log</string>
+  <key>WorkingDirectory</key>
+  <string>/Users/mvbj0638/.ai_coding_survey_delivery_runtime</string>
+</dict>
+</plist>

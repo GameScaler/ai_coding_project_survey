@@ -87,6 +87,7 @@ Codex automations:
 macOS launchd jobs:
 
 - `com.gamescaler.ai-coding-daily-fallback`: runs 11:15 and 11:45, creates conservative daily fallback if needed and sends.
+- `com.gamescaler.ai-coding-weekly-fallback`: runs Monday 11:50 and 12:30, creates conservative weekly fallback if needed and sends.
 - `com.gamescaler.ai-coding-feishu-delivery-guard`: runs every 10 minutes, sends pending daily / weekly cards.
 
 The launchd runtime is outside Documents to avoid macOS privacy restrictions:

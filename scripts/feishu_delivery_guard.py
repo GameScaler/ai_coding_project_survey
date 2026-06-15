@@ -99,6 +99,7 @@ def candidate_digests(
     daily_lookback_days: int,
     weekly_lookback_weeks: int,
     only: str,
+    label_filter: str | None,
 ) -> list[Digest]:
     candidates: list[Digest] = []
 
@@ -111,6 +112,8 @@ def candidate_digests(
                 continue
             if start <= digest_date <= today:
                 label = digest_date.isoformat()
+                if label_filter and label != label_filter:
+                    continue
                 rel = path.relative_to(ROOT).as_posix()
                 candidates.append(
                     Digest(
@@ -136,6 +139,8 @@ def candidate_digests(
                 continue
             week_end = week_start + dt.timedelta(days=6)
             if start <= week_end <= today:
+                if label_filter and path.stem != label_filter:
+                    continue
                 rel = path.relative_to(ROOT).as_posix()
                 candidates.append(
                     Digest(
@@ -294,6 +299,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--attempts", type=int, default=3)
     parser.add_argument("--backoff-seconds", type=int, default=20)
     parser.add_argument("--only", choices=["all", "daily", "weekly"], default="all")
+    parser.add_argument(
+        "--label",
+        help="Only deliver one digest label, for example 2026-06-12 or 2026-W24. Useful for precise correction resends.",
+    )
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument(
@@ -310,6 +319,7 @@ def main(argv: list[str] | None = None) -> int:
         daily_lookback_days=args.daily_lookback_days,
         weekly_lookback_weeks=args.weekly_lookback_weeks,
         only=args.only,
+        label_filter=args.label,
     )
 
     plan = []

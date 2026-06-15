@@ -38,3 +38,4 @@ weekly digest 的唯一格式规范是：[../../automation/digest_format.md](../
 - [2026-W21](2026-W21.md)
 - [2026-W22](2026-W22.md)
 - [2026-W23](2026-W23.md)
+- [2026-W24](2026-W24.md)
